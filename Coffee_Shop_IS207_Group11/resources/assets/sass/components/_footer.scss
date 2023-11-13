@@ -1,7 +1,7 @@
 // Footer start
 .ftco-footer {
     padding: 7rem 0;
-    background: $footerBG;
+    background: darken($darken, 1%);
 
     .ftco-footer-logo {
         text-transform: uppercase;
@@ -33,11 +33,15 @@
         .btn-primary {
             background: $white !important;
             border: 2px solid $white !important;
-
+            
             &:hover {
                 background: $white;
                 border: 2px solid $white !important;
             }
+        }
+
+        .icon {
+            margin-right: 1rem;
         }
     }
 
@@ -62,7 +66,7 @@
     .block-21 {
         .text {
             .heading {
-                font-size: 16px;
+                font-size: 1rem;
                 font-weight: 300;
                 a {
                     color: rgba(255, 255, 255, 0.9);

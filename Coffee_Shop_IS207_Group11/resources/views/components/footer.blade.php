@@ -8,9 +8,9 @@
                         repellat nisi molestiae officia at, sequi quos! Lorem ipsum dolor, sit amet consectetur
                         adipisicing elit. </p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span><i class="fa-brands fa-twitter"></i></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span><i class="fa-brands fa-facebook"></i></span></a></li>
+                        <li class="ftco-animate"><a href="#"><span><i class="fa-brands fa-instagram"></i></span></a></li>
                     </ul>
                 </div>
             </div>
@@ -26,19 +26,19 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Have a Questions?</h2>
+                    <h2 class="ftco-heading-2">Liên hệ</h2>
                     <div class="block-23 mb-3">
-                        <ul>
+                        <ul class="list-unstyled">
                             <li>
-                                <span class="icon icon-map-marker"></span>
+                                <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
                                 <span class="text">UIT</span>
                             </li>
                             <li>
-                                <span class="icon icon-phone">
-                                </span><span class="text">+84123456789</span>
+                                <span class="icon"><i class="fa-solid fa-phone"></i></span>
+                                <span class="text">+84123456789</span>
                             </li>
                             <li>
-                                <span class="icon icon-envelope"></span>
+                                <span class="icon"><i class="fa-solid fa-envelope"></i></span>
                                 <span class="text">example@gmail.com</span>
                             </li>
                         </ul>
