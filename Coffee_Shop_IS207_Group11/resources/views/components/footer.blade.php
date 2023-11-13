@@ -1,12 +1,12 @@
 <footer class="ftco-footer ftco-section img">
-    <div class="overlay"></div>
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-7 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">About UwU</h2>
+                    <h2 class="ftco-heading-2">Về chúng tôi</h2>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum pariatur velit alias tenetur
-                        repellat nisi molestiae officia at, sequi quos!</p>
+                        repellat nisi molestiae officia at, sequi quos! Lorem ipsum dolor, sit amet consectetur
+                        adipisicing elit. </p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                         <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                         <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -16,11 +16,11 @@
             </div>
             <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4 ml-md-4">
-                    <h2 class="ftco-heading-2">Services</h2>
+                    <h2 class="ftco-heading-2">Sản phẩm</h2>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="py-2 d-block">Cooked</a></li>
-                        <li><a href="#" class="py-2 d-block">Deliver</a></li>
-                        <li><a href="#" class="py-2 d-block">Quality Foods</a></li>
+                        <li><a href="#" class="py-2 d-block">Cà phê pha</a></li>
+                        <li><a href="#" class="py-2 d-block">Cà phê phê</a></li>
+                        <li><a href="#" class="py-2 d-block">Cà phê phán</a></li>
                     </ul>
                 </div>
             </div>
