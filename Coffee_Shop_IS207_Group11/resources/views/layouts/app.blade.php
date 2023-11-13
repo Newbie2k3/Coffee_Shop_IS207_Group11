@@ -4,24 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Shop</title>
+    
+    <!-- Title -->
+    <title>@yield('title') | Coffee Shop</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+
+    <!-- Include Styles -->
+    @include('layouts/sections/styles')
+
+    <!-- Include Scripts -->
+    @include('layouts/sections/scriptsIncludes')
 </head>
 
 <body>
-    @include('components.header')
+    <!-- Layout Content -->
+    @yield('layoutContent')
 
-    <main class="main-container">
-        @yield('content')
-        <button class="btn btn-success">Easy Bootstrap</button>
-    </main>
-
-    @include('components.footer')
-
-    <!-- Scripts -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- Include Scripts -->
+    @include('layouts/sections/scripts')
 </body>
 
 </html>

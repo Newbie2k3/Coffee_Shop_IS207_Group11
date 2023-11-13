@@ -1,5 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.user')
+
+@section('title', 'Account')
 
 @section('content')
-    <h1>Welcome to the User Page</h1>
+    <h1>Welcome to the Account Page</h1>
 @endsection

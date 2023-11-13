@@ -1,6 +1,6 @@
-<header>
+<header class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <a class="navbar-brand" href="/">Home</a>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item {{ request()->is('great-deals') ? 'active' : '' }}">
