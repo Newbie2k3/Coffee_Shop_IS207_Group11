@@ -4,6 +4,14 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+try {
+    window.Popper = require('@popperjs/core');
+    window.$ = window.jQuery = require('jquery');
+    require('bootstrap');
+} catch (error) {
+    console.log('Loi rui anh Tuan oi');
+}
+
 import axios from 'axios';
 window.axios = axios;
 
