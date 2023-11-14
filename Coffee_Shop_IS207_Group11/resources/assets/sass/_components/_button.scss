@@ -1,0 +1,62 @@
+// Button
+.btn {
+	cursor: pointer;
+	@include border-radius(4px);
+	box-shadow: none!important;
+	font-size: 13px;
+	&:hover, &:active, &:focus {
+		outline: none;
+	}
+	&.btn-primary {
+		background: lighten($primary,0);
+		border: 1px solid lighten($primary,0);
+		color: $black;
+		&:hover {
+			border: 1px solid $primary;
+			background: rgba($white, .02);
+			color :$primary;
+		}
+		&.btn-outline-primary {
+			border: 1px solid $primary;
+			background: transparent;
+			color :$primary;
+			&:hover {
+				border: 1px solid transparent;
+				background: $primary;
+				color :$white;
+			}
+		}
+	}
+	&.btn-white {
+		background: $white;
+		border: 1px solid $white;
+		color: $black;
+		&:hover {
+			border: 1px solid $black;
+			background: $black;
+			color :$white;
+		}
+		&.btn-outline-white {
+			border-color: rgba($white, .8);
+			background: none;
+			border-width: 1px;
+			color: $white;
+			&:hover, &:focus, &:active {
+				background: $primary;
+				border-color: rgba($primary, .8);
+				color: $black;
+			}
+		}
+	}
+	&.btn-outline-black {
+		border-color: rgba($black, 1);
+		background: none;
+		border-width: 1px;
+		color: $black;
+		&:hover, &:focus, &:active {
+			background: $black;
+			border-color: $black;
+			color: $white;
+		}
+	}
+}

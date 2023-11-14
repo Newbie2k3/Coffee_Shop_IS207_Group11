@@ -1,5 +1,4 @@
 @import "~bootstrap/scss/bootstrap";
-
 @import "app-variables";
 
 * {
@@ -67,3 +66,13 @@ h5,
 .text-primary {
     color: $primary !important;
 }
+
+.bg-light {
+    background: lighten($black, 98%) !important;
+}
+
+.bg-primary {
+    background: $primary;
+}
+
+@import "_components/include";
