@@ -55,6 +55,19 @@ mixAssetsDir("sass/**/!(_)*.scss", (src, dest) =>
 // Core javascripts
 mixAssetsDir("js/**/*.js", (src, dest) => mix.js(src, dest));
 
+// Libs
+mixAssetsDir('vendor/libs/**/*.js', (src, dest) => mix.js(src, dest));
+mixAssetsDir('vendor/libs/**/!(_)*.scss', (src, dest) =>
+mix.sass(src, dest.replace(/\.scss$/, '.css'), { sassOptions })
+);
+
+// Template
+// mixAssetsDir('vendor/template/**/*.js', (src, dest) => mix.copy(src, dest));
+// mixAssetsDir('vendor/template/**/!(_)*.css', (src, dest) =>
+//   mix.copy(src, dest)
+// );
+// mixAssetsDir('vendor/libs/**/*.{png,jpg,jpeg,gif}', (src, dest) => mix.copy(src, dest));
+
 /*
  |--------------------------------------------------------------------------
  | Browsersync Reloading

@@ -29,9 +29,18 @@ Route::get('/about', function () {
     return view('pages.about.index');
 })->name('about');
 
+// Account
 Route::get('/account', function () {
     return view('pages.account.index');
 })->name('account');
+
+Route::get('/login', function () {
+    return view('pages.account.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('pages.account.register');
+})->name('register');
 
 Route::get('/cart', function () {
     return view('pages.cart.index');

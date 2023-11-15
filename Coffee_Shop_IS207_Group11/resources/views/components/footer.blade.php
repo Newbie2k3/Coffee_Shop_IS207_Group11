@@ -8,9 +8,15 @@
                         repellat nisi molestiae officia at, sequi quos! Lorem ipsum dolor, sit amet consectetur
                         adipisicing elit. </p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                        <li class="ftco-animate"><a href="#"><span><i class="fa-brands fa-twitter"></i></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span><i class="fa-brands fa-facebook"></i></span></a></li>
-                        <li class="ftco-animate"><a href="#"><span><i class="fa-brands fa-instagram"></i></span></a></li>
+                        <li data-aos="fade-up">
+                            <a href="#"><span><i class="fa-brands fa-twitter"></i></span></a>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay=50>
+                            <a href="#"><span><i class="fa-brands fa-facebook"></i></span></a>
+                        </li>
+                        <li data-aos="fade-up" data-aos-delay=100>
+                            <a href="#"><span><i class="fa-brands fa-instagram"></i></span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
