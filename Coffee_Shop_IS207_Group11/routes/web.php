@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// Controller
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,27 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home.index');
-})->name('home');
+Route::get('/', [PagesController::class, 'index'])->name('home');
+Route::get('/great-deals', [PagesController::class, 'greatDeals'])->name('great-deals');
+Route::get('/menu', [PagesController::class, 'menu'])->name('menu');
+Route::get('/about', [PagesController::class, 'about'])->name('about');
+Route::get('/account', [PagesController::class, 'account'])->name('account');
+Route::get('/cart', [PagesController::class, 'cart'])->name('cart');
 
-Route::get('/great-deals', function () {
-    return view('pages.great-deals.index');
-})->name('great-deals');
-
-Route::get('/menu', function () {
-    return view('pages.menu.index');
-})->name('menu');
-
-Route::get('/about', function () {
-    return view('pages.about.index');
-})->name('about');
 
 // Account
-Route::get('/account', function () {
-    return view('pages.account.index');
-})->name('account');
-
 Route::get('/login', function () {
     return view('pages.account.login');
 })->name('login');
@@ -41,7 +31,3 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('pages.account.register');
 })->name('register');
-
-Route::get('/cart', function () {
-    return view('pages.cart.index');
-})->name('cart');

@@ -1,0 +1,52 @@
+.ftco-intro {
+	margin-top: -130px;
+	// @include media-breakpoint-up(lg) {
+	// 	margin-top: -130px;
+	// }
+	.container-wrap {
+		z-index: 2 !important;
+		position: relative;
+	}
+	.wrap {
+		width: 100%;
+		.info {
+			background: $black;
+			padding: 30px;
+			width: calc(100% - 35%);
+			padding: 2% 5% 2% 12%;
+			// @include media-breakpoint-up(xl) {
+			// 	width: calc(100% - 35%);
+			// 	padding: 2% 5% 2% 12%;
+			// }
+			// @include media-breakpoint-down(sm) {
+			// 	width: 100%;
+			// }
+			p {
+				margin-bottom: 0;
+			}
+		}
+		.book {
+			width: 35%;
+			background: $primary;
+			// @include media-breakpoint-down(sm) {
+			// 	width: 100%;
+			// }
+			h3 {
+				text-transform: uppercase;
+			}
+		}
+		h3 {
+			font-size: 16px;
+		}
+		.text {
+			width: calc(100% - 40px);
+		}
+		.icon {
+			width: 40px;
+			span {
+				color: $primary;
+				font-size: 20px;
+			}
+		}
+	}
+}
