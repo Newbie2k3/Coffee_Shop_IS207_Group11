@@ -1,3 +1,7 @@
+:root {
+    --menu-item-bg: url(../../img/backgrounds/page-bg.jpg);
+}
+
 .heading-pricing {
     text-transform: uppercase;
     font-size: 24px;
@@ -47,7 +51,7 @@
 }
 .pricing-entry .text h3 span {
     background: var(--darken);
-    background: url(../img/backgrounds/page-bg.jpg) no-repeat fixed;
+    background: var(--menu-item-bg) no-repeat fixed;
     padding-right: 20px;
 }
 .pricing-entry .text .price {
@@ -55,6 +59,6 @@
     color: var(--primary);
     text-align: right;
     background: var(--darken);
-    background: url(../img/backgrounds/page-bg.jpg) no-repeat fixed;
+    background: var(--menu-item-bg) no-repeat fixed;
     font-size: 16px;
 }
