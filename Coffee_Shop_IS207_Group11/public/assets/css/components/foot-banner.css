@@ -1,0 +1,41 @@
+.ftco-intro {
+    margin-top: -130px;
+}
+.ftco-intro .container-wrap {
+    z-index: 2 !important;
+    position: relative;
+}
+.ftco-intro .wrap {
+    width: 100%;
+}
+.ftco-intro .wrap .info {
+    background: var(--black);
+    padding: 30px;
+    width: 65%;
+    padding: 2% 5% 2% 12%;
+}
+.ftco-intro .wrap .info p {
+    margin-bottom: 0;
+}
+.ftco-intro .wrap .book {
+    width: 35%;
+    background: var(--primary);
+}
+.ftco-intro .wrap .book h3,
+.ftco-intro .wrap .book .h3 {
+    text-transform: uppercase;
+}
+.ftco-intro .wrap h3,
+.ftco-intro .wrap .h3 {
+    font-size: 16px;
+}
+.ftco-intro .wrap .text {
+    width: calc(100% - 40px);
+}
+.ftco-intro .wrap .icon {
+    width: 40px;
+}
+.ftco-intro .wrap .icon span {
+    color: var(--primary);
+    font-size: 20px;
+}
