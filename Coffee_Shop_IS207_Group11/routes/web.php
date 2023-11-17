@@ -31,3 +31,6 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('pages.account.register');
 })->name('register');
+
+// Admin
+include 'admin.php';

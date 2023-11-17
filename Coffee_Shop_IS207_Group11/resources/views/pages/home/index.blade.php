@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Home')
+@section('title', $title)
 
 @section('content')
     <x-head-banner :imgUrl="'assets/img/backgrounds/home-bg.jpg'">
