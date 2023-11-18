@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GuestPagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
+Route::get('/', [GuestPagesController::class, 'index'])->name('home');
+Route::get('/great-deals', [GuestPagesController::class, 'greatDeals'])->name('great-deals');
+Route::get('/menu', [GuestPagesController::class, 'menu'])->name('menu');
+Route::get('/about', [GuestPagesController::class, 'about'])->name('about');
+Route::get('/cart', [GuestPagesController::class, 'cart'])->name('cart');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
     Route::view('/', 'dashboard')->name('dashboard');

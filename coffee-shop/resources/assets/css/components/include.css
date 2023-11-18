@@ -4,6 +4,6 @@
 
 /* Small elements */
 @import 'button.css';
-@import 'head-banner.css';
-@import 'foot-banner.css';
+@import 'big-banner.css';
+@import 'intro.css';
 @import 'menu-item.css';
