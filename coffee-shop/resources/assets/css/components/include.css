@@ -1,0 +1,9 @@
+/* Big */
+@import 'header.css';
+@import 'footer.css';
+
+/* Small elements */
+@import 'button.css';
+@import 'head-banner.css';
+@import 'foot-banner.css';
+@import 'menu-item.css';

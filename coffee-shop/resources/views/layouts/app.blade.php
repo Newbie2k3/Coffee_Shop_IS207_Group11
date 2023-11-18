@@ -19,21 +19,21 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Title -->
-    <title>@yield('title') | Coffee Shop</title>
+    <title>@hasSection('title')@yield('title') | @endif Coffee Shop</title>
 
     <!-- Include Styles -->
-    @include('layouts/sections/styles')
+    @include('layouts.sections.includes.styles')
 
     <!-- Include Scripts -->
-    @include('layouts/sections/scriptsIncludes')
+    @include('layouts.sections.includes.scriptsIncludes')
 </head>
 
 <body>
     <!-- Layout Content -->
-    @yield('layoutContent')
+    {{ $slot }}
 
     <!-- Include Scripts -->
-    @include('layouts/sections/scripts')
+    @include('layouts.sections.includes.scripts')
 </body>
 
 </html>
