@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class GuestPagesController extends Controller
 {
     public function index()
@@ -21,7 +21,8 @@ class GuestPagesController extends Controller
     public function menu()
     {
         $title = "Menu";
-        return view('pages.menu.index')->with('title', $title);
+        $product = DB::table('products')->where('status','1')->get();
+        return view('pages.menu.index',compact('product'))->with('title', $title);
     }
 
     public function about()

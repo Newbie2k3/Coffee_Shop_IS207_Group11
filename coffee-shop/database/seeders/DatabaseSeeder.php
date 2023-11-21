@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Category;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,11 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Category::create(['name'=>'Cà phê','slug'=>'Coffee','description'=>'Thức uống thơm ngon']);
+        Category::create(['name'=>'Dụng cụ pha chế','slug'=>'Coffee-tools','description'=>'Dụng cụ hỗ trợ pha thức uống']);
     }
 }

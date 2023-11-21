@@ -9,7 +9,7 @@
                     <a class="nav-link px-3" href="/great-deals">Khuyến mãi</a>
                 </li>
                 <li class="nav-item {{ request()->is('menu') ? 'active' : '' }}">
-                    <a class="nav-link px-3" href="/menu">Thực đơn</a>
+                    <a class="nav-link px-3" href="/menu">Sản phẩm</a>
                 </li>
                 <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                     <a class="nav-link px-3" href="/about">Về chúng tôi</a>

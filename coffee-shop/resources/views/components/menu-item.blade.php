@@ -5,7 +5,7 @@
     <div class="desc pl-3">
         <div class="d-flex text align-items-center">
             <h3><span>{{ $title }}</span></h3>
-            <span class="price">${{ $price }}</span>
+            <span class="price">{{ $price }}đ</span>
         </div>
         <div class="d-block">
             <p>{{ $description }}</p>

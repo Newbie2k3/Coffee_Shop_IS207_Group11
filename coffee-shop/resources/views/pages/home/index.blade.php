@@ -12,7 +12,7 @@
             </p>
             <p>
                 <a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Mua ngay</a>
-                <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">Xem sản phẩm</a>
+                <a href="{{ route('menu') }}" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">Xem sản phẩm</a>
             </p>
         </div>
     </x-big-banner>
