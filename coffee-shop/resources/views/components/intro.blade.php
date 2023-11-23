@@ -27,13 +27,13 @@
                 </div>
             </div>
             <div class="book p-4">
-                <h3 class=" font-weight-bold">Đặt một bàn</h3>
+                <h3 class=" font-weight-bold">Đặt một món</h3>
                 <p class="text-light mt-2 mb-4">
                     Đến với Coffee Shop - nghệ thuật cà phê với không gian gặp gỡ
                     thoải mái. Để trải nghiệm một buổi hẹn tuyệt vời và đảm bảo chỗ ngồi cho bạn, cùng chọn một chỗ ngồi
                     thật đẹp nào.
                 </p>
-                <a href={{ route('home') }} class="btn btn-white py-3 px-4"> Chọn chỗ </a>
+                <a href={{ route('home') }} class="btn btn-white py-3 px-4"> Đến ngay </a>
             </div>
         </div>
     </div>

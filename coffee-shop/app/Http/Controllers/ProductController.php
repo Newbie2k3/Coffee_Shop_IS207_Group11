@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Product;
@@ -13,8 +15,8 @@ class ProductController extends Controller
         ->join('categories', 'categories.id', '=', 'products.category_id')
         ->select('products.*', 'categories.name as category_name')
         ->get();
-        $product = Product::with('category')->get();
-        return view('product',compact('product'));
+        $product = Product::paginate(5);
+        return view('product',compact('product'))->with('category',$category)->with('i',(request()->input('page',1)-1)*5);
     }
     public function create(){
         $category = Category::orderBy('id','desc')->get();
@@ -68,5 +70,12 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect()->route('product');
+    }
+    //end admin function
+
+    public function product_detail($id){
+        $product = Product::where('id',$id)->first();
+        $related_product = Product::where('category_id',$product->category_id)->where('id','<>',$id)->get();
+        return view('pages.menu.product_detail',compact('product','related_product'));
     }
 }

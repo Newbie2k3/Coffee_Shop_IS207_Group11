@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestPagesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +24,15 @@ Route::get('/great-deals', [GuestPagesController::class, 'greatDeals'])->name('g
 Route::get('/menu', [GuestPagesController::class, 'menu'])->name('menu');
 Route::get('/about', [GuestPagesController::class, 'about'])->name('about');
 Route::get('/cart', [GuestPagesController::class, 'cart'])->name('cart');
+Route::get('/product_detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
     Route::view('/', 'dashboard')->name('dashboard');
-    
+
+    //Khach hang
+    Route::get('/user',[UserController::class, 'show'])->name('user');
+
     //Danh muc san pham
     Route::get('/category',[CategoryController::class,'show'])->name('category');
     Route::get('category/create',[CategoryController::class, 'create'])->name('category_create');

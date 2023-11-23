@@ -1,4 +1,4 @@
-@props(['imgUrl', 'title', 'price', 'description'])
+@props(['id','imgUrl', 'title', 'price', 'description'])
 
 <div class="pricing-entry d-flex" data-aos="fade-up">
     <div class="img" style="background-image: url({{ $imgUrl }});"></div>

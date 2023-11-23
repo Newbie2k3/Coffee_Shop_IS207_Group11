@@ -15,6 +15,7 @@
                     <table class="table">
                         <thead>
                           <tr>
+                            <th scope="col">STT</th>
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Mô tả sản phẩm</th>
                             <th scope="col">Danh mục sản phẩm</th>
@@ -29,7 +30,8 @@
                         <tbody>
                         @foreach ($product as $item)
                           <tr>
-                            <th scope="row">{{ $item->name }}</th>
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $item->name }}</td>
                             <td>{{ $item->description }}</td>
                             <td>{{ $item->category->name }}</td>
                             <td>
@@ -57,6 +59,7 @@
                       </table>    
                       <a href="{{ route('product_create') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">Thêm sản phẩm mới</a>                
                 </div>
+                {{ $product->links() }}
             </div>
         </div>
     </div>

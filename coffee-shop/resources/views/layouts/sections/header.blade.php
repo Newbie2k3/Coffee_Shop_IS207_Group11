@@ -20,7 +20,7 @@
                 <a class="icon" href="/account">
                     <i class="fa-solid fa-user"></i>
                 </a>
-                <a class="icon" href="/cart">
+                <a class="icon" href="{{ route('cart') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
             </div>
