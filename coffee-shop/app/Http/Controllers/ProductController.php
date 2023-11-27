@@ -75,7 +75,7 @@ class ProductController extends Controller
 
     public function product_detail($id){
         $product = Product::where('id',$id)->first();
-        $related_product = Product::where('category_id',$product->category_id)->where('id','<>',$id)->get();
+        $related_product = Product::where('category_id',$product->category_id)->where('id','<>',$id)->limit(4)->get();
         return view('pages.menu.product_detail',compact('product','related_product'));
     }
 }
