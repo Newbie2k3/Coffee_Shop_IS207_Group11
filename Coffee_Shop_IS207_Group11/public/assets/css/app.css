@@ -1,9 +1,0 @@
-/* Core */
-@import 'variables.css';
-@import 'core.css';
-
-/* Components */
-@import 'components/include.css';
-
-/* Test style */
-@import 'test/test.css';
