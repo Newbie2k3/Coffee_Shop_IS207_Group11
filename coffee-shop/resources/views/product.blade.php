@@ -11,7 +11,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("Sản phẩm") }}
+                    {{ __("Thông tin Sản phẩm") }}
+                    <h2 style="color:black">Tìm kiếm sản phẩm</h2>
+                    <form action="{{ route('product_search') }}" method="GET">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="search" >
+                            <div class="input-group-append">
+                                <x-primary-button>Tìm</x-primary-button>
+                            </div>
+                        </div>
+                    </form>
                     <table class="table">
                         <thead>
                           <tr>
@@ -28,6 +37,9 @@
                           </tr>
                         </thead>
                         <tbody>
+                            @if(isset($keyword))
+                                <p>Search results for '{{ $keyword }}':</p>
+                            @endif
                         @foreach ($product as $item)
                           <tr>
                             <td>{{ ++$i }}</td>
@@ -43,7 +55,7 @@
                                 }
                                 ?>
                             </td>
-                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->price }}đ</td>
                             <td><img src="{{ asset('assets/img/product/'.$item->image) }}" alt="{{ $item->image }}"width=100 height=100></td>
                             <td>
                                 <form action="{{ route('product_destroy',$item->id) }}" method="POST">

@@ -10,13 +10,19 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function show(){
+    public function show(Request $request){
         $category = DB::table('products')
         ->join('categories', 'categories.id', '=', 'products.category_id')
         ->select('products.*', 'categories.name as category_name')
         ->get();
-        $product = Product::paginate(5);
-        return view('product',compact('product'))->with('category',$category)->with('i',(request()->input('page',1)-1)*5);
+        $keyword = $request->input('search');
+        $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
+        return view('product', compact('product', 'category', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+    public function search(Request $request){
+        $keyword = $request->input('search');
+        $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
+        return view('product', compact('product', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function create(){
         $category = Category::orderBy('id','desc')->get();
@@ -26,7 +32,7 @@ class ProductController extends Controller
     public function store(Request $request){
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = $request->id . '_' . $file->getClientOriginalName();
             $file->move(public_path('assets/img/product'), $filename);
             Product::create([
                 'name' => $request->input('name'),
@@ -52,7 +58,7 @@ class ProductController extends Controller
         $product= Product::find($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = $request->id .'_' . $file->getClientOriginalName();
             $file->move(public_path('assets/img/product'), $filename);
             $product->update([
                 'name' => $request->input('name'),

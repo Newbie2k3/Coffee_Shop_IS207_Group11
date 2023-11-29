@@ -32,6 +32,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
 
     //Khach hang
     Route::get('/user',[UserController::class, 'show'])->name('user');
+    Route::get('/user/{id}/edit',[UserController::class,'edit'])->name('user_edit');
+    Route::put('/user/{id}',[UserController::class,'update'])->name('user_update');
+    Route::delete('/user/{id}',[UserController::class,'destroy'])->name('user_destroy');
 
     //Danh muc san pham
     Route::get('/category',[CategoryController::class,'show'])->name('category');
@@ -43,6 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
 
     //San pham
     Route::get('/product',[ProductController::class,'show'])->name('product');
+    Route::get('/search',[ProductController::class,'search'])->name('product_search');
     Route::get('product/create',[ProductController::class, 'create'])->name('product_create');
     Route::post('product',[ProductController::class, 'store'])->name('product_store');
     Route::get('/product/{id}/edit',[ProductController::class,'edit'])->name('product_edit');

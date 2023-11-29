@@ -16,15 +16,15 @@
                         @method('PUT')
                         @csrf
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Tên sản phẩm</label>
-                            <input type="text" name='name' value={{ old('name', $product->name) }} class="form-control" placeholder="Nhập tên sản phẩm" >
+                            <label for="name" class="form-label">Tên sản phẩm</label>
+                            <input type="text" name='name' value="{{ $product->name }}" class="form-control" placeholder="Nhập tên sản phẩm" >
                           </div>
                           <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Giá sản phẩm</label>
-                              <input type="text" name='price' value={{ old('price',$product->price) }} class="form-control" placeholder="Nhập giá sản phẩm" >
+                              <label for="price" class="form-label">Giá sản phẩm</label>
+                              <input type="text" name='price' value="{{ $product->price }}" class="form-control" placeholder="Nhập giá sản phẩm" >
                           </div>
                           <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Danh mục sản phẩm</label>
+                              <label for="category_id" class="form-label">Danh mục sản phẩm</label>
                               <select name="category_id">
                                   @foreach ($category as $item)
                                       <option value="{{ $item->id }}" {{ $item->id == old('category_id', $product->category_id) ? 'selected' : '' }}>{{ $item->name }}</option>
@@ -32,19 +32,19 @@
                               </select>
                           </div>
                           <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Mô tả sản phẩm</label>
-                              <textarea type="text" rows="8" name='description' value={{ old('description',$product->description) }} class="form-control" placeholder="Nhập mô tả"></textarea>
+                              <label for="description" class="form-label">Mô tả sản phẩm</label>
+                              <textarea type="text" rows="8" name='description' class="form-control" placeholder="Nhập mô tả">{{ $product->description }}</textarea>
                           </div>
                           <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Hiển thị</label>
+                              <label for="status" class="form-label">Hiển thị</label>
                               <select name="status">
                                   <option value="0" {{ $product->status == 0 ? 'selected' : '' }}>Ẩn</option>
                                   <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Hiện</option>
                               </select>
                           </div>
                           <div class="mb-3">
-                              <label for="exampleInputPassword1" class="form-label">Hình ảnh sản phẩm</label>
-                              <input type="file" name='image' value={{ $product->image }} class="form-control" >
+                              <label for="image" class="form-label">Hình ảnh sản phẩm</label>
+                              <input type="file" name='image' value="{{ $product->image }}" class="form-control" >
                           </div>
                           <x-primary-button>Lưu</x-primary-button>
                       </form>                
