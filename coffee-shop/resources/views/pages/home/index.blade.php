@@ -1,6 +1,11 @@
 <x-guest-layout>
     @section('title', $title)
 
+    @section('page-style')
+        <!-- Menu -->
+        <link rel="stylesheet" href="{{ asset('assets/css/pages/phucdeptrai.css') }}">
+    @endsection
+
     <x-big-banner :imgUrl="'assets/img/backgrounds/home-bg.jpg'">
         <div class="col-md-8 col-sm-12 text-center">
             <span class="subheading">Welcome</span>
@@ -17,5 +22,7 @@
         </div>
     </x-big-banner>
 
-    <x-intro/>
+    <x-intro />
+
+    @include('pages.home.phucdeptrai')
 </x-guest-layout>
