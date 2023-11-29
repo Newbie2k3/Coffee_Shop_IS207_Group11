@@ -16,48 +16,56 @@
                 </li>
             </ul>
 
-            <div class="d-flex">
-                <a class="icon" href="/account">
+            <div class="d-flex" x-data="{ menuOpen: false }">
+                <div class="icon" @click="menuOpen = !menuOpen">
                     <i class="fa-solid fa-user"></i>
-                </a>
+                </div>
+                @if (Route::has('login'))
+                    <div class="account-menu" x-show="menuOpen" @click.away="menuOpen = false">
+                        @auth
+                            <h3 class="menu-title">{{ __(Auth::user()->name) }}
+                                <br>
+                                <span class="menu-subtitle">
+                                    @if (Auth::user()->is_admin)
+                                        Admin
+                                    @else
+                                        Guest
+                                    @endif
+                                </span>
+                            </h3>
+
+                            @admin
+                                <a href="{{ url('/admin') }}" class="">Dashboard</a>
+                            @endadmin
+
+                            <a href="{{ route('profile.edit') }}">
+                                Profile
+                            </a>
+
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <a href="route('logout')"
+                                    onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </a>
+                            </form>
+                        @else
+                            <h3 class="menu-title">Coffee Shop</h3>
+                            <a href="{{ route('login') }}">Log in</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
                 <a class="icon" href="{{ route('cart') }}">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
             </div>
         </div>
     </div>
-    @if (Route::has('login'))
-        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-            @auth
-                @admin
-                    <a href="{{ url('/admin') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                @endadmin
-
-                <a href="{{ route('profile.edit') }}">
-                    {{ __(Auth::user()->name) }}
-                </a>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <a href="route('logout')"
-                        onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </a>
-                </form>
-            @else
-                <a href="{{ route('login') }}"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                    in</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}"
-                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
 </header>

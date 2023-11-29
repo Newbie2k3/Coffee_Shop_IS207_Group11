@@ -73,3 +73,46 @@ header .icon:hover {
     color: var(--white);
     letter-spacing: 5px;
 }
+
+.account-menu {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: var(--white);
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    transition: 0.5s;
+}
+
+.account-menu .menu-title {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.2em;
+}
+
+.account-menu .menu-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    color: #cecece;
+}
+
+.account-menu a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+    color: #555;
+    transition: 0.5s;
+}
+
+.account-menu a:hover {
+    color: var(--primary);
+}
