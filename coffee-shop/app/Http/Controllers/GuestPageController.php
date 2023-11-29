@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-class GuestPagesController extends Controller
+use App\Models\Category;
+use App\Models\Product;
+
+class GuestPageController extends Controller
 {
     public function index()
     {
@@ -21,8 +24,24 @@ class GuestPagesController extends Controller
     public function menu()
     {
         $title = "Menu";
-        $product = DB::table('products')->where('status','1')->get();
-        return view('pages.menu.index',compact('product'))->with('title', $title);
+        
+        $categories = Category::all();
+
+        $menu = [];
+    
+        foreach ($categories as $category) {
+            $products = Product::where('category_id', $category->id)
+                              ->where('status', 1)
+                              ->get();
+    
+            $menu[] = [
+                'id' => $category->id,
+                'name' => $category->name,
+                'products' => $products->toArray(),
+            ];
+        }
+
+        return view('pages.menu.index', compact('menu'))->with('title', $title);
     }
 
     public function about()

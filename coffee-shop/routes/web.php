@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\GuestPagesController;
+use App\Http\Controllers\GuestPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 //guest
-Route::get('/', [GuestPagesController::class, 'index'])->name('home');
-Route::get('/great-deals', [GuestPagesController::class, 'greatDeals'])->name('great-deals');
-Route::get('/menu', [GuestPagesController::class, 'menu'])->name('menu');
-Route::get('/about', [GuestPagesController::class, 'about'])->name('about');
-Route::get('/cart', [GuestPagesController::class, 'cart'])->name('cart');
+Route::get('/', [GuestPageController::class, 'index'])->name('home');
+Route::get('/great-deals', [GuestPageController::class, 'greatDeals'])->name('great-deals');
+Route::get('/menu', [GuestPageController::class, 'menu'])->name('menu');
+Route::get('/about', [GuestPageController::class, 'about'])->name('about');
+Route::get('/cart', [GuestPageController::class, 'cart'])->name('cart');
 Route::get('/product_detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
 
 //admin
