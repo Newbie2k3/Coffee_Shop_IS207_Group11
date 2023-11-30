@@ -8,24 +8,29 @@
                 <li class="nav-item {{ request()->is('great-deals') ? 'active' : '' }}">
                     <a class="nav-link px-3" href="/great-deals">Khuyến mãi</a>
                 </li>
-                <li class="nav-item {{ request()->is('menu') ? 'active' : '' }}">
-                    <a class="nav-link px-3" href="/menu">Sản phẩm</a>
+                <li class="nav-item {{ request()->is('menu') ? 'active' : '' }} dropdown">
+                    <a class="nav-link px-3 dropdown-toggle" href="#" role="button" id="productsDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Sản phẩm
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                        <a class="dropdown-item" href="/menu">Cà phê</a>
+                        <a class="dropdown-item" href="/menu">Trà</a>
+                    </div>
                 </li>
                 <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                     <a class="nav-link px-3" href="/about">Về chúng tôi</a>
                 </li>
             </ul>
 
-            <div class="d-flex" x-data="{ menuOpen: false }">
-                <div class="icon" @click="menuOpen = !menuOpen">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                @if (Route::has('login'))
-                    <div class="account-menu" x-show="menuOpen" @click.away="menuOpen = false">
+            <div class="d-flex">
+                {{-- Account --}}
+                <x-icon-modal menuOpen="accountMenuOpen" icon='<i class="fa-solid fa-user"></i>' size='small'>
+                    @if (Route::has('login'))
                         @auth
-                            <h3 class="menu-title">{{ __(Auth::user()->name) }}
+                            <h3 class="modal-title">{{ __(Auth::user()->name) }}
                                 <br>
-                                <span class="menu-subtitle">
+                                <span class="modal-subtitle">
                                     @if (Auth::user()->is_admin)
                                         Admin
                                     @else
@@ -53,18 +58,22 @@
                                 </a>
                             </form>
                         @else
-                            <h3 class="menu-title">Coffee Shop</h3>
+                            <h3 class="modal-title">Coffee Shop</h3>
                             <a href="{{ route('login') }}">Log in</a>
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}">Register</a>
                             @endif
                         @endauth
-                    </div>
-                @endif
-                <a class="icon" href="{{ route('cart') }}">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
+                    @endif
+                </x-icon-modal>
+
+                {{-- Cart --}}
+                <x-icon-modal menuOpen="cartMenuOpen" icon='<i class="fa-solid fa-cart-shopping"></i>' size='medium'>
+                    <h3 class="modal-title">Coffee Shop</h3>
+                    {{-- ... (Nội dung của menu giỏ hàng) ... --}}
+                    <a href="{{ route('cart') }}">Giỏ hàng</a>
+                </x-icon-modal>
             </div>
         </div>
     </div>
