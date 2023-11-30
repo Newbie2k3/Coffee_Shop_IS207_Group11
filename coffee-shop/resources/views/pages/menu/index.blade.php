@@ -37,4 +37,6 @@
             @endforeach
         </div>
     </section>
+
+    @livewire('products-container')
 </x-guest-layout>

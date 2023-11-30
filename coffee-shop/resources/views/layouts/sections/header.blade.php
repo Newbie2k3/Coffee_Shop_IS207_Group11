@@ -69,11 +69,16 @@
                 </x-icon-modal>
 
                 {{-- Cart --}}
-                <x-icon-modal menuOpen="cartMenuOpen" icon='<i class="fa-solid fa-cart-shopping"></i>' size='medium'>
-                    <h3 class="modal-title">Coffee Shop</h3>
-                    {{-- ... (Nội dung của menu giỏ hàng) ... --}}
-                    <a href="{{ route('cart') }}">Giỏ hàng</a>
-                </x-icon-modal>
+                <div class="position-relative">
+                    <x-icon-modal menuOpen="cartMenuOpen" icon='<i class="fa-solid fa-cart-shopping"></i>'
+                        size='medium'>
+                        <h3 class="modal-title">Coffee Shop</h3>
+                        {{-- ... (Nội dung của menu giỏ hàng) ... --}}
+                        <a href="{{ route('cart') }}">Giỏ hàng</a>
+                    </x-icon-modal>
+                    
+                    @livewire('cart-counter')
+                </div>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -28,6 +29,7 @@ class GuestPageController extends Controller
         $categories = Category::all();
 
         $menu = [];
+        $cart = Cart::content();
     
         foreach ($categories as $category) {
             $products = Product::where('category_id', $category->id)
@@ -41,7 +43,7 @@ class GuestPageController extends Controller
             ];
         }
 
-        return view('pages.menu.index', compact('menu'))->with('title', $title);
+        return view('pages.menu.index', compact('menu','cart'))->with('title', $title);
     }
 
     public function about()
