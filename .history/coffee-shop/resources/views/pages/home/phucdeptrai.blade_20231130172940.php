@@ -3,8 +3,7 @@
     
         <img width="50%" src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/about.jpg" alt="">
         <div class="px-6">
-            <p class="fs-2 font-tertiary">Discover</p>
-            <p class="fs-2 font-primary ">OUR STORY</p>
+            <p class="fs-2">Discover <br>OUR STORY</p>
             
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit minima obcaecati eligendi ratione possimus illo dolorum iste amet dicta, fugiat laudantium soluta debitis! Ad incidunt dignissimos dolorem placeat asperiores assumenda.</p>
         </div>
@@ -34,8 +33,8 @@
 <section class="menu">
     <div class="flex px-5 pd-top">
         <div>
-            <p class="fs-2 text-end font-tertiary">Discover</p>
-            <p class="fs-2 text-end font-primary">OUR MENU</p>
+            <p class="fs-2 text-end ">Discover</p>
+            <p class="fs-2 text-end">OUR MENU</p>
             <p class="text-end">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio tempora numquam facere cumque nisi soluta error rem repellat amet vel? Nulla enim adipisci veniam, libero dolorum hic facilis doloribus nisi.</p>
         </div>
         <div class="image">

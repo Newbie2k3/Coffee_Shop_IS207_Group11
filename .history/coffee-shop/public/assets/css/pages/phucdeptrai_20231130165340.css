@@ -9,24 +9,13 @@
     color:black;
 }
 .pd-top{
-    padding-top: 120px;
+    padding-top: 150px;
 }
 .image{
-    padding-left: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10px;
-    width: 1000px;
+    width: 700px;
     height: 300px;
-}
-.font-tertiary{
-    font-family: var(--font-tertiary);
-    color:#c49b63;
-    
-}
-.font-primary{
-    font-family: var(--font-primary);
-    color:white;
-    transform:translateY(-30px);
 }

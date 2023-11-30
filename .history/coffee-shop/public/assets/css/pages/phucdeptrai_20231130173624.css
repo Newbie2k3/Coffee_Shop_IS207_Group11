@@ -23,10 +23,4 @@
 .font-tertiary{
     font-family: var(--font-tertiary);
     color:#c49b63;
-    
-}
-.font-primary{
-    font-family: var(--font-primary);
-    color:white;
-    transform:translateY(-30px);
 }

@@ -28,5 +28,5 @@
 .font-primary{
     font-family: var(--font-primary);
     color:white;
-    transform:translateY(-30px);
+    transform:translateY(30px);
 }
