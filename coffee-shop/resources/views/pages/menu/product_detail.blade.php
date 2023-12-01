@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="small mb-1"></div>
-                        <h1 class="display-5 fw-bolder">{{ $product->name }}</h1>
+                        <h1 class="display-5 fw-bolder" >{{ $product->name }}</h1>
                         <div class="fs-5 mb-5">
                             <span>{{ $product->price }}đ</span>
                         </div>
@@ -36,7 +36,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ $item->name }}</h5>
+                                    <h5 class="fw-bolder" style="color:black">{{ $item->name }}</h5>
                                     @php
                                         // dd($item->name);
                                     @endphp

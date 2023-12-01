@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
 
     //San pham
     Route::get('/product',[ProductController::class,'show'])->name('product');
+    Route::get('/get-products/{category_id}', 'ProductController@getProducts')->name('get-products');
     Route::get('/search',[ProductController::class,'search'])->name('product_search');
     Route::get('product/create',[ProductController::class, 'create'])->name('product_create');
     Route::post('product',[ProductController::class, 'store'])->name('product_store');

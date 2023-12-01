@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
     public function show(Request $request){
@@ -15,15 +16,18 @@ class ProductController extends Controller
         ->join('categories', 'categories.id', '=', 'products.category_id')
         ->select('products.*', 'categories.name as category_name')
         ->get();
+        $categories = DB::table('categories')->get();
         $keyword = $request->input('search');
         $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
-        return view('product', compact('product', 'category', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('product', compact('product', 'category','categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    public function search(Request $request){
-        $keyword = $request->input('search');
-        $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
-        return view('product', compact('product', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+
+    public function getProducts($category_id)
+    {
+        $products = Product::where('category_id', $category_id)->get();
+        return view('product_list', compact('products'));
     }
+
     public function create(){
         $category = Category::orderBy('id','desc')->get();
         return view('product_create',compact('category'));
