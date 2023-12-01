@@ -5,7 +5,7 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 
 
 <!-- My Styles -->
-{{-- <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('assets/vendor/css/sweetalert.css') }}">
 
 <!-- Page Styles -->
 @yield('page-style')

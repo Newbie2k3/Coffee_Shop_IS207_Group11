@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GuestPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +24,11 @@ Route::get('/', [GuestPageController::class, 'index'])->name('home');
 Route::get('/great-deals', [GuestPageController::class, 'greatDeals'])->name('great-deals');
 Route::get('/menu', [GuestPageController::class, 'menu'])->name('menu');
 Route::get('/about', [GuestPageController::class, 'about'])->name('about');
-Route::get('/cart', [GuestPageController::class, 'cart'])->name('cart');
 Route::get('/product_detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
+
+// Shopping cart
+Route::get('/cart', [CartController::class, 'view'])->name('cart');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.store');
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {

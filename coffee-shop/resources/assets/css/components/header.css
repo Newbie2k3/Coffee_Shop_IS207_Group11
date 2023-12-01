@@ -73,3 +73,16 @@ header .icon:hover {
     color: var(--white);
     letter-spacing: 5px;
 }
+
+.cart-badge {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dc3545;
+    border-radius: 50%;
+}
