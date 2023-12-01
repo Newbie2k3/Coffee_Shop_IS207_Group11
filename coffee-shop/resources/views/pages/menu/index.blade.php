@@ -43,29 +43,17 @@
 
                 @if (!empty($category['products']))
                     @foreach ($category['products'] as $product)
-                        <div class="col-md-12 mb-3 pb-3">
-                            <form>
-                                @csrf
-                                <input type="hidden" value="{{ $product['id'] }}"
-                                    class="cart_product_id_{{ $product['id'] }}">
-                                <input type="hidden" value="{{ $product['name'] }}"
-                                    class="cart_product_name_{{ $product['id'] }}">
-                                <input type="hidden" value="{{ $product['price'] }}"
-                                    class="cart_product_price_{{ $product['id'] }}">
-                                <input type="hidden" value="{{ $product['description'] }}"
-                                    class="cart_product_description_{{ $product['id'] }}">
-                                <button type="button" class="add-to-cart" name="add-to-cart"
-                                    data-id="{{ $product['id'] }}">Add to
-                                    cart</button>
-                            </form>
+                        <div class="col-md-12 mb-3 pb-3 product_data">
+
+                            <input type="hidden" value="{{ $product['id'] }}"
+                                class="product_id">
+                            <button type="button" class="add-to-cart" name="add-to-cart"
+                                data-id="{{ $product['id'] }}">Add to cart</button>
+
                             <h4><a href="#">{{ $product['id'] }}</a></h4>
                             <h4>{{ $product['name'] }}</h4>
                             <h4>{{ $product['price'] }}</h4>
                             <h4>{{ $product['description'] }}</h4>
-
-
-
-
                         </div>
                     @endforeach
                 @else

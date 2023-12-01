@@ -24,7 +24,7 @@ Route::get('/', [GuestPageController::class, 'index'])->name('home');
 Route::get('/great-deals', [GuestPageController::class, 'greatDeals'])->name('great-deals');
 Route::get('/menu', [GuestPageController::class, 'menu'])->name('menu');
 Route::get('/about', [GuestPageController::class, 'about'])->name('about');
-Route::get('/product_detail/{id}',[ProductController::class,'product_detail'])->name('product_detail');
+Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])->name('product_detail');
 
 // Shopping cart
 Route::get('/cart', [CartController::class, 'view'])->name('cart');
@@ -35,31 +35,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
     Route::view('/', 'dashboard')->name('dashboard');
 
     //Khach hang
-    Route::get('/user',[UserController::class, 'show'])->name('user');
+    Route::get('/user', [UserController::class, 'show'])->name('user');
 
     //Danh muc san pham
-    Route::get('/category',[CategoryController::class,'show'])->name('category');
-    Route::get('category/create',[CategoryController::class, 'create'])->name('category_create');
-    Route::post('category',[CategoryController::class, 'store'])->name('category_store');
-    Route::get('/category/{id}/edit',[CategoryController::class,'edit'])->name('category_edit');
-    Route::put('/category/{id}',[CategoryController::class,'update'])->name('category_update');
-    Route::delete('/category/{id}',[CategoryController::class,'destroy'])->name('category_destroy');
+    Route::get('/category', [CategoryController::class, 'show'])->name('category');
+    Route::get('category/create', [CategoryController::class, 'create'])->name('category_create');
+    Route::post('category', [CategoryController::class, 'store'])->name('category_store');
+    Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category_edit');
+    Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category_update');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category_destroy');
 
     //San pham
-    Route::get('/product',[ProductController::class,'show'])->name('product');
-    Route::get('product/create',[ProductController::class, 'create'])->name('product_create');
-    Route::post('product',[ProductController::class, 'store'])->name('product_store');
-    Route::get('/product/{id}/edit',[ProductController::class,'edit'])->name('product_edit');
-    Route::put('/product/{id}',[ProductController::class,'update'])->name('product_update');
-    Route::delete('/product/{id}',[ProductController::class,'destroy'])->name('product_destroy');
+    Route::get('/product', [ProductController::class, 'show'])->name('product');
+    Route::get('product/create', [ProductController::class, 'create'])->name('product_create');
+    Route::post('product', [ProductController::class, 'store'])->name('product_store');
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product_edit');
+    Route::put('/product/{id}', [ProductController::class, 'update'])->name('product_update');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product_destroy');
 
 });
 
-//chinh sửa thông tin
+//Login Required
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

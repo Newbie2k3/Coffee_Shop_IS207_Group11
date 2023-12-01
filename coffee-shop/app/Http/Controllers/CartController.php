@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -14,7 +17,11 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        $data = $request->all();
-        print_r($data);
+        $data = $request->input('product_id');
+        if (Auth::check()) {
+            print_r($data . 'Login rui');
+        } else {
+            print_r($data . 'Chua login');
+        }
     }
 }
