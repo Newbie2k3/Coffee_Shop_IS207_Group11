@@ -28,7 +28,6 @@ Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])
 
 // Shopping cart
 Route::get('/cart', [CartController::class, 'view'])->name('cart');
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.store');
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
@@ -60,6 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.store');
+    Route::delete('/remove-from-cart', [CartController::class, 'removeItem'])->name('cart.remove');
+    Route::put('/update-cart-qty', [CartController::class, 'updateQuantity'])->name('cart.update');
+    Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
+    Route::get('/get-cart', [CartController::class, 'getCart'])->name('cart.getcart');
 });
 
 require __DIR__ . '/auth.php';

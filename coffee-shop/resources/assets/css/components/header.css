@@ -86,3 +86,36 @@ header .icon:hover {
     background: #dc3545;
     border-radius: 50%;
 }
+
+.cart-sm {
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.cart-sm .cart-sm-item {
+    position: relative;
+    padding: 8px 4px;
+    height: 72px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cart-sm .cart-sm-item button {
+    position: absolute;
+    top: 8px;
+    right: 4px;
+    color: #555;
+}
+
+.cart-sm .cart-sm-item button:hover,
+.cart-sm .cart-sm-item button:active {
+    color: var(--white);
+}
+
+.cart-sm .cart-sm-item button:active {
+    opacity: 0.8;
+}
+
+.cart-sm .cart-sm-item .name {
+    font-size: 18px;
+    color: #555;
+}

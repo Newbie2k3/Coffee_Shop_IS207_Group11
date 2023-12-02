@@ -73,10 +73,12 @@
                     <x-icon-modal menuOpen="cartMenuOpen" icon='<i class="fa-solid fa-cart-shopping"></i>'
                         size='medium'>
                         <h3 class="modal-title">Coffee Shop</h3>
-                        {{-- ... (Nội dung của menu giỏ hàng) ... --}}
-                        <a href="{{ route('cart') }}">Giỏ hàng</a>
+                        <div class="cart-sm" id="smallCartContainer">
+                            {{-- Cart Items --}}
+                        </div>
+                        <a href="{{ route('cart') }}">Xem giỏ hàng</a>
                     </x-icon-modal>
-                    <span class="badge cart-badge">4</span>
+                    <span id="cartCount" class="badge cart-badge"></span>
                 </div>
             </div>
         </div>

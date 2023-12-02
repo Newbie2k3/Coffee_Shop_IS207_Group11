@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->integer('category_id');
+            $table->bigInteger('category_id');
             $table->string('image');
             $table->integer('price')->default(0);
             $table->string('status')->default('pending');

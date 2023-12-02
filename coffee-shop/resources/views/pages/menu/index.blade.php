@@ -36,24 +36,20 @@
         </div>
     </section>
 
-    <section>
+    <section class="container p-5">
         @foreach ($menu as $key => $category)
             <div class="row mb-5">
                 <h3 class="col-md-12 mb-3 heading-pricing">{{ $category['name'] }}</h3>
 
                 @if (!empty($category['products']))
                     @foreach ($category['products'] as $product)
-                        <div class="col-md-12 mb-3 pb-3 product_data">
-
-                            <input type="hidden" value="{{ $product['id'] }}"
-                                class="product_id">
-                            <button type="button" class="add-to-cart" name="add-to-cart"
-                                data-id="{{ $product['id'] }}">Add to cart</button>
-
-                            <h4><a href="#">{{ $product['id'] }}</a></h4>
-                            <h4>{{ $product['name'] }}</h4>
-                            <h4>{{ $product['price'] }}</h4>
-                            <h4>{{ $product['description'] }}</h4>
+                        <div class="col-md-3 p-2">
+                            <x-product-card id="{{ $product['id'] }}"
+                                    imgUrl="{{ 'assets/img/product/' . $product['image'] }}"
+                                    name="{{ $product['name'] }}"
+                                    price="{{ $product['price'] }}"
+                                    description="{{ $product['description'] }}"
+                                    buttonName="Thêm vào giỏ" />
                         </div>
                     @endforeach
                 @else
