@@ -17,9 +17,6 @@
 </script>
 
 <!-- My Scripts -->
-@auth
-    <script src="{{ asset('assets/js/cart.js') }}"></script>
-@endauth
 
 <!-- Page Scripts -->
 @yield('page-script')

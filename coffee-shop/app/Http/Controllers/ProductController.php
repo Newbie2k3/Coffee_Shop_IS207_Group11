@@ -7,19 +7,20 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function show(Request $request){
+    public function show(Request $request)
+    {
         $category = DB::table('products')
-        ->join('categories', 'categories.id', '=', 'products.category_id')
-        ->select('products.*', 'categories.name as category_name')
-        ->get();
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->select('products.*', 'categories.name as category_name')
+            ->get();
         $categories = DB::table('categories')->get();
         $keyword = $request->input('search');
         $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
-        return view('admin.product.product', compact('product', 'category','categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.product.product', compact('product', 'category', 'categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function getProducts($category_id)
@@ -28,15 +29,18 @@ class ProductController extends Controller
         return view('admin.product.product_list', compact('products'));
     }
 
-    public function create(){
-        $category = Category::orderBy('id','desc')->get();
-        return view('admin.product.product_create',compact('category'));
+    public function create()
+    {
+        $category = Category::orderBy('id', 'desc')->get();
+        return view('admin.product.product_create', compact('category'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        print_r($request->all());
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $request->id . '_' . $file->getClientOriginalName();
+            $filename = 'product_' . $request->input('category_id') . '_' . time() . '_' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/img/product'), $filename);
             Product::create([
                 'name' => $request->input('name'),
@@ -48,21 +52,24 @@ class ProductController extends Controller
             ]);
         }
         $category_name = Category::find($request->input('category_id'))->name;
-    
-        return redirect()->route('product')->with('category_name', $category_name);;
+
+        return redirect()->route('product')->with('category_name', $category_name);
+        ;
     }
 
-    public function edit($id){
-        $product= Product::find($id);
-        $category = Category::orderBy('id','desc')->get();
-        return view('admin.product.product_edit',compact('product'))->with('category',$category);
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        $category = Category::orderBy('id', 'desc')->get();
+        return view('admin.product.product_edit', compact('product'))->with('category', $category);
     }
 
-    public function update(Request $request, $id){
-        $product= Product::find($id);
+    public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = $request->id .'_' . $file->getClientOriginalName();
+            $filename = 'product_' . $request->input('category_id') . '_' . time() . '_' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/img/product'), $filename);
             $product->update([
                 'name' => $request->input('name'),
@@ -76,16 +83,18 @@ class ProductController extends Controller
         return redirect()->route('product');
     }
 
-    public function destroy($id){
-        $product = Product::find($id);
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
         $product->delete();
         return redirect()->route('product');
     }
     //end admin function
 
-    public function product_detail($id){
-        $product = Product::where('id',$id)->first();
-        $related_product = Product::where('category_id',$product->category_id)->where('id','<>',$id)->limit(4)->get();
-        return view('pages.menu.product_detail',compact('product','related_product'));
+    public function product_detail($id)
+    {
+        $product = Product::where('id', $id)->first();
+        $related_product = Product::where('category_id', $product->category_id)->where('id', '<>', $id)->limit(4)->get();
+        return view('pages.menu.product_detail', compact('product', 'related_product'));
     }
 }
