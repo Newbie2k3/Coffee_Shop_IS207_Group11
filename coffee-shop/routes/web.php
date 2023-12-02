@@ -26,18 +26,15 @@ Route::get('/menu', [GuestPageController::class, 'menu'])->name('menu');
 Route::get('/about', [GuestPageController::class, 'about'])->name('about');
 Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])->name('product_detail');
 
-// Shopping cart
-Route::get('/cart', [CartController::class, 'view'])->name('cart');
-
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
-    Route::view('/', 'dashboard')->name('dashboard');
+    Route::view('/', 'admin.dashboard')->name('dashboard');
 
     //Khach hang
-    Route::get('/user',[UserController::class, 'show'])->name('user');
-    Route::get('/user/{id}/edit',[UserController::class,'edit'])->name('user_edit');
-    Route::put('/user/{id}',[UserController::class,'update'])->name('user_update');
-    Route::delete('/user/{id}',[UserController::class,'destroy'])->name('user_destroy');
+    Route::get('/user', [UserController::class, 'show'])->name('user');
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user_edit');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user_update');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user_destroy');
 
     //Danh muc san pham
     Route::get('/category', [CategoryController::class, 'show'])->name('category');
@@ -48,14 +45,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category_destroy');
 
     //San pham
-    Route::get('/product',[ProductController::class,'show'])->name('product');
+    Route::get('/product', [ProductController::class, 'show'])->name('product');
     Route::get('/get-products/{category_id}', 'ProductController@getProducts')->name('get-products');
-    Route::get('/search',[ProductController::class,'search'])->name('product_search');
-    Route::get('product/create',[ProductController::class, 'create'])->name('product_create');
-    Route::post('product',[ProductController::class, 'store'])->name('product_store');
-    Route::get('/product/{id}/edit',[ProductController::class,'edit'])->name('product_edit');
-    Route::put('/product/{id}',[ProductController::class,'update'])->name('product_update');
-    Route::delete('/product/{id}',[ProductController::class,'destroy'])->name('product_destroy');
+    Route::get('/search', [ProductController::class, 'search'])->name('product_search');
+    Route::get('product/create', [ProductController::class, 'create'])->name('product_create');
+    Route::post('product', [ProductController::class, 'store'])->name('product_store');
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product_edit');
+    Route::put('/product/{id}', [ProductController::class, 'update'])->name('product_update');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product_destroy');
 
 });
 
@@ -64,6 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    // Shopping cart
+    Route::get('/cart', [CartController::class, 'view'])->name('cart');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.store');
     Route::delete('/remove-from-cart', [CartController::class, 'removeItem'])->name('cart.remove');
     Route::put('/update-cart-qty', [CartController::class, 'updateQuantity'])->name('cart.update');

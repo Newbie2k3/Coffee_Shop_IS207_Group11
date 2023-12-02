@@ -25,51 +25,53 @@
 
             <div class="d-flex">
                 {{-- Account --}}
-                <x-icon-modal menuOpen="accountMenuOpen" icon='<i class="fa-solid fa-user"></i>' size='small'>
-                    @if (Route::has('login'))
-                        @auth
-                            <h3 class="modal-title">{{ __(Auth::user()->name) }}
-                                <br>
-                                <span class="modal-subtitle">
-                                    @if (Auth::user()->is_admin)
-                                        Admin
-                                    @else
-                                        Guest
-                                    @endif
-                                </span>
-                            </h3>
+                <div class="icon-container">
+                    <x-icon-modal menuOpen="accountMenuOpen" icon='<i class="fa-solid fa-user"></i>' size='small'>
+                        @if (Route::has('login'))
+                            @auth
+                                <h3 class="modal-title">{{ __(Auth::user()->name) }}
+                                    <br>
+                                    <span class="modal-subtitle">
+                                        @if (Auth::user()->is_admin)
+                                            Admin
+                                        @else
+                                            Guest
+                                        @endif
+                                    </span>
+                                </h3>
 
-                            @admin
-                                <a href="{{ url('/admin') }}" class="">Dashboard</a>
-                            @endadmin
+                                @admin
+                                    <a href="{{ url('/admin') }}" class="">Dashboard</a>
+                                @endadmin
 
-                            <a href="{{ route('profile.edit') }}">
-                                Profile
-                            </a>
-
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-
-                                <a href="route('logout')"
-                                    onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                <a href="{{ route('profile.edit') }}">
+                                    Profile
                                 </a>
-                            </form>
-                        @else
-                            <h3 class="modal-title">Coffee Shop</h3>
-                            <a href="{{ route('login') }}">Log in</a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}">Register</a>
-                            @endif
-                        @endauth
-                    @endif
-                </x-icon-modal>
+                                <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <a href="route('logout')"
+                                        onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </a>
+                                </form>
+                            @else
+                                <h3 class="modal-title">Coffee Shop</h3>
+                                <a href="{{ route('login') }}">Log in</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}">Register</a>
+                                @endif
+                            @endauth
+                        @endif
+                    </x-icon-modal>
+                </div>
 
                 {{-- Cart --}}
-                <div class="position-relative">
+                <div class="icon-container">
                     <x-icon-modal menuOpen="cartMenuOpen" icon='<i class="fa-solid fa-cart-shopping"></i>'
                         size='medium'>
                         <h3 class="modal-title">Coffee Shop</h3>

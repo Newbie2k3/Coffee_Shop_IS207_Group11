@@ -34,7 +34,6 @@ $(document).ready(function () {
             },
             success: function (response) {
                 swal("Thành công", "Thêm sản phẩm thành công.", "success");
-                console.log(response);
 
                 updateCartCount();
                 updateCart();
@@ -51,8 +50,6 @@ $(document).ready(function () {
     }
 
     function handleUpdateCartQty(id, newQuantity) {
-        console.log("Trigger");
-
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -67,7 +64,6 @@ $(document).ready(function () {
                 new_quantity: newQuantity,
             },
             success: function (response) {
-                console.log(response);
                 updateCartItemTotal(id, response.itemTotal);
                 updateCartTotal(response.cartTotal);
             },
@@ -206,7 +202,6 @@ $(document).ready(function () {
                     `;
 
                     $("#smallCartContainer").append(cartItemHtml);
-
                 });
             },
             error: function (error) {

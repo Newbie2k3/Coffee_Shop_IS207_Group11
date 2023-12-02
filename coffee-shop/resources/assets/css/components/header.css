@@ -77,9 +77,9 @@ header .icon:hover {
 .cart-badge {
     width: 20px;
     height: 20px;
-    position: absolute;
-    top: 2px;
-    right: 8px;
+    position: relative;
+    top: -46px;
+    right: -40px;
     display: flex;
     justify-content: center;
     align-items: center;

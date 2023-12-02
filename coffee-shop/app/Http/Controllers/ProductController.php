@@ -19,18 +19,18 @@ class ProductController extends Controller
         $categories = DB::table('categories')->get();
         $keyword = $request->input('search');
         $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
-        return view('product', compact('product', 'category','categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.product.product', compact('product', 'category','categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function getProducts($category_id)
     {
         $products = Product::where('category_id', $category_id)->get();
-        return view('product_list', compact('products'));
+        return view('admin.product.product_list', compact('products'));
     }
 
     public function create(){
         $category = Category::orderBy('id','desc')->get();
-        return view('product_create',compact('category'));
+        return view('admin.product.product_create',compact('category'));
     }
 
     public function store(Request $request){
@@ -55,7 +55,7 @@ class ProductController extends Controller
     public function edit($id){
         $product= Product::find($id);
         $category = Category::orderBy('id','desc')->get();
-        return view('product_edit',compact('product'))->with('category',$category);
+        return view('admin.product.product_edit',compact('product'))->with('category',$category);
     }
 
     public function update(Request $request, $id){

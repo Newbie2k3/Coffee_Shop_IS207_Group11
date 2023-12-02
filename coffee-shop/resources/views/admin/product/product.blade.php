@@ -48,7 +48,7 @@
                                     <p>kết quả tìm kiếm cho: '{{ $keyword }}':</p>
                                 @endif
                                 <div id="product-list">
-                                    @include('product_list', ['products' => $product])
+                                    @include('admin.product.product_list', ['products' => $product])
                                 </div>
                             </tbody>
                           </table>      
