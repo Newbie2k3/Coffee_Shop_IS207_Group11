@@ -21,7 +21,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Mô tả danh mục</label>
-                            <textarea type="text" name='description' rows="8" value="{{ $category->description }}" class="form-control" placeholder="Nhập mô tả"></textarea>
+                            <textarea type="text" name='description' rows="8" class="form-control" placeholder="Nhập mô tả">{{ $category->description }}</textarea>
                         </div>
                         <x-primary-button>Lưu</x-primary-button>
                       </form>                   
