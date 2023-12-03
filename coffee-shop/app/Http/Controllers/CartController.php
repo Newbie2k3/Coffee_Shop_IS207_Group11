@@ -16,116 +16,103 @@ class CartController extends Controller
 
         $user = auth()->user();
         $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
+        $cart_total = $this->calculateCartTotal($cart_items);
 
-        $product_ids = $cart_items->pluck('product_id');
-        $products = Product::whereIn('id', $product_ids)->get();
-
-        $cart_total = $this->calculateCartTotal();
-
-        return view('pages.cart.index', compact('cart_items', 'products', 'cart_total', ))->with('title', $title);
+        return view('pages.cart.index', compact('cart_items', 'cart_total'))->with('title', $title);
     }
 
     public function addToCart(Request $request)
     {
-        $user = Auth::user();
-
         $product_id = $request->input('product_id');
         $product_qty = max(1, $request->input('product_qty'));
 
+        $user = Auth::user();
         $product = Product::find($product_id);
 
-        if (!$user) {
-            return response()->json(['status' => 'Login to continue!']);
+        if (!$user || !$product) {
+            return response()->json(['status' => 'warning']);
         }
 
-        if (!$product) {
-            return response()->json(['status' => 'Invalid product!']);
-        }
-
-        $existingCartItem = Cart::where('product_id', $product_id)
+        $existing_item = Cart::where('product_id', $product_id)
             ->where('user_id', $user->id)
             ->first();
 
-        if ($existingCartItem) {
-            return response()->json(['status' => $product->name . ' already added to cart']);
+        if ($existing_item) {
+            $existing_item->update([
+                'product_qty' => $existing_item->product_qty + $product_qty,
+            ]);
+
+        } else {
+            Cart::create([
+                'user_id' => $user->id,
+                'product_id' => $product_id,
+                'product_qty' => $product_qty,
+            ]);
         }
 
-        Cart::create([
-            'user_id' => $user->id,
-            'product_id' => $product_id,
-            'product_qty' => $product_qty,
-        ]);
-
-        return response()->json(['status' => $product->name . ' added to cart', 'cartTotal' => $this->calculateCartTotal(),]);
+        return response()->json(['status' => $product->name . ' đã được thêm vào giỏ hàng.', 'cartTotal' => $this->calculateCartTotal(),]);
     }
 
     public function getCartCount()
     {
         $cart_count = Cart::where('user_id', auth()->id())->count();
-        return response()->json(['cartCount' => $cart_count]);
+        return response()->json(['cart_count' => $cart_count]);
     }
 
     public function getCart()
     {
         $user = auth()->user();
         $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
+        $cart_total = $this->calculateCartTotal($cart_items);
 
-        $product_ids = $cart_items->pluck('product_id');
-        $products = Product::whereIn('id', $product_ids)->get();
-
-        return response()->json(['cartItems' => $cart_items, 'products' => $products, 'cartTotal' => $this->calculateCartTotal(),]);
+        return response()->json(['cart_items' => $cart_items, 'cart_total' => $cart_total]);
     }
 
-    public function removeItem(Request $request)
+    public function removeFromCart(Request $request)
     {
         $id = $request->input('id');
 
-        $removedItem = Cart::find($id);
+        $removed_item = Cart::find($id);
 
-        if (!$removedItem) {
+        if (!$removed_item) {
             return response()->json(['message' => 'Sản phẩm không tồn tại'], 404);
         }
 
-        $removedItem->delete();
+        $removed_item->delete();
 
-        return response()->json(['removedItem' => $removedItem, 'cartTotal' => $this->calculateCartTotal(),]);
+        return response()->json(['removed_item' => $removed_item, 'cart_total' => $this->calculateCartTotal(),]);
     }
 
-    public function updateQuantity(Request $request)
+    public function updateItemQty(Request $request)
     {
         $id = $request->input('id');
-        $newQuantity = max(1, $request->input('new_quantity'));
+        $product_qty = max(1, $request->input('product_qty'));
 
-        $cartItem = Cart::find($id);
+        $cart_item = Cart::find($id);
 
-        if (!$cartItem) {
+        if (!$cart_item) {
             return response()->json(['message' => 'Sản phẩm không tồn tại'], 404);
         }
 
-        $cartItem->update(['product_qty' => $newQuantity]);
-
-        $itemTotal = $this->calculateItemTotal($cartItem->product, $newQuantity);
+        $cart_item->update(['product_qty' => $product_qty]);
 
         return response()->json([
-            'updatedItem' => $cartItem,
-            'itemTotal' => $itemTotal,
-            'cartTotal' => $this->calculateCartTotal(),
+            'item_total' => $this->calculateItemTotal($cart_item->product, $product_qty),
+            'cart_total' => $this->calculateCartTotal(),
         ]);
     }
 
     // Private
-    private function calculateCartTotal()
+    private function calculateCartTotal($cart_items = null)
     {
-        $user = auth()->user();
-        $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
-
-        $total = 0;
-
-        foreach ($cart_items as $cart_item) {
-            $total += $cart_item->product->price * $cart_item->product_qty;
+        if (!$cart_items) {
+            $user = auth()->user();
+            $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
         }
 
-        return $total;
+        return $cart_items->sum(function ($cart_item) {
+            return $cart_item->product->price * $cart_item->product_qty;
+        });
     }
 
     private function calculateItemTotal($product, $quantity)

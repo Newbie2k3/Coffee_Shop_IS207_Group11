@@ -4,12 +4,13 @@
             Giỏ hàng trống.
         </div>
         @if (count($cart_items) > 0)
-            <?php
-            function formatPrice($price)
-            {
-                return number_format($price, 0, ',', '.') . ' ₫';
-            }
-            ?>
+            @php
+                function formatPrice($price)
+                {
+                    return number_format($price, 0, ',', '.') . ' ₫';
+                }
+            @endphp
+
             <div id="filled_cart">
                 <table>
                     <thead>
@@ -50,8 +51,7 @@
                 </table>
 
                 <p>Tổng tiền: <span class="cart_total">{{ formatPrice($cart_total) }}</span></p>
-
-                <a href="{{ route('cart') }}">Thanh toán</a>
+                <button class="btn btn-primary">Thanh toán</button>
             </div>
         @endif
     </x-big-banner>

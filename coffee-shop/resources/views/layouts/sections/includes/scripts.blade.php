@@ -17,6 +17,11 @@
 </script>
 
 <!-- My Scripts -->
+@section('page-script')
+    @auth
+        <script src="{{ asset('assets/js/cart.js') }}"></script>
+    @endauth
+@endsection
 
 <!-- Page Scripts -->
 @yield('page-script')

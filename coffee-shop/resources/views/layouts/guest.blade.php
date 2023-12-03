@@ -5,9 +5,5 @@
 
     @include('layouts.sections.footer')
 
-    @section('page-script')
-        @auth
-            <script src="{{ asset('assets/js/cart.js') }}"></script>
-        @endauth
-    @endsection
+    
 </x-app-layout>

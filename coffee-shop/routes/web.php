@@ -66,8 +66,8 @@ Route::middleware('auth')->group(function () {
     // Shopping cart
     Route::get('/cart', [CartController::class, 'view'])->name('cart');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.store');
-    Route::delete('/remove-from-cart', [CartController::class, 'removeItem'])->name('cart.remove');
-    Route::put('/update-cart-qty', [CartController::class, 'updateQuantity'])->name('cart.update');
+    Route::delete('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::put('/update-item-qty', [CartController::class, 'updateItemQty'])->name('cart.update');
     Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
     Route::get('/get-cart', [CartController::class, 'getCart'])->name('cart.getcart');
 });
