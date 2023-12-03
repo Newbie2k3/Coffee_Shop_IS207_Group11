@@ -40,7 +40,7 @@ class ProductController extends Controller
         print_r($request->all());
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'product_' . $request->input('category_id') . '_' . time() . '_' . $file->getClientOriginalExtension();
+            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/img/product'), $filename);
             Product::create([
                 'name' => $request->input('name'),
@@ -69,7 +69,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = 'product_' . $request->input('category_id') . '_' . time() . '_' . $file->getClientOriginalExtension();
+            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/img/product'), $filename);
             $product->update([
                 'name' => $request->input('name'),
