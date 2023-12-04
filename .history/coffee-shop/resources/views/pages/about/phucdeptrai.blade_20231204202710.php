@@ -15,8 +15,7 @@
                   <div class="col">
                     <input type="text"  placeholder="Email" required>
                   </div>
-                </div>
-                <div class="row">
+                < class="row">
                     <div class="col">
                 
                         <input type="tel" id="phone" name="phone" placeholder="Số điện thoại"  required>
@@ -24,10 +23,7 @@
                       
                     
                     <div class="col">
-                        <input type="text" id="address" name="address" placeholder="Địa chỉ" required>
-                    </div>
-                    <div>
-                        <input  type="text" placeholder="Để lại lời nhắn">
+                        <input type="text" id="address" name="address" placeholder="Địa chỉ"  required>
                     </div>
                 </div>
               </form>
@@ -43,7 +39,7 @@
                 <option value="product3">Sản phẩm 3</option>
               </select>
             </div>
-           
+            
             <input type="submit" value="Gửi ngay">
           </form>
       </div>

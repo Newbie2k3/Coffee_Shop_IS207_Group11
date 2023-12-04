@@ -1,27 +1,19 @@
-
 .form{
-    
     width:700px;
-    padding-right: 300px;
-    
+    padding-right: 350px;
+
 }
 .my-form{
-    width:700px;
-    height:auto;
-    padding-left: 30px;
+    width:500px;
 }
 input[type="text"], input[type="tel"], .product {
-    width: 300px; 
+    width: 200px; 
     background-color:black;
-    border-left:none ;
-    border-top:none;
-    border-right:none;
-
+    border:none;
     font-weight: bold;
     color:white;
     padding: 16px 32px;
     margin: 4px 2px;
-    border-bottom-color:#c49b63 ;
   }
   input[type=text]:focus {
     background-color:black;
@@ -32,9 +24,9 @@ input[type="text"], input[type="tel"], .product {
   width: 100px;
   height: 40px;
   border: 2px solid black;
-  border-radius: 10px;   
+  border-radius: 5px;   
   font-size: 16px;
   text-align: center;
   
-  transform:translate(280px,5px);
+  transform:translate(200px,5px);
   }

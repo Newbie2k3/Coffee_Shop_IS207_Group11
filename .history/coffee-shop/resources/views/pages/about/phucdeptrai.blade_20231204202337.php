@@ -15,24 +15,26 @@
                   <div class="col">
                     <input type="text"  placeholder="Email" required>
                   </div>
-                </div>
-                <div class="row">
-                    <div class="col">
+                  <div class="col">
                 
-                        <input type="tel" id="phone" name="phone" placeholder="Số điện thoại"  required>
+                    <input type="tel" id="phone" name="phone" placeholder="Số điện thoại"  required>
                     </div>
-                      
-                    
-                    <div class="col">
-                        <input type="text" id="address" name="address" placeholder="Địa chỉ" required>
-                    </div>
-                    <div>
-                        <input  type="text" placeholder="Để lại lời nhắn">
-                    </div>
+                  
                 </div>
+                <div class="col ">
+                    <input type="text" id="address" name="address" placeholder="Địa chỉ"  required>
+                    </div>
               </form>
              
-            
+            <div class="row">
+                <div class="col">
+                
+                <input type="tel" id="phone" name="phone" placeholder="Số điện thoại"  required>
+                </div>
+                <div class="col ">
+                <input type="text" id="address" name="address" placeholder="Địa chỉ"  required>
+                </div>
+            </div>
             
             <div class="form-group mt-2 my-form">
               <label for="product">Sản phẩm quan tâm:</label>
@@ -43,7 +45,7 @@
                 <option value="product3">Sản phẩm 3</option>
               </select>
             </div>
-           
+            
             <input type="submit" value="Gửi ngay">
           </form>
       </div>

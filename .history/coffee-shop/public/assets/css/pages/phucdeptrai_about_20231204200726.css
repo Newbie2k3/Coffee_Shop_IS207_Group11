@@ -8,7 +8,6 @@
 .my-form{
     width:700px;
     height:auto;
-    padding-left: 30px;
 }
 input[type="text"], input[type="tel"], .product {
     width: 300px; 

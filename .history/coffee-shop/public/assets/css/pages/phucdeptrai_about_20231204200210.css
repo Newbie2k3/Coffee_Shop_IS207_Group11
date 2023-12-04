@@ -1,14 +1,13 @@
-
-.form{
+.container{
     
+}
+.form{
     width:700px;
-    padding-right: 300px;
+    padding-right: 350px;
     
 }
 .my-form{
     width:700px;
-    height:auto;
-    padding-left: 30px;
 }
 input[type="text"], input[type="tel"], .product {
     width: 300px; 

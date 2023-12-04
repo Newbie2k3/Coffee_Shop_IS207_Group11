@@ -26,9 +26,6 @@
                     <div class="col">
                         <input type="text" id="address" name="address" placeholder="Địa chỉ" required>
                     </div>
-                    <div>
-                        <input  type="text" placeholder="Để lại lời nhắn">
-                    </div>
                 </div>
               </form>
              
@@ -43,7 +40,7 @@
                 <option value="product3">Sản phẩm 3</option>
               </select>
             </div>
-           
+            <input type="text" placeholder="Để lại lời nhắn">
             <input type="submit" value="Gửi ngay">
           </form>
       </div>

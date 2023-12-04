@@ -1,0 +1,20 @@
+.form{
+    width:700px;
+    padding-right: 350px;
+
+}
+.my-form{
+    width:500px;
+}
+input[type="text"], input[type="tel"] {
+    width: 200px; 
+    background-color:black;
+    border:none;
+    font-weight: bold;
+    color:white;
+    padding: 16px 32px;
+    margin: 4px 2px;
+  }
+  input[type=text]:focus {
+    background-color:black;
+  }
