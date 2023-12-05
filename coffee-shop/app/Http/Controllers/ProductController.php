@@ -68,13 +68,13 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $image_path=public_path('assets/img/product/'. $product->image);
-        if($request->hasFile('image')){
-            File::delete($image_path);
-        }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/img/product'), $filename);
+            if(File::exists($image_path)){
+                File::delete($image_path);
+            }
             $product->update([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
@@ -82,6 +82,14 @@ class ProductController extends Controller
                 'status' => $request->input('status'),
                 'price' => $request->input('price'),
                 'image' => $filename,
+            ]);
+        }else{
+            $product->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'category_id' => $request->input('category_id'),
+                'status' => $request->input('status'),
+                'price' => $request->input('price'),
             ]);
         }
         return redirect()->route('product');
