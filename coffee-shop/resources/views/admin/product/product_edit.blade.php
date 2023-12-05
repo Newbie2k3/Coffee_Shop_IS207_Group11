@@ -44,7 +44,11 @@
                           </div>
                           <div class="mb-3">
                               <label for="image" class="form-label">Hình ảnh sản phẩm</label>
-                              <input type="file" name='image' value="{{ $product->image }}" class="form-control" >
+                              <img src="{{ asset('assets/img/product/'.$product->image) }}" alt="Hình ảnh" width=300px>
+                          </div>
+                          <div class="mb-3">
+                            <label for="image" class="form-label">Thêm hình ảnh mới</label>
+                            <input type="file" name='image' value="{{ $product->image }}" class="form-control" >
                           </div>
                           <x-primary-button>Lưu</x-primary-button>
                       </form>                
