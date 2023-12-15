@@ -15,14 +15,17 @@ class CartController extends Controller
         $title = "Cart";
 
         $user = auth()->user();
-        $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
+        $cart_items = Cart::with('product')
+            ->where('user_id', $user->id)
+            ->where('is_deleted', 0)
+            ->get();
 
         $product_ids = $cart_items->pluck('product_id');
         $products = Product::whereIn('id', $product_ids)->get();
 
         $cart_total = $this->calculateCartTotal();
 
-        return view('pages.cart.index', compact('cart_items', 'products', 'cart_total', ))->with('title', $title);
+        return view('pages.cart.index', compact('cart_items', 'products', 'cart_total',))->with('title', $title);
     }
 
     public function addToCart(Request $request)

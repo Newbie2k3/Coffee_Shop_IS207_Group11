@@ -51,7 +51,7 @@
 
                 <p>Tổng tiền: <span class="cart_total">{{ formatPrice($cart_total) }}</span></p>
 
-                <a href="{{ route('cart') }}">Thanh toán</a>
+                <a href="{{ route('order.index') }}">Thanh toán</a>
             </div>
         @endif
     </x-big-banner>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,7 @@ class Cart extends Model
         'user_id',
         'product_id',
         'product_qty',
+        'is_deleted'
     ];
 
     public function user()
@@ -23,5 +25,9 @@ class Cart extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function order()
+    {
+        return $this->hasOne(Order::class);
     }
 }
