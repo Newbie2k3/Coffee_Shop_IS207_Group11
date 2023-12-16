@@ -145,14 +145,15 @@ $(document).ready(function () {
         e.preventDefault();
         const id = $(this).data("id");
 
+        const removeBtn = $(this);
+        removeBtn.prop("disabled", true);
+        removeBtn.html('Xoá <i class="fa-solid fa-circle-notch fa-spin"></i>');
+
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
-
-        const removed_item_id = id;
-        $(".cart_item_id_" + removed_item_id).remove();
 
         $.ajax({
             method: "DELETE",
@@ -163,28 +164,13 @@ $(document).ready(function () {
             success: function (response) {
                 updateCartCount();
                 updateCartTotal(response.cart_total);
+                const removed_item_id = id;
+                $(".cart_item_id_" + removed_item_id).remove();
             },
             error: function (error) {
                 console.log(error);
             },
         });
-    }
-
-    function handleCartUpdateBtn(e) {
-        e.preventDefault();
-        const id = $(this).data("id");
-        let cur_qty = parseInt($(".product_qty_" + id).val());
-
-        const updateBtn = $(this);
-        updateBtn.prop("disabled", true);
-        updateBtn.html(
-            'Đang cập nhật <i class="fa-solid fa-circle-notch fa-spin"></i>'
-        );
-
-        handleUpdateItemQty(id, cur_qty);
-
-        updateBtn.prop("disabled", false);
-        updateBtn.html("Cập nhật");
     }
 
     function updateCartCount() {

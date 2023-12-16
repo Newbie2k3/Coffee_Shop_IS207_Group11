@@ -13,24 +13,40 @@
 
     <x-intro />
 
-    <section class="container p-5">
-        @foreach ($menu as $key => $category)
-            <div class="row mb-5">
-                <h3 class="col-md-12 mb-3 heading-pricing">{{ $category['name'] }}</h3>
+    <div class="container p-5">
+        <ul class="nav nav-tabs" id="categoryTabs">
+            @foreach ($menu as $key => $category)
+                <li class="nav-item">
+                    <a class="nav-link {{ $loop->first ? 'active' : '' }} h3" id="tab-{{ $key }}"
+                        data-bs-toggle="tab" href="#{{ $key }}">{{ $category['name'] }}</a>
+                </li>
+            @endforeach
+        </ul>
 
-                @if (!empty($category['products']))
-                    @foreach ($category['products'] as $product)
-                        <div class="col-md-3 p-2">
-                            <x-product-card id="{{ $product['id'] }}"
-                                imgUrl="{{ 'assets/img/product/' . $product['image'] }}" name="{{ $product['name'] }}"
-                                price="{{ $product['price'] }}" description="{{ $product['description'] }}"
-                                buttonName="Thêm vào giỏ" />
+        <div class="tab-content mt-2" id="categoryTabsContent">
+            @foreach ($menu as $key => $category)
+                <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="{{ $key }}">
+                    <div class="row mb-5">
+                        <div class="category-info">
+                            <h3 class="col-12 category-title">{{ $category['name'] }}</h3>
+                            <p class="category-description">{{ $category['description'] }}</p>
                         </div>
-                    @endforeach
-                @else
-                    <p>Hết hàng.</p>
-                @endif
-            </div>
-        @endforeach
-    </section>
+
+                        @if (!empty($category['products']))
+                            @foreach ($category['products'] as $product)
+                                <div class="col-md-3 p-2">
+                                    <x-product-card id="{{ $product['id'] }}"
+                                        imgUrl="{{ 'assets/img/product/' . $product['image'] }}"
+                                        name="{{ $product['name'] }}" price="{{ $product['price'] }}"
+                                        buttonName="Thêm vào giỏ" />
+                                </div>
+                            @endforeach
+                        @else
+                            <p class="out-of-stock">Hết hàng.</p>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
 </x-guest-layout>

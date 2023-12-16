@@ -37,6 +37,7 @@ class GuestPageController extends Controller
             $menu[] = [
                 'id' => $category->id,
                 'name' => $category->name,
+                'description' => $category->description,
                 'products' => $products->toArray(),
             ];
         }
