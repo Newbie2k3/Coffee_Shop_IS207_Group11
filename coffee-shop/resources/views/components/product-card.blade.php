@@ -15,6 +15,7 @@ $formattedPrice = number_format($price, 0, ',', '.') . 'đ';
             <h5 class="card-title">{{ $name }}</h5>
         </a>
         <p class="card-text">{{ $description }}</p>
+        <p class="card-text">{{ $formattedPrice }}</p>
         <button type="button" class="btn btn-primary add-to-cart" name="add-to-cart" data-id={{ $id }}>
             {{ $buttonName }}
         </button>

@@ -1,0 +1,123 @@
+#filled_cart {
+    display: flex;
+    height: 100%;
+    padding-top: 140px;
+    justify-content: space-between;
+}
+
+#filled_cart table {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+}
+
+#filled_cart table thead tr {
+    display: flex;
+    height: 48px;
+    width: 100%;
+    border-bottom: solid 2px white;
+    font-size: 1rem;
+    text-align: left;
+}
+
+#filled_cart table tbody {
+    width: 100%;
+}
+
+#filled_cart table tbody tr {
+    display: flex;
+    height: 80px;
+    width: 100%;
+    align-items: center;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.4);
+    font-size: 1rem;
+    text-align: left;
+}
+
+#filled_cart .cart-item-price,
+#filled_cart .cart-item-total {
+    width: 16%;
+}
+
+#filled_cart .cart-item-qty {
+    width: 18%;
+    height: 42px;
+}
+
+#filled_cart .cart-item-name,
+#filled_cart .cart-item-action {
+    width: 25%;
+}
+
+#filled_cart .cart-item-action .cart-update-btn{
+    width: 100px;
+}
+
+#filled_cart .checkout-container {
+    width: 30%;
+    height: 420px;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 16px;
+}
+
+.qty-group-btn button,
+.qty-group-btn input {
+    background-color: rgba(255, 255, 255, 0, 3);
+}
+
+.qty-group-btn {
+    width: 120px;
+}
+
+.qty-group-btn input {
+    padding: 2px;
+}
+
+#empty_cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+#empty_cart img {
+    width: 400px;
+}
+
+#empty_cart .text {
+    text-align: center;
+}
+
+#empty_cart h3 {
+    font-size: 2rem;
+}
+
+#empty_cart .links {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+#mini-empty_cart {
+    padding: 12px 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+#mini-empty_cart img {
+    width: 320px;
+}
+
+#mini-empty_cart .text {
+    text-align: center;
+    color: #555555;
+}
+
+#mini-empty_cart h3 {
+    font-size: 1.3rem;
+    color: #555555;
+}

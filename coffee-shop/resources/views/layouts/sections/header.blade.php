@@ -6,20 +6,13 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li class="nav-item {{ request()->is('great-deals') ? 'active' : '' }}">
-                    <a class="nav-link px-3" href="/great-deals">Khuyến mãi</a>
+                    <a class="nav-link px-3" href="{{ route('great-deals') }}">Khuyến mãi</a>
                 </li>
-                <li class="nav-item {{ request()->is('menu') ? 'active' : '' }} dropdown">
-                    <a class="nav-link px-3 dropdown-toggle" href="#" role="button" id="productsDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Sản phẩm
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="productsDropdown">
-                        <a class="dropdown-item" href="/menu">Cà phê</a>
-                        <a class="dropdown-item" href="/menu">Trà</a>
-                    </div>
+                <li class="nav-item {{ request()->is('menu') ? 'active' : '' }}">
+                    <a class="nav-link px-3" href="{{ route('menu') }}">Thực đơn</a>
                 </li>
                 <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
-                    <a class="nav-link px-3" href="/about">Về chúng tôi</a>
+                    <a class="nav-link px-3" href="{{ route('about') }}">Về chúng tôi</a>
                 </li>
             </ul>
 
@@ -28,15 +21,16 @@
                 <div class="icon-container">
                     <x-icon-modal menuOpen="accountMenuOpen" icon='<i class="fa-solid fa-user"></i>' size='small'>
                         @if (Route::has('login'))
+                            <div id="user-avatar" data-auth="{{ Auth::check() ? 'true' : 'false' }}"></div>
                             @auth
                                 <h3 class="modal-title">{{ __(Auth::user()->name) }}
                                     <br>
                                     <span class="modal-subtitle">
-                                        @if (Auth::user()->is_admin)
+                                        @admin
                                             Admin
                                         @else
                                             Guest
-                                        @endif
+                                        @endadmin
                                     </span>
                                 </h3>
 
@@ -78,9 +72,18 @@
                         <div class="cart-sm" id="small_cart">
                             {{-- Cart Items --}}
                         </div>
-                        <a href="{{ route('cart') }}">Xem giỏ hàng</a>
+                        <div id="mini-empty_cart">
+                            <img src="{{ asset('assets/img/empty-cart.png') }}" alt="Your Cart is Empty!">
+                            <div class="text text-center">
+                                <h3>Giỏ hàng của bạn đang trống</h3>
+                                <p>Lựa chọn sản phẩm của mình nhé!</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('cart') }}"><i class="fa-solid fa-cart-shopping"></i>&nbsp&nbspXem giỏ hàng</a>
                     </x-icon-modal>
-                    <span id="cart_count" class="badge cart-badge"></span>
+                    @auth
+                        <span id="cart_count" class="badge cart-badge">0</span>
+                    @endauth
                 </div>
             </div>
         </div>

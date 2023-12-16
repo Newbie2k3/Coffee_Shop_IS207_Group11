@@ -1,10 +1,15 @@
 $(document).ready(function () {
-    updateCart();
-    updateCartCount();
+    const isAuthenticated = $("#user-avatar").data("auth");
+
+    if (isAuthenticated) {
+        updateCart();
+        updateCartCount();
+    }
 
     $(".add-to-cart").click(handleAddToCart);
     $("#small_cart").on("click", ".remove-from-cart", handleRemoveFromCart);
     $(".remove-from-cart").click(handleRemoveFromCart);
+    $(".cart-update-btn").click(handleUpdateItemQty);
     $(".qty-input").on("change", handleQtyInputChange);
     $(".increment-btn, .decrement-btn").click(handleQtyChange);
 
@@ -14,6 +19,21 @@ $(document).ready(function () {
         const id = $(this).data("id");
         const product_id = $(".product_id_" + id).val();
         const product_qty = $(".product_qty_" + id).val();
+
+        if (!isAuthenticated) {
+            swal(
+                "Yêu cầu đăng nhập",
+                "Xin lỗi vì sự bất tiện này, mong quý khách đăng nhập tài khoản ạ!",
+                "info"
+            );
+            return;
+        }
+
+        const addToCartButton = $(this);
+        addToCartButton.prop("disabled", true);
+        addToCartButton.html(
+            'Đang thêm <i class="fa-solid fa-circle-notch fa-spin"></i>'
+        );
 
         $.ajaxSetup({
             headers: {
@@ -50,6 +70,10 @@ $(document).ready(function () {
                 );
                 console.log(error);
             },
+            complete: function () {
+                addToCartButton.prop("disabled", false);
+                addToCartButton.html("Thêm vào giỏ");
+            },
         });
     }
 
@@ -59,30 +83,36 @@ $(document).ready(function () {
         let cur_qty = parseInt($(".product_qty_" + id).val());
 
         if ($(this).hasClass("increment-btn")) {
-            cur_qty += 1;
+            cur_qty = Math.min(99, cur_qty + 1);
         } else {
             cur_qty = Math.max(1, cur_qty - 1);
         }
 
         $(".product_qty_" + id).val(cur_qty);
-        if ($(this).hasClass("update-cart-qty")) {
-            handleUpdateItemQty(id, cur_qty);
-        }
     }
 
     function handleQtyInputChange(e) {
         e.preventDefault();
         const id = $(this).data("id");
         let cur_qty = parseInt($(this).val());
-        cur_qty = Math.max(1, cur_qty);
-
-        $(this).val(cur_qty);
-        if ($(this).hasClass("update-cart-qty")) {
-            handleUpdateItemQty(id, cur_qty);
+        if (!isNaN(cur_qty) && cur_qty >= 0 && cur_qty <= 99) {
+            $(this).val(cur_qty);
+        } else {
+            $(this).val(1);
         }
     }
 
-    function handleUpdateItemQty(id, product_qty) {
+    function handleUpdateItemQty(e) {
+        e.preventDefault();
+        const id = $(this).data("id");
+        let product_qty = parseInt($(".product_qty_" + id).val());
+
+        const updateBtn = $(this);
+        updateBtn.prop("disabled", true);
+        updateBtn.html(
+            'Cập nhật <i class="fa-solid fa-circle-notch fa-spin"></i>'
+        );
+
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -103,6 +133,10 @@ $(document).ready(function () {
             },
             error: function (error) {
                 console.log(error);
+            },
+            complete: function () {
+                updateBtn.prop("disabled", false);
+                updateBtn.html("Cập nhật");
             },
         });
     }
@@ -136,8 +170,26 @@ $(document).ready(function () {
         });
     }
 
+    function handleCartUpdateBtn(e) {
+        e.preventDefault();
+        const id = $(this).data("id");
+        let cur_qty = parseInt($(".product_qty_" + id).val());
+
+        const updateBtn = $(this);
+        updateBtn.prop("disabled", true);
+        updateBtn.html(
+            'Đang cập nhật <i class="fa-solid fa-circle-notch fa-spin"></i>'
+        );
+
+        handleUpdateItemQty(id, cur_qty);
+
+        updateBtn.prop("disabled", false);
+        updateBtn.html("Cập nhật");
+    }
+
     function updateCartCount() {
         const empty_cart = $("#empty_cart");
+        const mini_empty_cart = $("#mini-empty_cart");
         const filled_cart = $("#filled_cart");
 
         $.ajax({
@@ -152,9 +204,11 @@ $(document).ready(function () {
                 $("#cart_count").text(cart_count);
 
                 if (cart_count > 0) {
+                    mini_empty_cart.hide();
                     empty_cart.hide();
                     filled_cart.show();
                 } else {
+                    mini_empty_cart.show();
                     empty_cart.show();
                     filled_cart.hide();
                 }
