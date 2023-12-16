@@ -39,9 +39,9 @@
     </x-big-banner>
 
     <!-- Related products -->
-    <section class="py-5 bg-light">
+    <section id="relatedProducts" class="py-5">
         <div class="container">
-            <h3 class="fw-bolder mb-4 text-secondary h3">Các sản phẩm liên quan</h3>
+            <h3 class="fw-bolder mb-4 text-white h3">Các sản phẩm liên quan</h3>
             @foreach ($related_product as $product)
                 <div class="col-12 col-md-3">
                     <x-product-card id="{{ $product['id'] }}" imgUrl="{{ 'assets/img/product/' . $product['image'] }}"

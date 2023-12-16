@@ -1,0 +1,49 @@
+.blacka {
+    background-color: pink;
+}
+
+.bg-color-yellow {
+    background-color: #c49b63;
+}
+
+.feature {
+    padding: 80px 40px;
+    color: black;
+}
+
+.feature .order {
+    padding: 4px 12px;
+}
+
+.pd-top {
+    padding-top: 120px;
+}
+
+.image-container {
+    padding-left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    width: 1000px;
+    height: 300px;
+}
+
+.image-container img {
+    height: 148px;
+    width: 496px;
+}
+
+.title-tertiary {
+    font-family: var(--font-tertiary);
+    color: #c49b63;
+    z-index: 1;
+}
+
+.title-primary {
+    font-family: var(--font-primary);
+    color: white;
+    font-weight: 400;
+    transform: translateY(-30px);
+    z-index: 0;
+}
