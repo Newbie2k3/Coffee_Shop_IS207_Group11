@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -22,9 +23,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+        
         Blade::if('admin', function () {
             return auth()->user()?->is_admin;
         });
+
         Paginator::useBootstrap();
+
+        Blade::directive('formatNumber', function ($expression) {
+            return "<?php echo number_format($expression, 0, ',', '.') . ' ₫'; ?>";
+        });
     }
 }

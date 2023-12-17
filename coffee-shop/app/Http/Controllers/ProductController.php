@@ -13,14 +13,21 @@ class ProductController extends Controller
 {
     public function show(Request $request)
     {
-        $category = DB::table('products')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->select('products.*', 'categories.name as category_name')
-            ->get();
-        $categories = DB::table('categories')->get();
         $keyword = $request->input('search');
-        $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
-        return view('admin.product.product', compact('product', 'category', 'categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $categoryId = $request->input('category_id');
+
+        $query = Product::with('category')
+            ->where('name', 'like', "%$keyword%");
+
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+
+        $products = $query->paginate(5);
+        $categories = Category::all();
+        
+        return view('admin.product.product', compact('products', 'categories', 'keyword', 'categoryId'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function getProducts($category_id)
@@ -37,24 +44,22 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        print_r($request->all());
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/img/product'), $filename);
-            Product::create([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'category_id' => $request->input('category_id'),
-                'status' => $request->input('status'),
-                'price' => $request->input('price'),
-                'image' => $filename,
-            ]);
-        }
+        $this->validateProductRequest($request);
+
+        $filename = $this->uploadFile($request);
+
+        Product::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'status' => $request->input('status'),
+            'price' => $request->input('price'),
+            'image' => $filename,
+        ]);
+
         $category_name = Category::find($request->input('category_id'))->name;
 
         return redirect()->route('product')->with('category_name', $category_name);
-        ;
     }
 
     public function edit($id)
@@ -66,48 +71,76 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $image_path=public_path('assets/img/product/'. $product->image);
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/img/product'), $filename);
-            if(File::exists($image_path)){
-                File::delete($image_path);
-            }
-            $product->update([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'category_id' => $request->input('category_id'),
-                'status' => $request->input('status'),
-                'price' => $request->input('price'),
-                'image' => $filename,
-            ]);
-        }else{
-            $product->update([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'category_id' => $request->input('category_id'),
-                'status' => $request->input('status'),
-                'price' => $request->input('price'),
-            ]);
-        }
+        $this->validateProductRequest($request);
+
+        $product = Product::findOrFail($id);
+
+        $filename = $this->uploadFile($request, $product);
+
+        $product->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'status' => $request->input('status'),
+            'price' => $request->input('price'),
+            'image' => $filename ?: $product->image,
+        ]);
+
         return redirect()->route('product');
     }
 
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        $image_path=public_path('assets/img/product/'. $product->image);
-        // echo $image_path;
-        if(File::exists($image_path)){
-            File::delete($image_path);
-        }
+
+        $this->deleteFile($product);
+
         $product->delete();
         return redirect()->route('product');
     }
     //end admin function
 
+    // Private
+    private function validateProductRequest(Request $request)
+    {
+        $rules = [
+            'name' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
+
+        $request->validate($rules);
+    }
+
+    private function uploadFile(Request $request, $existingProduct = null)
+    {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/img/product'), $filename);
+
+            if ($existingProduct) {
+                $this->deleteFile($existingProduct);
+            }
+
+            return $filename;
+        }
+
+        return null;
+    }
+
+    private function deleteFile(Product $product)
+    {
+        $imagePath = public_path('assets/img/product/' . $product->image);
+
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+    }
+
+    // Detail gonna muv into guest
     public function product_detail($id)
     {
         $product = Product::where('id', $id)->first();
