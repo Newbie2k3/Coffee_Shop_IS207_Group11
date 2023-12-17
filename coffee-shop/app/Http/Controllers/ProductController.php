@@ -13,9 +13,7 @@ class ProductController extends Controller
 {
     public function show(Request $request)
     {
-        $query = Product::with('category');
-
-        $products = $query->paginate(5);
+        $products = Product::with('category')->get();
         $categories = Category::all();
         
         return view('admin.product.product', compact('products', 'categories'))
@@ -34,7 +32,7 @@ class ProductController extends Controller
             $query->where('category_id', $categoryId);
         }
 
-        $products = $query->paginate(5);
+        $products = $query->get();
         $categories = Category::all();
 
         return view('admin.product.product_list', compact('products', 'keyword', 'categoryId'))->render();

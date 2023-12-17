@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const csrfToken = $('meta[name="csrf-token"]').attr("content");
+
     const productSearchUrl = "/admin/product-search";
     const productDeleteUrl = "/admin/product/:id";
 
@@ -12,14 +14,12 @@ $(document).ready(function () {
     function handleSearch(e) {
         e.preventDefault();
 
-        console.log("Search");
-
         const keyword = $("#search-input").val();
         const categoryId = $("#category").val();
 
         $.ajaxSetup({
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                "X-CSRF-TOKEN": csrfToken,
             },
         });
 
@@ -65,9 +65,7 @@ $(document).ready(function () {
 
                 $.ajaxSetup({
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
+                        "X-CSRF-TOKEN": csrfToken,
                     },
                 });
 

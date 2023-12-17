@@ -1,5 +1,6 @@
 $(document).ready(function () {
     const isAuthenticated = $("#user-avatar").data("auth");
+    const csrfToken = $('meta[name="csrf-token"]').attr("content");
 
     if (isAuthenticated) {
         updateCart();
@@ -37,7 +38,7 @@ $(document).ready(function () {
 
         $.ajaxSetup({
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                "X-CSRF-TOKEN": csrfToken,
             },
         });
 
@@ -115,7 +116,7 @@ $(document).ready(function () {
 
         $.ajaxSetup({
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                "X-CSRF-TOKEN": csrfToken,
             },
         });
 
@@ -151,7 +152,7 @@ $(document).ready(function () {
 
         $.ajaxSetup({
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                "X-CSRF-TOKEN": csrfToken,
             },
         });
 
