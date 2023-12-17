@@ -12,24 +12,21 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __('Thông tin Sản phẩm') }}
-                    <form action="{{ route('product') }}" method="GET">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="search"
-                                value={{ $keyword }}>
-                            <select id="category" name="category_id">
-                                <option value="">Tất cả</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        {{ $category->id == $categoryId ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="input-group-append">
-                                <x-primary-button>Tìm</x-primary-button>
-                            </div>
+                    <div class="input-group mb-3">
+                        <input id="search-input" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm"
+                            name="search">
+                        <select id="category" name="category_id">
+                            <option value="">Tất cả</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <div class="input-group-append">
+                            <x-primary-button type="button" id="search-btn">Tìm</x-primary-button>
                         </div>
-                    </form>
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>
@@ -45,22 +42,12 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @if ($products->isEmpty())
-                                <tr>
-                                    <td colspan="8">
-                                        @if (isset($keyword) || $categoryId)
-                                            Không có sản phẩm phù hợp với tìm kiếm của bạn.
-                                        @else
-                                            Không có sản phẩm nào trong kho.
-                                        @endif
-                                    </td>
-                                </tr>
-                            @else
-                                <div id="product-list">
-                                    @include('admin.product.product_list', ['products' => $products])
-                                </div>
-                            @endif
+                        <tbody id="product-list">
+                            @include('admin.product.product_list', [
+                                'products' => $products,
+                                'keywork' => null,
+                                'categoryId' => null,
+                            ])
                         </tbody>
                     </table>
                     <a href="{{ route('product_create') }}"
@@ -72,5 +59,7 @@
         </div>
     </div>
 
-
+    @section('page-script')
+        <script src="{{ asset('assets/js/admin-manage.js') }}" defer></script>
+    @endsection
 </x-admin-layout>

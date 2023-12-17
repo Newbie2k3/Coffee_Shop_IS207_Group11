@@ -13,8 +13,19 @@ class ProductController extends Controller
 {
     public function show(Request $request)
     {
-        $keyword = $request->input('search');
-        $categoryId = $request->input('category_id');
+        $query = Product::with('category');
+
+        $products = $query->paginate(5);
+        $categories = Category::all();
+        
+        return view('admin.product.product', compact('products', 'categories'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $categoryId = $request->input('categoryId');
 
         $query = Product::with('category')
             ->where('name', 'like', "%$keyword%");
@@ -25,9 +36,8 @@ class ProductController extends Controller
 
         $products = $query->paginate(5);
         $categories = Category::all();
-        
-        return view('admin.product.product', compact('products', 'categories', 'keyword', 'categoryId'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+
+        return view('admin.product.product_list', compact('products', 'keyword', 'categoryId'))->render();
     }
 
     public function getProducts($category_id)
@@ -44,7 +54,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $this->validateProductRequest($request);
+        // $this->validateProductRequest($request);
 
         $filename = $this->uploadFile($request);
 
@@ -71,7 +81,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validateProductRequest($request);
+        // $this->validateProductRequest($request);
 
         $product = Product::findOrFail($id);
 
