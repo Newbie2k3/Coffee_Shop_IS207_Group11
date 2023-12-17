@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -67,10 +67,14 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+        $image_path=public_path('assets/img/product/'. $product->image);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('assets/img/product'), $filename);
+            if(File::exists($image_path)){
+                File::delete($image_path);
+            }
             $product->update([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
@@ -79,6 +83,14 @@ class ProductController extends Controller
                 'price' => $request->input('price'),
                 'image' => $filename,
             ]);
+        }else{
+            $product->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'category_id' => $request->input('category_id'),
+                'status' => $request->input('status'),
+                'price' => $request->input('price'),
+            ]);
         }
         return redirect()->route('product');
     }
@@ -86,6 +98,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+        $image_path=public_path('assets/img/product/'. $product->image);
+        // echo $image_path;
+        if(File::exists($image_path)){
+            File::delete($image_path);
+        }
         $product->delete();
         return redirect()->route('product');
     }
