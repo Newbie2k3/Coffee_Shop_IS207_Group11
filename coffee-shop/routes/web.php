@@ -6,6 +6,8 @@ use App\Http\Controllers\GuestPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +30,8 @@ Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
-    Route::view('/', 'admin.dashboard')->name('dashboard');
-
+    Route::get('/', [OrderController::class, 'statistic'])->name('dashboard');
+    Route::get('/chartStatistic', [OrderController::class, 'chartStatistic'])->name('statisticChart');
     //Khach hang
     Route::get('/user', [UserController::class, 'show'])->name('user');
     Route::post('/user', [UserController::class, 'store'])->name('user_store');
@@ -63,6 +65,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/booking', [OrderController::class, 'booking'])->name('order.booking');
+    Route::get('/my-booking', [OrderController::class, 'myBooking'])->name('order.myBooking');
+
+    Route::get('/bookingAPI', [OrderController::class, 'BookingApi']);
 
     // Shopping cart
     Route::get('/cart', [CartController::class, 'view'])->name('cart');
@@ -72,5 +78,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
     Route::get('/get-cart', [CartController::class, 'getCart'])->name('cart.getcart');
 });
-
+Route::middleware('auth')->group(function () {
+    Route::get('/order', [OrderController::class, 'view'])->name('order.index');
+    Route::post('/create-order', [OrderController::class, 'insertOrder'])->name('order.create');
+    Route::post('/payment-vnpay', [OrderController::class, 'paymentVnpay'])->name('payment-vnpay');
+    Route::get('/payment-vnpay-return', [OrderController::class, 'paymentResult'])->name('payment-vnpay-return');
+});
 require __DIR__ . '/auth.php';

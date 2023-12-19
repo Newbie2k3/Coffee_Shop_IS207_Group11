@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Order;
-use App\Models\User;
+use App\Models\Booking;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Status extends Model
 {
     use HasFactory;
-    protected $table = 'carts';
+    protected $table = 'status';
     protected $fillable = [
-        'user_id',
-        'total_cart'
+        'name',
     ];
     public $timestamps = false;
-    public function user()
+    public function order()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Booking::class);
     }
 }

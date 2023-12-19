@@ -46,8 +46,8 @@ $(document).ready(function () {
             method: "POST",
             url: "/add-to-cart",
             data: {
-                product_id: product_id,
-                product_qty: product_qty,
+                product_id: +product_id,
+                product_qty: +product_qty,
             },
             success: function (response) {
                 const status = response.status;
@@ -254,5 +254,62 @@ $(document).ready(function () {
             style: "currency",
             currency: "VND",
         }).format(price);
+    }
+});
+
+var paymentMethodSelect = document.getElementById("paymentMethodSelect");
+var paymentMethodIdInput = document.getElementById("payment_method_id");
+var cartId = document.getElementById("cart_id");
+paymentMethodSelect.addEventListener("change", function () {
+    var selectedValue = paymentMethodSelect.value;
+    paymentMethodIdInput.value = selectedValue;
+});
+
+document.getElementById("createOrderForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+    if (!paymentMethodIdInput.value) {
+        alert("Vui lý chọn phúc thức thanh toán!");
+        return;
+    }
+    if (+paymentMethodIdInput.value === 2) {
+        $.ajax({
+            url: "/payment-vnpay",
+            method: "POST",
+            cache: false,
+            data: {
+                payment_method_id: paymentMethodIdInput.value,
+            },
+            success: function (response) {
+                console.log(response);
+                window.location.href = response.url;
+            },
+            error: function (error) {
+                console.log(error);
+            },
+        });
+    }
+    if (+paymentMethodIdInput.value === 1) {
+        $.ajax({
+            url: "/create-order",
+            method: "POST",
+            cache: false,
+            data: {
+                payment_method_id: paymentMethodIdInput.value,
+            },
+            success: function (response, b, c) {
+                console.log(response);
+                console.log(b);
+                console.log(c);
+                alert("Thanh toán khi nhận hàng thành công!");
+            },
+            error: function (error) {
+                console.log(error);
+            },
+        });
     }
 });
