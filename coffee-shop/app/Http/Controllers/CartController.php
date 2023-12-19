@@ -29,7 +29,7 @@ class CartController extends Controller
         $user = Auth::user();
         $product = Product::find($product_id);
 
-        if (!$user || !$product) {
+        if (!$user || !$product || $product->status !== 1) {
             return response()->json(['status' => 'warning']);
         }
 

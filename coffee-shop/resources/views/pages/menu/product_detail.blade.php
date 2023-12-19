@@ -16,23 +16,27 @@
                     <div class="fs-5 mb-5">
                         <span>{{ number_format($product->price, 0, ',', '.') . ' ₫' }}</span>
                     </div>
-
-                    <div class="big-input-group">
-                        <div>Số lượng</div>
-                        <div class="input-group text-center mb-3">
-                            <button class="input-group-text decrement-btn" data-id={{ $product->id }}>-</button>
-                            <input type="number" name="quantity"
-                                class="form-control qty-input text-center product_qty_{{ $product->id }}"
-                                value="1" min="1">
-                            <button class="input-group-text increment-btn" data-id={{ $product->id }}>+</button>
+                    @if (!$product->status)
+                        <div class="h3 fw-bold">Ngừng bán</div>
+                    @else
+                        <div class="big-input-group">
+                            <div>Số lượng</div>
+                            <div class="input-group text-center mb-3">
+                                <button class="input-group-text decrement-btn" data-id={{ $product->id }}>-</button>
+                                <input type="number" name="quantity"
+                                    class="form-control qty-input text-center product_qty_{{ $product->id }}"
+                                    value="1" min="1">
+                                <button class="input-group-text increment-btn" data-id={{ $product->id }}>+</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="d-flex">
-                        <input type="hidden" value={{ $product->id }} class="product_id_{{ $product->id }}">
-                        <button type="button" class="btn btn-primary add-to-cart" data-id={{ $product->id }}>Thêm vào
-                            giỏ</button>
-                    </div>
+                        <div class="d-flex">
+                            <input type="hidden" value={{ $product->id }} class="product_id_{{ $product->id }}">
+                            <button type="button" class="btn btn-primary add-to-cart" data-id={{ $product->id }}>
+                                Thêm vào giỏ
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -45,7 +49,8 @@
             @foreach ($related_product as $product)
                 <div class="col-12 col-md-3">
                     <x-product-card id="{{ $product['id'] }}" imgUrl="{{ 'assets/img/product/' . $product['image'] }}"
-                        name="{{ $product['name'] }}" price="{{ $product['price'] }}" buttonName="Thêm vào giỏ" />
+                        name="{{ $product['name'] }}" price="{{ $product['price'] }}" buttonName="Thêm vào giỏ"
+                        status="{{ $product['status'] }}" />
                 </div>
             @endforeach
         </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -24,16 +23,16 @@ class GuestPageController extends Controller
     public function menu()
     {
         $title = "Menu";
-        
+
         $categories = Category::all();
 
         $menu = [];
-    
+
         foreach ($categories as $category) {
             $products = Product::where('category_id', $category->id)
-                              ->where('status', 1)
-                              ->get();
-    
+                ->whereIn('status', [0, 1])
+                ->get();
+
             $menu[] = [
                 'id' => $category->id,
                 'name' => $category->name,

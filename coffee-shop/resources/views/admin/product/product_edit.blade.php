@@ -45,11 +45,11 @@
                         <div class="mb-3">
                             <x-input-label for="status" :value="__('Tình trạng')" />
                             <x-selector-input id="status" name="status" class="block mt-1 w-full required-field"
-                                :disabled="false" :options="['0' => 'Ngừng bán', '1' => 'Đang bán']" :selected="$product->status" />
+                                :disabled="false" :options="['0' => 'Ngừng bán', '1' => 'Đang bán', '2' => 'Ẩn khỏi trang bán hàng']" :selected="$product->status" />
                         </div>
                         <div class="mb-3">
                             <x-input-label :value="__('Hình ảnh sản phẩm')" />
-                            <img src="{{ asset('assets/img/product/' . $product->image) }}" alt="Hình ảnh" width=300px>
+                            <img src="{{ asset('assets/img/product/' . $product->image) }}" alt="Hình ảnh" style="width:300px; height:300px; object-fit: cover; vertical-align: middle;">
                         </div>
                         <div class="mb-3">
                             <x-input-label for="image" :value="__('Thay hình ảnh mới')" />

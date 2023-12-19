@@ -42,7 +42,7 @@
                         <div class="mb-3">
                             <x-input-label for="status" :value="__('Tình trạng')" />
                             <x-selector-input id="status" name="status" class="block mt-1 w-full required-field"
-                                :disabled="false" :options="['0' => 'Chưa bán', '1' => 'Bán ngay']" :selected="1" />
+                                :disabled="false" :options="['0' => 'Chưa bán', '1' => 'Bán ngay', '2' => 'Chưa công bố']" :selected="1" />
                         </div>
                         <div class="mb-3">
                             <x-input-label for="image" :value="__('Hình ảnh sản phẩm')" />

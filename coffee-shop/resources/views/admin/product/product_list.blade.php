@@ -1,10 +1,18 @@
+@php
+    $statuses = [
+        '0' => 'Ngừng bán',
+        '1' => 'Đang bán',
+        '2' => 'Ẩn',
+    ];
+@endphp
+
 @forelse ($products as $index => $item)
     <tr class="rowid_{{ $item->id }}">
         <td>{{ $index + 1 }}</td>
         <td>{{ $item->name }}</td>
         <td>{{ $item->description }}</td>
         <td>{{ $item->category->name }}</td>
-        <td>{{ $item->status == '0' ? 'Ngừng bán' : 'Đang bán' }}</td>
+        <td>{{ $statuses[$item->status] ?? 'Không xác định' }}</td>
         <td>@formatNumber($item->price)</td>
         <td><img src="{{ asset('assets/img/product/' . $item->image) }}" alt="{{ $item->name }}"
                 style="width:120px; height:120px; object-fit: cover; vertical-align: middle;">

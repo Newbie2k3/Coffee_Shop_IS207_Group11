@@ -38,7 +38,7 @@
                                     <x-product-card id="{{ $product['id'] }}"
                                         imgUrl="{{ 'assets/img/product/' . $product['image'] }}"
                                         name="{{ $product['name'] }}" price="{{ $product['price'] }}"
-                                        buttonName="Thêm vào giỏ" />
+                                        buttonName="Thêm vào giỏ" status="{{ $product['status'] }}" />
                                 </div>
                             @endforeach
                         @else

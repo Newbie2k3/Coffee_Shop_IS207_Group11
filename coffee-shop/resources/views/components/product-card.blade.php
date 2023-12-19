@@ -1,4 +1,4 @@
-@props(['id', 'imgUrl', 'name', 'price', 'buttonName'])
+@props(['id', 'imgUrl', 'name', 'price', 'buttonName', 'status'])
 
 <?php
 $productDetail = URL::to('/product_detail/' . $id);
@@ -18,8 +18,14 @@ $formattedPrice = number_format($price, 0, ',', '.') . ' ₫';
             </a>
             <p class="card-price">{{ $formattedPrice }}</p>
         </div>
-        <button type="button" class="btn btn-primary add-to-cart" name="add-to-cart" data-id={{ $id }}>
-            {{ $buttonName }}
+        @if ($status)
+            <button type="button" class="btn btn-primary add-to-cart" name="add-to-cart" data-id={{ $id }}>
+                {{ $buttonName }}
+            </button>
+        @else
+        <button type="button" class="btn btn-error" disabled>
+            Ngừng bán
         </button>
+        @endif
     </div>
 </div>
