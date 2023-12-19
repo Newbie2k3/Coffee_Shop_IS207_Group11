@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
 
     //Khach hang
     Route::get('/user', [UserController::class, 'show'])->name('user');
+    Route::post('/user', [UserController::class, 'store'])->name('user_store');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user_create');
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user_edit');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user_update');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user_destroy');

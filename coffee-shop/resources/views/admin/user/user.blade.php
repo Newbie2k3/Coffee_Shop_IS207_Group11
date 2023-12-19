@@ -2,9 +2,14 @@
     @section('title', 'User')
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('User') }}
-        </h2>
+        <div class="position-relative">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('User') }}
+            </h2>
+
+            <a href="{{ route('user_create') }}"
+                class="btn btn-primary position-absolute translate-middle top-3 end-0">Thêm tài khoản mới</a>
+        </div>
     </x-slot>
 
     <div class="container-fluid px-5 py-4">

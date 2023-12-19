@@ -50,3 +50,7 @@
     -webkit-background-clip: text;
     animation: rainbow 5s ease-out infinite;
 }
+
+#myTable_wrapper select {
+    width: 80px;
+}

@@ -51,7 +51,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // $this->validateProductRequest($request);
+        $this->validateProductRequest($request);
 
         $filename = $this->uploadFile($request);
 
@@ -78,7 +78,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $this->validateProductRequest($request);
+        $this->validateProductRequest($request);
 
         $product = Product::findOrFail($id);
 

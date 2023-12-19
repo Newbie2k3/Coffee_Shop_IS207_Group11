@@ -2,9 +2,14 @@
     @section('title', 'Category')
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Category') }}
-        </h2>
+        <div class="position-relative">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Category') }}
+            </h2>
+
+            <a href="{{ route('category_create') }}"
+                class="btn btn-primary position-absolute translate-middle top-3 end-0">Thêm danh mục mới</a>
+        </div>
     </x-slot>
 
     <div class="container-fluid px-5 py-4">
@@ -36,9 +41,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="{{ route('category_create') }}"
-                    class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">Thêm
-                    danh mục mới</a>
             </div>
         </div>
     </div>

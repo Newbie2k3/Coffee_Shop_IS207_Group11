@@ -4,7 +4,7 @@
         <td>{{ $item->name }}</td>
         <td>{{ $item->description }}</td>
         <td>{{ $item->category->name }}</td>
-        <td>{{ $item->status == '0' ? 'Ẩn' : 'Hiện' }}</td>
+        <td>{{ $item->status == '0' ? 'Ngừng bán' : 'Đang bán' }}</td>
         <td>@formatNumber($item->price)</td>
         <td><img src="{{ asset('assets/img/product/' . $item->image) }}" alt="{{ $item->name }}"
                 style="width:120px; height:120px; object-fit: cover; vertical-align: middle;">

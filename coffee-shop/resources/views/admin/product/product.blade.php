@@ -23,7 +23,7 @@
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Mô tả sản phẩm</th>
                             <th scope="col">Danh mục sản phẩm</th>
-                            <th scope="col">Hiển thị</th>
+                            <th scope="col">Tình trạng</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">
