@@ -63,6 +63,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/booking', [OrderController::class, 'booking'])->name('order.booking');
+    Route::get('/my-booking', [OrderController::class, 'myBooking'])->name('order.myBooking');
+
+    Route::get('/bookingAPI', [OrderController::class, 'BookingApi']);
 
     // Shopping cart
     Route::get('/cart', [CartController::class, 'view'])->name('cart');

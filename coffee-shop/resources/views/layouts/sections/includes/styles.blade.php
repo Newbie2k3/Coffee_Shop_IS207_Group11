@@ -6,6 +6,8 @@
 
 <!-- My Styles -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/css/sweetalert.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.jqueryui.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <!-- Page Styles -->
 @yield('page-style')

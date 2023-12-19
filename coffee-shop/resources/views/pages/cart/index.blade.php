@@ -32,7 +32,7 @@
                                             data-id={{ $cart_item->id }}>-</button>
                                         <input type="number" name="quantity"
                                             class="form-control qty-input text-center product_qty_{{ $cart_item->id }} update-cart-qty"
-                                            data-id={{ $cart_item->id }} value="{{ $cart_item->product_qty }}"
+                                            data-id={{ $cart_item->id }} value="{{ $cart_item->quantity }}"
                                             min="1">
                                         <button class="input-group-text increment-btn update-cart-qty"
                                             data-id={{ $cart_item->id }}>+</button>

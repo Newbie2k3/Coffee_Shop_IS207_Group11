@@ -2,27 +2,28 @@
 
 namespace App\Models;
 
-use App\Models\Paymentmethod;
-use App\Models\Status;
-use App\Models\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Cart;
+use App\Models\Paymentmethod;
+use App\Models\Status;
 
-class Order extends Model
+class Booking extends Model
 {
     use HasFactory;
-    protected $table = 'orders';
-    protected $fillable = ['user_id', 'cart_id', 'paymentmethod_id', 'status_id', 'time', 'total'];
+    protected $table = 'bookings';
+    protected $fillable = [
+        'user_id',
+        'total',
+        'paymentmethod_id',
+        'status_id',
+    ];
     public $timestamps = false;
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function carts()
-    {
-        return $this->belongsTo(Cart::class);
-    }
-    public function paymentmethods()
+    public function paymentmethod()
     {
         return $this->belongsTo(Paymentmethod::class);
     }

@@ -29,10 +29,13 @@ $(document).ready(function () {
             method: "POST",
             url: "/add-to-cart",
             data: {
-                product_id: product_id,
-                product_qty: product_qty,
+                product_id: +product_id,
+                product_qty: +product_qty,
             },
-            success: function (response) {
+            success: function (response, b, c) {
+                console.log(response);
+                console.log(b);
+                console.log(c);
                 swal("Thành công", "Thêm sản phẩm thành công.", "success");
 
                 updateCartCount();
@@ -252,7 +255,6 @@ document.getElementById("createOrderForm").addEventListener("submit", (e) => {
             cache: false,
             data: {
                 payment_method_id: paymentMethodIdInput.value,
-                cart_id: cartId.value,
             },
             success: function (response) {
                 console.log(response);
@@ -270,10 +272,11 @@ document.getElementById("createOrderForm").addEventListener("submit", (e) => {
             cache: false,
             data: {
                 payment_method_id: paymentMethodIdInput.value,
-                cart_id: cartId.value,
             },
-            success: function (response) {
+            success: function (response, b, c) {
                 console.log(response);
+                console.log(b);
+                console.log(c);
                 alert("Thanh toán khi nhận hàng thành công!");
             },
             error: function (error) {

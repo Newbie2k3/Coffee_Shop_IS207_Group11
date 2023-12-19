@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,22 +13,11 @@ class Cart extends Model
     protected $table = 'carts';
     protected $fillable = [
         'user_id',
-        'product_id',
-        'product_qty',
-        'is_deleted'
+        'total_cart'
     ];
-
+    public $timestamps = false;
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-    public function order()
-    {
-        return $this->hasOne(Order::class);
     }
 }

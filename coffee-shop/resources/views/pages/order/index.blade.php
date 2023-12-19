@@ -35,13 +35,13 @@
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0 small">Số lượng: {{ $cart_item->product_qty }}
+                                                <p class="text-muted mb-0 small">Số lượng: {{ $cart_item->quantity }}
                                                 </p>
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                 <p class="text-muted mb-0 small">
-                                                    {{ $cart_item->product->price * $cart_item->product_qty }}</p>
+                                                    {{ $cart_item->product->price * $cart_item->quantity }}</p>
                                             </div>
                                         </div>
                                         <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
@@ -65,7 +65,6 @@
                                     @endforeach
                                 </select>
                                 <input type="hidden" name="payment_method_id" id="payment_method_id">
-                                <input type="hidden" name = "cart_id" id="cart_id" value="{{ $cart_item->id }}" />
                                 <button type="submit" class="btn btn-primary btn-block btn-lg">Thanh toán</button>
                             </form>
                         </div>

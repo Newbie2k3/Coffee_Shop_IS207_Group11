@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('image');
             $table->integer('price')->default(0);
+            $table->integer('quantity')->default(0);
             $table->string('status')->default('pending');
             $table->timestamps();
 

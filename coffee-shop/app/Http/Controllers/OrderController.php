@@ -7,6 +7,9 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\Status;
 use App\Models\Category;
+use App\Models\CartProduct;
+use App\Models\Booking;
+
 use App\Models\Paymentmethod;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,43 +21,42 @@ class OrderController extends Controller
         $title = "Order";
 
         $user = auth()->user();
-        $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
-
-        $product_ids = $cart_items->pluck('product_id');
-        $products = Product::whereIn('id', $product_ids)->get();
-
-        $cart_total = $this->calculateCartTotal();
+        $cart = Cart::where('user_id', $user->id)->first();
+        if (!$cart) {
+            $cart = Cart::create([
+                'user_id' => $user->id,
+            ]);
+        }
+        $cart_items = CartProduct::with('product')->where('cart_id', $cart->id)->get();
+        $cart_total = $cart->total_cart;
         $liststatus = Paymentmethod::all();
-        return view('pages.order.index', compact('cart_items', 'products', 'cart_total', 'liststatus'))->with('title', $title);
+        return view('pages.order.index', compact('cart_items', 'cart_total', 'liststatus'))->with('title', $title);
     }
 
-    public function getOrder($orderId)
-    {
-        $order = Order::find($orderId);
-        return response()->json($order);
-    }
+    // public function getOrder($orderId)
+    // {
+    //     $order = Order::find($orderId);
+    //     return response()->json($order);
+    // }
     public function insertOrder(Request $request)
     {
         $user = auth()->user();
+        $cart = Cart::where('user_id', $user->id)->first();
         $cart_id = $request->input('cart_id');
         $paymentmethod_id = $request->input('payment_method_id');
         $status_id = 1;
         $time = now();
-        $total = $this->calculateCartTotal();
+        $total = $cart->total_cart;
 
-        Order::create([
+        Booking::create([
             'user_id' => $user->id,
-            'cart_id' => $cart_id,
+            'total' => $total,
             'paymentmethod_id' => $paymentmethod_id,
             'status_id' => $status_id,
             'time' => $time,
-            'total' => $total,
         ]);
-        $cart = Cart::find($cart_id);
-        $cart->update([
-            'is_deleted' => 1,
-        ]);
-        return response()->json([]);
+        $cart->delete();
+        return response()->json(["cart" => $cart]);
     }
 
     public function paymentVnpay(Request $request)
@@ -62,15 +64,14 @@ class OrderController extends Controller
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $user = auth()->user();
-        $cart_id = $request->input('cart_id');
+        $cart = Cart::where('user_id', $user->id)->first();
         $paymentmethod_id = $request->input('payment_method_id');
         $status_id = 2;
         $time = now();
-        $total = $this->calculateCartTotal();
+        $total = $cart->total_cart;
 
-        $newOrder = Order::create([
+        $newOrder = Booking::create([
             'user_id' => $user->id,
-            'cart_id' => $cart_id,
             'paymentmethod_id' => $paymentmethod_id,
             'status_id' => $status_id,
             'time' => $time,
@@ -136,7 +137,8 @@ class OrderController extends Controller
     private function calculateCartTotal()
     {
         $user = auth()->user();
-        $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
+        $cart = Cart::where('user_id', $user->id)->first();
+        $cart_items = CartProduct::with('product')->where('cart_id', $cart->id)->get();
 
         $total = 0;
 
@@ -181,7 +183,7 @@ class OrderController extends Controller
         $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
         $vnp_Amount = $inputData['vnp_Amount'] / 100; // Số tiền thanh toán VNPAY phản hồi
         $orderId = $inputData['vnp_TxnRef'];
-        $order = Order::find($orderId);
+        $order = Booking::find($orderId);
         $debug = "Start";
         try {
             //Check Orderid    
@@ -200,10 +202,10 @@ class OrderController extends Controller
                             $order->update([
                                 'status_id' => 1,
                             ]);
-                            $cart = Cart::find($order->cart_id);
-                            $cart->update([
-                                'is_deleted' => 1,
-                            ]);
+                            $user = auth()->user();
+                            $cart = Cart::where('user_id', $user->id)->first();
+                            $cart->delete();
+                            $debug = "Payment success !!!";
                         } else {
                             $debug = "Payment failed";
                             $order->update([
@@ -233,7 +235,7 @@ class OrderController extends Controller
 
     public function statistic()
     {
-        $order_trong_ngay = Order::where('status_id', 1)
+        $order_trong_ngay = Booking::where('status_id', 1)
             ->whereDate('time', '>=', now())
             ->get();
         $tat_ca_danh_muc = Category::all();
@@ -246,14 +248,39 @@ class OrderController extends Controller
         $so_luong_danh_muc = count($tat_ca_danh_muc);
         $so_luong_san_pham = count($tat_ca_san_pham);
         $don_hang_trong_ngay = count($order_trong_ngay);
-        $don_hang_cod = count(Order::where('paymentmethod_id', 1)->get());
-        $don_hang_online = count(Order::where('paymentmethod_id', 2)->get());
+        $don_hang_cod = count(Booking::where('paymentmethod_id', 1)->get());
+        $don_hang_online = count(Booking::where('paymentmethod_id', 2)->get());
         return view('admin.dashboard', compact('doanh_thu_trong_ngay', 'so_luong_danh_muc', 'so_luong_san_pham', 'don_hang_trong_ngay'));
+    }
+
+    public function booking()
+    {
+        return view('pages.order.booking');
+    }
+
+    public function BookingApi()
+    {
+        $orders = Booking::with('user')->with('paymentmethod')->with('status')->get();
+        return response()->json(['data' => $orders]);
+    }
+
+    public function myBooking()
+    {
+        $user = auth()->user();
+        $orders = Booking::with('user')->where('user_id', $user->id)->get();
+        return view('pages.order.my_booking', compact('orders'));
+    }
+
+    public function myBookingApi()
+    {
+        $user = auth()->user();
+        $orders = Booking::with('user')->with('paymentmethod')->with('status')->where('user_id', $user->id)->get();
+        return response()->json(['data' => $orders]);
     }
     public function chartStatistic()
     {
-        $don_hang_cod = count(Order::where('paymentmethod_id', 1)->get());
-        $don_hang_online = count(Order::where('paymentmethod_id', 2)->get());
+        $don_hang_cod = count(Booking::where('paymentmethod_id', 1)->get());
+        $don_hang_online = count(Booking::where('paymentmethod_id', 2)->get());
         return response()->json(['don_hang_cod' => $don_hang_cod, 'don_hang_online' => $don_hang_online]);
     }
 }
