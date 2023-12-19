@@ -13,25 +13,9 @@
         </div>
     </x-slot>
 
-    {{-- <div class="container-fluid pt-4 px-5 d-flex justify-content-end">
-        <div class="input-group mb-2" style="max-width: 500px;">
-            <input id="search-input" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="search">
-            <select id="category" name="category_id" class="form-select" style="max-width: 140px;">
-                <option value="">Tất cả</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-            <button class="btn btn-primary" type="button" id="search-btn">Tìm</button>
-        </div>
-    </div> --}}
-
     <div class="container-fluid px-5 py-4">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-4 text-gray-900">
-                {{-- <table class="table table-hover"> --}}
                 <table id="myTable" class="display" style="width:100%;">
                     <thead>
                         <tr>
@@ -58,4 +42,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const csrfToken = "{{ csrf_token() }}";
+        const itemDeleteUrl = "{{ route('product_destroy', [':id']) }}";
+    </script>
 </x-admin-layout>

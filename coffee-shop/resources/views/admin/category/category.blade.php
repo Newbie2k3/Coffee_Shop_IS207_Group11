@@ -13,26 +13,24 @@
                 <table id="myTable" class="display" style="width:100%;">
                     <thead>
                         <tr>
+                            <th scope="col">STT</th>
                             <th scope="col">Tên danh mục</th>
                             <th scope="col">Mô tả danh mục</th>
-                            <th scope="col">
-                                Thao tác
-                            </th>
+                            <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($category as $item)
-                            <tr>
-                                <th scope="row">{{ $item->name }}</th>
+                        @foreach ($category as $index => $item)
+                            <tr class="rowid_{{ $item->id }}">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $item->name }}</td>
                                 <td>{{ $item->description }}</td>
                                 <td>
-                                    <form action="{{ route('category_destroy', $item->id) }}" method="POST">
-                                        <a href="{{ route('category_edit', $item->id) }}"
-                                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Sửa</a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-danger-button>Xóa</x-danger-button>
-                                    </form>
+                                    <a href="{{ route('category_edit', $item->id) }}"
+                                        class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Sửa</a>
+
+                                    <x-danger-button type="button" class="delete-btn"
+                                        data-id="{{ $item->id }}">Xóa</x-danger-button>
                                 </td>
                             </tr>
                         @endforeach
@@ -44,4 +42,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const csrfToken = "{{ csrf_token() }}";
+        const itemDeleteUrl = "{{ route('category_destroy', [':id']) }}";
+    </script>
 </x-admin-layout>

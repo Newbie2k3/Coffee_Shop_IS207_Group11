@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
             $table->longText('description')->nullable();
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->string('status')->default('pending');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('RESTRICT')->onUpdate('CASCADE');
         });
     }
 

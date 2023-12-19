@@ -1,18 +1,10 @@
 @forelse ($products as $index => $item)
-    <tr class="product_{{ $item->id }}">
+    <tr class="rowid_{{ $item->id }}">
         <td>{{ $index + 1 }}</td>
         <td>{{ $item->name }}</td>
         <td>{{ $item->description }}</td>
         <td>{{ $item->category->name }}</td>
-        <td>
-            <?php
-            if ($item->status == '0') {
-                echo 'Ẩn';
-            } else {
-                echo 'Hiện';
-            }
-            ?>
-        </td>
+        <td>{{ $item->status == '0' ? 'Ẩn' : 'Hiện' }}</td>
         <td>@formatNumber($item->price)</td>
         <td><img src="{{ asset('assets/img/product/' . $item->image) }}" alt="{{ $item->name }}"
                 style="width:120px; height:120px; object-fit: cover; vertical-align: middle;">
@@ -25,13 +17,5 @@
         </td>
     </tr>
 @empty
-    <tr>
-        <td colspan="8">
-            @if (isset($keyword) || $categoryId)
-                Không có sản phẩm phù hợp với tìm kiếm của bạn.
-            @else
-                Không có sản phẩm nào trong kho.
-            @endif
-        </td>
-    </tr>
+    {{-- Empty --}}
 @endforelse

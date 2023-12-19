@@ -15,9 +15,8 @@ class ProductController extends Controller
     {
         $products = Product::with('category')->get();
         $categories = Category::all();
-        
-        return view('admin.product.product', compact('products', 'categories'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+
+        return view('admin.product.product', compact('products', 'categories'));
     }
 
     public function search(Request $request)
@@ -101,10 +100,16 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $this->deleteFile($product);
+        if (!$product) {
+            return response()->json(['message' => 'Sản phẩm không tồn tại.'], 404);
+        }
 
+        $this->deleteFile($product);
         $product->delete();
-        return redirect()->route('product');
+
+        $remainingProducts = Product::count();
+
+        return response()->json(['message' => 'Sản phẩm đã được xóa thành công.', 'remaining' => $remainingProducts], 200);
     }
     //end admin function
 

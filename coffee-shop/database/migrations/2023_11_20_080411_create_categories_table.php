@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->foreignIdFor(\App\Models\Category::class, 'parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('name');

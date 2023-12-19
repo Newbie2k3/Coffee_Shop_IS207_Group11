@@ -27,8 +27,16 @@ class UserController extends Controller
     }
     
     public function destroy($id){
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Tài khoản không tồn tại.'], 404);
+        }
+
         $user->delete();
-        return redirect()->route('user');
+
+        $remainingUsers = User::count();
+
+        return response()->json(['message' => 'Tài khoản đã được xóa thành công.', 'remaining' => $remainingUsers], 200);
     }
 }

@@ -46,13 +46,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
 
     //San pham
     Route::get('/product', [ProductController::class, 'show'])->name('product');
+    Route::post('product', [ProductController::class, 'store'])->name('product_store');
+    Route::put('/product/{id}', [ProductController::class, 'update'])->name('product_update');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product_destroy');
     Route::get('/get-products/{category_id}', 'ProductController@getProducts')->name('get-products');
     Route::get('/product-search', [ProductController::class, 'search'])->name('product_search');
     Route::get('product/create', [ProductController::class, 'create'])->name('product_create');
-    Route::post('product', [ProductController::class, 'store'])->name('product_store');
     Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product_edit');
-    Route::put('/product/{id}', [ProductController::class, 'update'])->name('product_update');
-    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product_destroy');
 });
 
 //Login Required
