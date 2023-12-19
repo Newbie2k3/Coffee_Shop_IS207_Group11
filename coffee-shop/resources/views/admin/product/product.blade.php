@@ -13,7 +13,7 @@
         </div>
     </x-slot>
 
-    <div class="container-fluid pt-4 px-5 d-flex justify-content-end">
+    {{-- <div class="container-fluid pt-4 px-5 d-flex justify-content-end">
         <div class="input-group mb-2" style="max-width: 500px;">
             <input id="search-input" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="search">
             <select id="category" name="category_id" class="form-select" style="max-width: 140px;">
@@ -26,13 +26,14 @@
             </select>
             <button class="btn btn-primary" type="button" id="search-btn">Tìm</button>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="container-fluid px-5">
-        <div class="bg-white shadow-sm sm:rounded-lg">
-            <div class="p-4 text-gray-900"  style="height: 420px; overflow-y: auto;">
-                <table class="table table-hover">
-                    <thead class="table-dark">
+    <div class="container-fluid px-5 py-4">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-4 text-gray-900">
+                {{-- <table class="table table-hover"> --}}
+                <table id="myTable" class="display" style="width:100%;">
+                    <thead>
                         <tr>
                             <th scope="col">STT</th>
                             <th scope="col">Tên sản phẩm</th>
@@ -41,7 +42,7 @@
                             <th scope="col">Hiển thị</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
-                            <th scope="col" colspan="2">
+                            <th scope="col">
                                 Thao tác
                             </th>
                         </tr>
@@ -54,12 +55,7 @@
                         ])
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
-
-    @section('page-script')
-        <script src="{{ asset('assets/js/admin-manage.js') }}" defer></script>
-    @endsection
 </x-admin-layout>

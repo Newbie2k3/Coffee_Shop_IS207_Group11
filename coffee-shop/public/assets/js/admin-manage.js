@@ -1,6 +1,8 @@
 $(document).ready(function () {
     const csrfToken = $('meta[name="csrf-token"]').attr("content");
 
+    $('#myTable').DataTable();
+
     const productSearchUrl = "/admin/product-search";
     const productDeleteUrl = "/admin/product/:id";
 
