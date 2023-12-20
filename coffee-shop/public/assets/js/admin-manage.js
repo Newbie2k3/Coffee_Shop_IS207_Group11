@@ -7,41 +7,6 @@ $(document).ready(function () {
 
     $(document).off("click", ".save-btn").on("click", ".save-btn", handleSave);
 
-    function handleSaveTest() {
-        let validForm = true;
-        let formData = {}; // Tạo một đối tượng để lưu trữ dữ liệu form.
-
-        $(".required-field").each(function () {
-            const fieldName = $(this).attr("name");
-            const fieldValue = $(this).val();
-
-            // Thêm dữ liệu vào đối tượng formData.
-            formData[fieldName] = fieldValue;
-
-            if (!fieldValue.trim()) {
-                validForm = false;
-                return false;
-            }
-        });
-
-        if (!validForm) {
-            return;
-        }
-
-        // Log dữ liệu ra console.
-        console.log("Form Data:", formData);
-
-        // Nếu bạn muốn tiếp tục thực hiện submit form, hãy bỏ comment dòng dưới đây.
-        // $(this).closest("form").submit();
-
-        const saveBtn = $(this);
-
-        saveBtn.prop("disabled", true);
-        saveBtn.html(
-            'Đang xử lý <i class="fa-solid fa-circle-notch fa-spin"></i>'
-        );
-    }
-
     function handleSave() {
         const saveBtn = $(this);
 
@@ -49,17 +14,19 @@ $(document).ready(function () {
         saveBtn.html(
             'Đang xử lý <i class="fa-solid fa-circle-notch fa-spin"></i>'
         );
-        
+
         let validForm = true;
         $(".required-field").each(function () {
             const fieldValue = $(this).val();
             if (!fieldValue.trim()) {
                 validForm = false;
-                return false;
+                return;
             }
         });
 
         if (!validForm) {
+            saveBtn.prop("disabled", false);
+            saveBtn.html("Lưu");
             return;
         }
 

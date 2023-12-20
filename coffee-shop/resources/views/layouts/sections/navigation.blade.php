@@ -19,6 +19,12 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('payment.histories')" :active="request()->routeIs('payment.histories')">
+                            {{ __('Payment Histories') }}
+                        </x-nav-link>
+                    </div>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('category')" :active="request()->routeIs('category')">
                             {{ __('Category') }}
                         </x-nav-link>
@@ -63,6 +69,10 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <x-dropdown-link :href="route('payment.history')">
+                            {{ __('Personal Invoices') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -95,24 +105,37 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
+        @admin
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+            </div>
 
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('category')" :active="request()->routeIs('category')">
-                {{ __('Category') }}
-            </x-responsive-nav-link>
-        </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('payment.histories')" :active="request()->routeIs('payment.histories')">
+                    {{ __('Payment Histories') }}
+                </x-responsive-nav-link>
+            </div>
 
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('product')" :active="request()->routeIs('product')">
-                {{ __('Product') }}
-            </x-responsive-nav-link>
-        </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('category')" :active="request()->routeIs('category')">
+                    {{ __('Category') }}
+                </x-responsive-nav-link>
+            </div>
 
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('product')" :active="request()->routeIs('product')">
+                    {{ __('Product') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('user')" :active="request()->routeIs('user')">
+                    {{ __('User') }}
+                </x-responsive-nav-link>
+            </div>
+        @endadmin
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">

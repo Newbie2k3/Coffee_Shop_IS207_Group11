@@ -26,7 +26,7 @@
                             <th scope="col">Tình trạng</th>
                             <th scope="col">Giá</th>
                             <th scope="col">Hình ảnh</th>
-                            <th scope="col">
+                            <th scope="col" width="140px">
                                 Thao tác
                             </th>
                         </tr>

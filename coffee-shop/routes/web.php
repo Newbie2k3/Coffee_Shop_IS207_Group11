@@ -6,7 +6,7 @@ use App\Http\Controllers\GuestPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\StripeController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +30,7 @@ Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
     Route::view('/', 'admin.dashboard')->name('dashboard');
+    Route::get('/payment-histories', [PaymentController::class, 'allInvoices'])->name('payment.histories');
 
     //Khach hang
     Route::get('/user', [UserController::class, 'show'])->name('user');
@@ -73,12 +74,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
     Route::get('/get-cart', [CartController::class, 'getCart'])->name('cart.getcart');
 
-    // Checkout
-    Route::get('/session', [StripeController::class, 'session'])->name('checkout.session');
-    Route::get('/success', [StripeController::class, 'success'])->name('checkout.success');
-    Route::get('/cancel', [StripeController::class, 'cancel'])->name('checkout.cancel');
+    // Payment
+    Route::get('/session', [PaymentController::class, 'session'])->name('payment.session');
+    Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::get('/payment-history', [PaymentController::class, 'personalInvoices'])->name('payment.history');
 });
 
-Route::post('/webhook', [StripeController::class, 'getData']);
+Route::post('/webhook', [PaymentController::class, 'getData']);
 
 require __DIR__ . '/auth.php';

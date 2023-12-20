@@ -22,6 +22,5 @@
         {{ $slot }}
     </main>
 
-
-    <script src="{{ asset('assets/js/admin-manage.js') }}"></script>
+    <script src="{{ asset('assets/js/admin-manage.js') }}" defer></script>
 </x-app-layout>

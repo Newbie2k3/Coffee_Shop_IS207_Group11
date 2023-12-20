@@ -14,7 +14,7 @@ use Stripe\StripeClient;
 use Stripe\Webhook;
 use Stripe\Exception\SignatureVerificationException;
 
-class StripeController extends Controller
+class PaymentController extends Controller
 {
     public function session(Request $request)
     {
@@ -105,6 +105,18 @@ class StripeController extends Controller
     public function cancel()
     {
         return view('pages.checkout.cancel');
+    }
+
+    public function personalInvoices()
+    {
+        $user = auth()->user();
+        $invoices = $user->payments()->where('status', 'paid')->with('payment_details.product')->get();
+        return view('pages.profile.payment-history', compact('invoices'));
+    }
+    public function allInvoices()
+    {
+        $invoices = Payment::where('status', 'paid')->with('user', 'payment_details.product')->get();
+        return view('admin.payment-history', compact('invoices'));
     }
 
     protected function store($data)

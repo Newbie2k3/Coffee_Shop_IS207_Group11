@@ -42,6 +42,10 @@
                                     Profile
                                 </a>
 
+                                <a href="{{ route('payment.history') }}">
+                                    Persona Invoices
+                                </a>
+
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

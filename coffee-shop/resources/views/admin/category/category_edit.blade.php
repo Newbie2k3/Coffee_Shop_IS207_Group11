@@ -19,6 +19,7 @@
                             <x-text-input value="{{ $category->name }}" id="name" name="name"
                                 class="block mt-1 w-full required-field" type="text" required
                                 placeholder="Nhập tên danh mục" />
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div class="mb-3">
                             <x-input-label for="description" :value="__('Mô tả danh mục')" />

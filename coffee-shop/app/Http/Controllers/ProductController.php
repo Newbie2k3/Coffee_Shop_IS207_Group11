@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -96,18 +97,28 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
+        try {
+            $product = Product::findOrFail($id);
 
-        if (!$product) {
-            return response()->json(['message' => 'Sản phẩm không tồn tại.'], 404);
+            if (!$product) {
+                return response()->json(['message' => 'Sản phẩm không tồn tại.'], 404);
+            }
+
+            $this->deleteFile($product);
+            $product->delete();
+
+            $remainingProducts = Product::count();
+
+            return response()->json(['message' => 'Sản phẩm đã được xóa thành công.', 'remaining' => $remainingProducts], 200);
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+
+            if ($errorCode == 1451) {
+                return response()->json(['message' => 'Không thể xóa vì có dữ liệu liên quan.'], 500);
+            }
+
+            return response()->json(['message' => 'Lỗi xóa sản phẩm: ' . $e->getMessage()], 500);
         }
-
-        $this->deleteFile($product);
-        $product->delete();
-
-        $remainingProducts = Product::count();
-
-        return response()->json(['message' => 'Sản phẩm đã được xóa thành công.', 'remaining' => $remainingProducts], 200);
     }
     //end admin function
 
@@ -119,7 +130,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'status' => 'required',
             'price' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         $request->validate($rules);
