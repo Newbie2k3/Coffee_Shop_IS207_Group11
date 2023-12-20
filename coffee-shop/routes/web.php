@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,8 @@ Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
-    Route::view('/', 'admin.dashboard')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/data', [DashboardController::class, 'getData'])->name('dashboard.data');
     Route::get('/payment-histories', [PaymentController::class, 'allInvoices'])->name('payment.histories');
 
     //Khach hang

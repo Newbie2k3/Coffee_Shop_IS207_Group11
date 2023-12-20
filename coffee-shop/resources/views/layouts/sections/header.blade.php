@@ -35,7 +35,7 @@
                                 </h3>
 
                                 @admin
-                                    <a href="{{ url('/admin') }}" class="">Dashboard</a>
+                                    <a href="{{ route('dashboard.index') }}" class="">Dashboard</a>
                                 @endadmin
 
                                 <a href="{{ route('profile.edit') }}">
