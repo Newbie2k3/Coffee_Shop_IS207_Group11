@@ -6,6 +6,7 @@ use App\Http\Controllers\GuestPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/update-item-qty', [CartController::class, 'updateItemQty'])->name('cart.update');
     Route::get('/get-cart-count', [CartController::class, 'getCartCount'])->name('cart.count');
     Route::get('/get-cart', [CartController::class, 'getCart'])->name('cart.getcart');
+
+    // Checkout
+    Route::get('/session', [StripeController::class, 'session'])->name('checkout.session');
+    Route::get('/success', [StripeController::class, 'success'])->name('checkout.success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('checkout.cancel');
 });
+
+Route::post('/webhook', [StripeController::class, 'getData']);
 
 require __DIR__ . '/auth.php';

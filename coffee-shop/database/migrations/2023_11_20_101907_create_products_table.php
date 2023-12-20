@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('image');
             $table->integer('price')->default(0);
-            $table->string('status')->default('pending');
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('RESTRICT')->onUpdate('CASCADE');
