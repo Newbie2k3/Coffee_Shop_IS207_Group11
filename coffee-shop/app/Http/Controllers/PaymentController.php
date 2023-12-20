@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use App\Exports\PaymentExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Payment;
 use App\Models\PaymentDetail;
 use App\Models\Cart;
@@ -117,6 +119,12 @@ class PaymentController extends Controller
     {
         $invoices = Payment::where('status', 'paid')->with('user', 'payment_details.product')->get();
         return view('admin.payment-history', compact('invoices'));
+    }
+
+    public function export()
+    {
+        $timestamp = now()->format('Y-m-d_H-i-s');
+        return Excel::download(new PaymentExport, 'payment_history_' . $timestamp . '.xlsx');
     }
 
     protected function store($data)

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/dashboard/data', [DashboardController::class, 'getData'])->name('dashboard.data');
     Route::get('/payment-histories', [PaymentController::class, 'allInvoices'])->name('payment.histories');
+    Route::get('/export-payment', [PaymentController::class, 'export'])->name('payment.export');
 
     //Khach hang
     Route::get('/user', [UserController::class, 'show'])->name('user');

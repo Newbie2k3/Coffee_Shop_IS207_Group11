@@ -1,5 +1,17 @@
 <x-admin-layout>
     @section('title', 'Payment Histories')
+
+    <x-slot name="header">
+        <div class="position-relative">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Payment Histories') }}
+            </h2>
+
+            <a href="{{ route('payment.export') }}"
+                class="btn btn-primary position-absolute translate-middle top-3 end-0">Xuất hóa đơn</a>
+        </div>
+    </x-slot>
+
     <div class="container-fluid px-5 py-4">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
