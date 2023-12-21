@@ -63,7 +63,7 @@
                 <div class="checkout-container">
                     <p>Tổng tiền: <span class="cart_total">{{ formatPrice($cart_total) }}</span></p>
                     {{-- <button class="btn btn-primary">Thanh toán</button> --}}
-                    <a href="{{ route('checkout.session') }}" class="btn btn-primary">Thanh toán</a>
+                    <a href="{{ route('payment.session') }}" class="btn btn-primary">Thanh toán</a>
                 </div>
             </div>
         @endif

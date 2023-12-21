@@ -55,7 +55,7 @@ class PaymentController extends Controller
                 'user_id' => $user->id,
             ],
             'customer_email' => $user->email,
-            'success_url' => route('checkout.success'),
+            'success_url' => route('payment.success'),
             'cancel_url' => route('cart'),
         ]);
 
