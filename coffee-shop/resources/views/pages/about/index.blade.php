@@ -17,6 +17,5 @@
             
         </div>
     </x-big-banner>
-    
     @include('pages.about.phucdeptrai')
 </x-guest-layout>
