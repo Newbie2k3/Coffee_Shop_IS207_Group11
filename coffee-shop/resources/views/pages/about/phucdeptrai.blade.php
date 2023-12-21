@@ -3,11 +3,11 @@
       <div>
         <img width="auto" src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/bg_2.jpg" alt="">
       </div>
-      <div class="form bg-black">
+      <div class="bg-black form">
         
         <form class="my-form" >
             <p class="fs-3">Yêu cầu tư vấn ngay</p>
-            <form >
+            
                 <div class="row">
                   <div class="col">
                     <input type="text"  placeholder="Họ và tên" required>
@@ -30,11 +30,11 @@
                         <input  type="text" placeholder="Để lại lời nhắn">
                     </div>
                 </div>
-              </form>
+             
              
             
             
-            <div class="form-group mt-2 my-form">
+            <div class="mt-2 form-group my-form">
               <label for="product">Sản phẩm quan tâm:</label>
               <select class="product" id="product" name="product" required>
                 <option value="">Chọn sản phẩm</option>

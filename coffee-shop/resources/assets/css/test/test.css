@@ -54,3 +54,39 @@
 #myTable_wrapper select {
     width: 80px;
 }
+/* login */
+
+.remember-forgot{
+    display:flex;
+    justify-content: space-between;
+}
+
+
+
+  .bg-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("C:\Users\ASUS\Desktop\IS207\Coffee_Shop_IS207_Group11\Coffee_Shop_IS207_Group11\coffee-shop\public\assets\img\backgrounds\login-bg.jpg");
+    background-size: cover;
+    background-position:center;
+    z-index:0;
+    filter: blur(5px);
+  }
+  .bg-img::after{
+    content: "";
+    
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color:rgba(0,0,0,0.5);
+    z-index:1;
+  }
+  .bg-img > * {
+    position: relative;
+    z-index:2;
+  }
+  

@@ -1,5 +1,5 @@
 <x-app-layout>
-        
+        <div class="container">
             <div class="flex flex-col items-center min-h-screen pt-6 bg-gray-100 bg-img max-w-screen sm:justify-center sm:pt-0 ">
                 <div>
                     <a href="/">
@@ -11,6 +11,6 @@
                     {{ $slot }}
                 </div>
             </div>
-            
-        
+            <div class="overlay"></div>
+        </div>
 </x-app-layout>
