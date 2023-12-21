@@ -51,6 +51,6 @@
     </div>
 
     @section('page-script')
-        <script src="{{ asset('assets/js/payment-manage.js') }}" defer></script>
+        @vite(['resources/assets/js/payment-manage.js'])
     @endsection
 </x-admin-layout>

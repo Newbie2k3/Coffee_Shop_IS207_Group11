@@ -1,35 +1,39 @@
 $(document).ready(function () {
     createTable();
-    $(document)
-        .off("click", ".delete-btn")
-        .on("click", ".delete-btn", handleDelete);
 
-    $(document).off("click", ".save-btn").on("click", ".save-btn", handleSave);
+    const documentObj = $(document);
+    const deleteBtn = ".delete-btn";
+    const saveBtn = ".save-btn";
+
+    documentObj.off("click", deleteBtn).on("click", deleteBtn, handleDelete);
+    documentObj.off("click", saveBtn).on("click", saveBtn, handleSave);
 
     function handleSave() {
         const saveBtn = $(this);
 
-        saveBtn.prop("disabled", true);
-        saveBtn.html(
+        disableButton(
+            saveBtn,
             'Đang xử lý <i class="fa-solid fa-circle-notch fa-spin"></i>'
         );
 
+        if (!isFormValid()) {
+            enableButton(saveBtn, "Lưu");
+            return;
+        }
+
+        $(this).closest("form").submit();
+    }
+
+    function isFormValid() {
         let validForm = true;
         $(".required-field").each(function () {
             const fieldValue = $(this).val();
             if (!fieldValue.trim()) {
                 validForm = false;
-                return;
+                return false;
             }
         });
-
-        if (!validForm) {
-            saveBtn.prop("disabled", false);
-            saveBtn.html("Lưu");
-            return;
-        }
-
-        $(this).closest("form").submit();
+        return validForm;
     }
 
     function handleDelete(e) {
@@ -57,8 +61,10 @@ $(document).ready(function () {
     }
 
     function deleteItem(itemId, url, deleteBtn) {
-        deleteBtn.prop("disabled", true);
-        deleteBtn.html('Xoá <i class="fa-solid fa-circle-notch fa-spin"></i>');
+        disableButton(
+            deleteBtn,
+            'Xoá <i class="fa-solid fa-circle-notch fa-spin"></i>'
+        );
 
         $.ajaxSetup({
             headers: {
@@ -78,8 +84,7 @@ $(document).ready(function () {
                     icon: "warning",
                     text: JSON.parse(error.responseText).message,
                 });
-                deleteBtn.prop("disabled", false);
-                deleteBtn.html("Xoá");
+                enableButton(deleteBtn, "Xoá");
             },
         });
     }
@@ -96,9 +101,46 @@ $(document).ready(function () {
                 table.rows.add($("#myTable" + "_body")).draw();
             } else {
                 updateIndexes();
-                // $("#myTable").DataTable().rows().invalidate().draw();
             }
         });
+    }
+
+    function createTable() {
+        var priceColumnIndex = getTableColumnIndex("myTable", "price-column");
+
+        if (priceColumnIndex !== -1) {
+            $("#myTable").DataTable({
+                columnDefs: [
+                    {
+                        targets: priceColumnIndex,
+                        type: "numeric-comma",
+                    },
+                ],
+            });
+
+            $.fn.dataTable.ext.type.order["numeric-comma-pre"] = function (
+                data
+            ) {
+                return parseFloat(
+                    data.replace(/[^\d.-]/g, "").replace(",", ".")
+                );
+            };
+        } else {
+            $("#myTable").DataTable();
+        }
+    }
+
+    function getTableColumnIndex(tableId, columnId) {
+        var columnIndex = -1;
+
+        $("#" + tableId + " th").each(function (index) {
+            if ($(this).attr("id") === columnId) {
+                columnIndex = index;
+                return false;
+            }
+        });
+
+        return columnIndex;
     }
 
     function updateIndexes() {
@@ -108,38 +150,14 @@ $(document).ready(function () {
                 .text(index + 1);
         });
     }
-});
 
-function createTable() {
-    var priceColumnIndex = getTableColumnIndex('myTable', 'price-column');
-
-    if (priceColumnIndex !== -1) {
-        $('#myTable').DataTable({
-            columnDefs: [
-                {
-                    targets: priceColumnIndex,
-                    type: 'numeric-comma',
-                }
-            ],
-        });
-
-        $.fn.dataTable.ext.type.order['numeric-comma-pre'] = function (data) {
-            return parseFloat(data.replace(/[^\d.-]/g, '').replace(',', '.'));
-        };
-    } else {
-        $("#myTable").DataTable();
+    function disableButton(button, loadingText) {
+        button.prop("disabled", true);
+        button.html(loadingText);
     }
-}
 
-function getTableColumnIndex(tableId, columnId) {
-    var columnIndex = -1;
-
-    $('#' + tableId + ' th').each(function (index) {
-        if ($(this).attr('id') === columnId) {
-            columnIndex = index;
-            return false;
-        }
-    });
-
-    return columnIndex;
-}
+    function enableButton(button, buttonText) {
+        button.prop("disabled", false);
+        button.html(buttonText);
+    }
+});

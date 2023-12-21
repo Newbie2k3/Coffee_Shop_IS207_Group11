@@ -74,6 +74,6 @@
 
     @section('page-script')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="{{ asset('assets/js/dashboard.js') }}" defer></script>
+        @vite(['resources/assets/js/dashboard.js'])
     @endsection
 </x-admin-layout>

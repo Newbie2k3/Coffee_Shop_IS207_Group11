@@ -22,5 +22,5 @@
         {{ $slot }}
     </main>
 
-    <script src="{{ asset('assets/js/admin-manage.js') }}" defer></script>
+    @vite(['resources/assets/js/admin-manage.js'])
 </x-app-layout>

@@ -5,5 +5,5 @@
 
     @include('layouts.sections.footer')
 
-    <script src="{{ asset('assets/js/cart.js') }}"></script>
+    @vite(['resources/assets/js/cart.js'])
 </x-app-layout>

@@ -126,18 +126,22 @@ class ProductController extends Controller
 
     // Private
     private function validateProductRequest(Request $request)
-    {
-        $rules = [
-            'name' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required',
-            'quantity' => 'required|numeric|integer|min:0',
-            'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ];
+{
+    $rules = [
+        'name' => 'required',
+        'category_id' => 'required|exists:categories,id',
+        'status' => 'required',
+        'quantity' => 'required|numeric|integer|min:0',
+        'price' => 'required|numeric',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ];
 
-        $request->validate($rules);
+    if ($request->isMethod('post')) {
+        $rules['image'] .= '|required';
     }
+
+    $request->validate($rules);
+}
 
     private function uploadFile(Request $request, $existingProduct = null)
     {

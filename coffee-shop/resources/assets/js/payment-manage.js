@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    $(document)
-        .off("click", ".detail-btn")
-        .on("click", ".detail-btn", showDetails);
+    const documentObj = $(document);
+    const detailBtn = ".detail-btn";
+
+    documentObj.off("click", detailBtn).on("click", detailBtn, showDetails);
 
     function showDetails(e) {
         e.preventDefault();
@@ -20,7 +21,12 @@ $(document).ready(function () {
         let thead = document.createElement("thead");
         let theadRow = document.createElement("tr");
 
-        ["Tên Sản Phẩm", "Giá", "Số Lượng"].forEach((column) => {
+        let columns = [
+            `Sản Phẩm (${paymentDetails.length} mục)`,
+            "Giá",
+            "Số Lượng",
+        ];
+        columns.forEach((column) => {
             let th = document.createElement("th");
             th.textContent = column;
             if (column === "Giá" || column === "Số Lượng") {
@@ -30,23 +36,18 @@ $(document).ready(function () {
         });
 
         thead.appendChild(theadRow);
-
         table.appendChild(thead);
 
         let tbody = document.createElement("tbody");
 
         paymentDetails.forEach((detail) => {
             let tr = document.createElement("tr");
-            let tdName = document.createElement("td");
-            let tdPrice = document.createElement("td");
-            let tdQuantity = document.createElement("td");
-
-            tdPrice.style.width = "100px";
-            tdQuantity.style.width = "100px";
-
-            tdName.textContent = detail.product.name;
-            tdPrice.textContent = detail.product.price;
-            tdQuantity.textContent = detail.quantity;
+            let tdName = createTableCell(detail.product.name);
+            let tdPrice = createTableCell(
+                formatCurrency(detail.product.price),
+                "100px"
+            );
+            let tdQuantity = createTableCell(detail.quantity, "100px");
 
             tr.appendChild(tdName);
             tr.appendChild(tdPrice);
@@ -58,5 +59,21 @@ $(document).ready(function () {
         table.appendChild(tbody);
 
         return table;
+    }
+
+    function createTableCell(text, width) {
+        let td = document.createElement("td");
+        td.textContent = text;
+        if (width) {
+            td.style.width = width;
+        }
+        return td;
+    }
+
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+        }).format(amount);
     }
 });
