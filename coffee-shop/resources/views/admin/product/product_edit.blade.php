@@ -69,7 +69,7 @@
                             <input type="file" name='image' id="image" value="{{ $product->image }}"
                                 class="form-control" accept=".jpeg, .jpg, .png, .gif">
                             <div id="image-error" class="text-danger"></div>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                            {{-- <x-input-error :messages="$errors->get('image')" class="mt-2" /> --}}
                         </div>
                         <x-primary-button class="save-btn">Lưu</x-primary-button>
                     </form>

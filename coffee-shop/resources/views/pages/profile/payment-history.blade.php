@@ -9,7 +9,7 @@
                             <th>STT</th>
                             <th>Người Thanh Toán</th>
                             <th>Mã Hóa Đơn</th>
-                            <th>Giá</th>
+                            <th id="price-column">Giá</th>
                             <th>Số Lượng Sản Phẩm</th>
                             <th>Thời gian</th>
                             <th></th>

@@ -25,7 +25,7 @@
                             <th scope="col">Danh mục sản phẩm</th>
                             <th scope="col">Tình trạng</th>
                             <th scope="col">Còn lại</th>
-                            <th scope="col">Giá</th>
+                            <th scope="col" id="price-column">Giá</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col" width="140px">
                                 Thao tác

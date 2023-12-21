@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $("#myTable").DataTable();
-
+    createTable();
     $(document)
         .off("click", ".delete-btn")
         .on("click", ".delete-btn", handleDelete);
@@ -110,3 +109,37 @@ $(document).ready(function () {
         });
     }
 });
+
+function createTable() {
+    var priceColumnIndex = getTableColumnIndex('myTable', 'price-column');
+
+    if (priceColumnIndex !== -1) {
+        $('#myTable').DataTable({
+            columnDefs: [
+                {
+                    targets: priceColumnIndex,
+                    type: 'numeric-comma',
+                }
+            ],
+        });
+
+        $.fn.dataTable.ext.type.order['numeric-comma-pre'] = function (data) {
+            return parseFloat(data.replace(/[^\d.-]/g, '').replace(',', '.'));
+        };
+    } else {
+        $("#myTable").DataTable();
+    }
+}
+
+function getTableColumnIndex(tableId, columnId) {
+    var columnIndex = -1;
+
+    $('#' + tableId + ' th').each(function (index) {
+        if ($(this).attr('id') === columnId) {
+            columnIndex = index;
+            return false;
+        }
+    });
+
+    return columnIndex;
+}
