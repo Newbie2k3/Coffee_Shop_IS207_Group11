@@ -35,7 +35,7 @@
                                 </h3>
 
                                 @admin
-                                    <a href="{{ route('dashboard.index') }}" class="">Dashboard</a>
+                                    <a href="{{ route('dashboard.index') }}">Dashboard</a>
                                 @endadmin
 
                                 <a href="{{ route('profile.edit') }}">
@@ -43,7 +43,7 @@
                                 </a>
 
                                 <a href="{{ route('payment.history') }}">
-                                    Persona Invoices
+                                    Personal Invoices
                                 </a>
 
                                 <!-- Authentication -->
@@ -83,7 +83,8 @@
                                 <p>Lựa chọn sản phẩm của mình nhé!</p>
                             </div>
                         </div>
-                        <a href="{{ route('cart') }}"><i class="fa-solid fa-cart-shopping"></i>&nbsp&nbspXem giỏ hàng</a>
+                        <a href="{{ route('cart') }}"><i class="fa-solid fa-cart-shopping"></i>&nbsp&nbspXem giỏ
+                            hàng</a>
                     </x-icon-modal>
                     @auth
                         <span id="cart_count" class="badge cart-badge">0</span>

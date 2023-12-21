@@ -59,6 +59,7 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'category_id' => $request->input('category_id'),
             'status' => $request->input('status'),
+            'quantity' => $request->input('quantity'),
             'price' => $request->input('price'),
             'image' => $filename,
         ]);
@@ -88,6 +89,7 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'category_id' => $request->input('category_id'),
             'status' => $request->input('status'),
+            'quantity' => $request->input('quantity'),
             'price' => $request->input('price'),
             'image' => $filename ?: $product->image,
         ]);
@@ -129,6 +131,7 @@ class ProductController extends Controller
             'name' => 'required',
             'category_id' => 'required|exists:categories,id',
             'status' => 'required',
+            'quantity' => 'required|numeric|integer|min:0',
             'price' => 'required|numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];

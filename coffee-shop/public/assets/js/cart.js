@@ -57,6 +57,12 @@ $(document).ready(function () {
                         "Hãy trải nghiệm các sản phẩm khác",
                         "warning"
                     );
+                } else if (status == "not_enough") {
+                    swal(
+                        "Không đủ hàng",
+                        `Số lượng bạn cần đang hiện không còn đủ. Sản phẩm này chỉ còn: ${response.message}`,
+                        "warning"
+                    );
                 } else {
                     swal("Thành công", response.status, "success");
                 }
@@ -133,6 +139,12 @@ $(document).ready(function () {
                 updateCart();
             },
             error: function (error) {
+                const errorData = JSON.parse(error.responseText);
+                swal({
+                    title: "Không đủ số lượng",
+                    text: errorData.message,
+                    icon: "warning",
+                });
                 console.log(error);
             },
             complete: function () {

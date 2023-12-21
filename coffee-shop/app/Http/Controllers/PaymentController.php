@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Payment;
 use App\Models\PaymentDetail;
 use App\Models\Cart;
+use App\Models\Product;
 use Stripe\Stripe;
 use Stripe\StripeClient;
 use Stripe\Webhook;
@@ -26,10 +27,17 @@ class PaymentController extends Controller
         $user = auth()->user();
         $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
 
+        $insufficientProducts = [];
+
         foreach ($cart_items as $cartItem) {
             $product_name = $cartItem->product->name;
             $price = $cartItem->product->price;
             $quantity = $cartItem->product_qty;
+
+            if (!$cartItem->product->hasEnoughQuantity($quantity)) {
+                $insufficientProducts[] = $product_name;
+                continue;
+            }    
 
             $total = $price * $quantity;
 
@@ -45,6 +53,11 @@ class PaymentController extends Controller
                 ],
                 'quantity' => $quantity
             ];
+        }
+
+        if (!empty($insufficientProducts)) {
+            $message = implode(', ', $insufficientProducts) . ' không còn đủ hàng.';
+            return redirect()->route('cart')->with('alert', $message);
         }
 
         $checkoutSession = \Stripe\Checkout\Session::create([
@@ -146,6 +159,8 @@ class PaymentController extends Controller
                 $product_id = $cartItem->product_id;
                 $quantity = $cartItem->product_qty;
 
+                $this->reduceProductQuantity($product_id, $quantity);
+
                 PaymentDetail::create([
                     'payment_id' => $payment->id,
                     'product_id' => $product_id,
@@ -156,4 +171,14 @@ class PaymentController extends Controller
             Cart::where('user_id', $user->id)->delete();
         }
     }
+
+    protected function reduceProductQuantity($product_id, $quantity)
+{
+    $product = Product::find($product_id);
+
+    if ($product) {
+        $remaining_quantity = max(0, $product->quantity - $quantity);
+        $product->update(['quantity' => $remaining_quantity]);
+    }
+}
 }

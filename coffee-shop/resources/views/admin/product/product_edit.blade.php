@@ -28,6 +28,13 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div class="mb-3">
+                            <x-input-label for="quantity" :value="__('Số lượng sản phẩm')" />
+                            <x-text-input value="{{ $product->quantity }}" id="quantity" name="quantity"
+                                class="block mt-1 w-full required-field" type="number" inputmode="numberic"
+                                min="0" max="10000000" required placeholder="Nhập số lượng sản phẩm" />
+                            <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
+                        </div>
+                        <div class="mb-3">
                             <x-input-label for="price" :value="__('Giá sản phẩm')" />
                             <x-text-input value="{{ $product->price }}" id="price" name="price"
                                 class="block mt-1 w-full required-field" type="number" inputmode="numberic"
@@ -35,7 +42,7 @@
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
                         <div class="mb-3">
-                            <x-input-label for="price" :value="__('Danh mục sản phẩm')" />
+                            <x-input-label for="category_id" :value="__('Danh mục sản phẩm')" />
                             <x-selector-input id="category_id" name="category_id"
                                 class="block mt-1 w-full required-field" :options="$categoryOptions->toArray()" :selected="$product->category_id" />
                             <x-input-error :messages="$errors->get('category_id')" class="mt-2" />

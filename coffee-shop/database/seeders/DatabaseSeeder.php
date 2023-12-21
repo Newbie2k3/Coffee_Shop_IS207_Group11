@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
         Category::create(['name' => 'Bánh Ngọt', 'description' => 'Khám phá thiên đường của đồ ngọt với bộ sưu tập bánh ngọt phong phú của chúng tôi. Từ những chiếc bánh tinh tế đến những lớp kem mousse mềm mại, mỗi chiếc bánh đều là một tác phẩm nghệ thuật ẩm thực, đưa bạn đến một thế giới đầy màu sắc và ngon ngọt.']);
 
         // Product
-        Product::create(['name' => 'Cà phê chồn', 'description' => 'Cà phê chồn nguyên chất', 'category_id' => '1', 'price' => '30000', 'image' => 'sample.png', 'status' => '1']);
-        Product::create(['name' => 'Cà phê đen', 'description' => 'Cà phê đen nguyên chất', 'category_id' => '1', 'price' => '28000', 'image' => 'sample.png', 'status' => '1']);
-        Product::create(['name' => 'Trà táo', 'description' => 'Trà táo tươi ngon', 'category_id' => '2', 'price' => '18000', 'image' => 'sample.png', 'status' => '1']);
+        Product::create(['name' => 'Cà phê chồn', 'description' => 'Cà phê chồn nguyên chất', 'category_id' => '1', 'price' => '30000', 'image' => 'sample.png', 'status' => '1', 'quantity' => '50']);
+        Product::create(['name' => 'Cà phê đen', 'description' => 'Cà phê đen nguyên chất', 'category_id' => '1', 'price' => '28000', 'image' => 'sample.png', 'status' => '1', 'quantity' => '50']);
+        Product::create(['name' => 'Trà táo', 'description' => 'Trà táo tươi ngon', 'category_id' => '2', 'price' => '18000', 'image' => 'sample.png', 'status' => '1', 'quantity' => '50']);
     }
 }

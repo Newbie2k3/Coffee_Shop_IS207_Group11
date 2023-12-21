@@ -13,6 +13,7 @@
         <td>{{ $item->description }}</td>
         <td>{{ $item->category->name }}</td>
         <td>{{ $statuses[$item->status] ?? 'Không xác định' }}</td>
+        <td>{{ $item->quantity}}</td>
         <td>@formatNumber($item->price)</td>
         <td><img src="{{ asset('assets/img/product/' . $item->image) }}" alt="{{ $item->name }}"
                 style="width:120px; height:120px; object-fit: cover; vertical-align: middle;">

@@ -2,10 +2,22 @@ $(document).ready(function () {
     $("#price").on("change", function () {
         let inputValue = $(this).val();
 
-        if (inputValue < 1) {
+        if (inputValue < 0) {
             inputValue = 1000;
         } else if (inputValue > 10000000) {
             inputValue = 10000000;
+        }
+
+        $(this).val(inputValue);
+    });
+
+    $("#quantity").on("change", function () {
+        let inputValue = $(this).val();
+
+        if (inputValue < 0) {
+            inputValue = 0;
+        } else if (inputValue > 10000) {
+            inputValue = 10000;
         }
 
         $(this).val(inputValue);
