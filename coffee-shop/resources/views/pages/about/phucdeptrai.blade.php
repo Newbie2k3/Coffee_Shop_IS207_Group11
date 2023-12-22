@@ -1,5 +1,4 @@
 <section class="flex">
-
     <div>
         <img width="auto"
             src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/bg_2.jpg"
@@ -7,7 +6,7 @@
     </div>
     <div class="form bg-black py-4">
         <p class="mt-6 text-xl font-semibold text-white dark:text-white px-4">Tư vấn ngay<span id="loading-indicator"
-                style="display: none;">đang gửi...</span></p>
+                style="display: none; margin-left:4px;">đang gửi...</span></p>
         <form class="my-form px-4" id="leads-form">
             <div class="row">
                 <div class="col">
@@ -49,71 +48,6 @@
             const csrfToken = "{{ csrf_token() }}";
             const formUrl = "{{ route('guest.form') }}";
         </script>
-        <script defer>
-            $(document).ready(function() {
-                $("#submit-btn").click(submitForm);
-
-                function submitForm(e) {
-                    e.preventDefault();
-
-                    $("#loading-indicator").show();
-                    $('#leads-form :input').prop('disabled', true);
-
-                    const name = $("#name").val();
-                    const email = $("#email").val();
-                    const phone = $("#phone").val();
-                    const address = $("#address").val();
-                    const desc = $("#desc").val();
-                    const product = $("#product").val();
-
-                    const formData = {
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        address: address,
-                        desc: desc,
-                        product: product
-                    };
-
-                    $.ajaxSetup({
-                        headers: {
-                            "X-CSRF-TOKEN": csrfToken,
-                        },
-                    });
-
-                    $.ajax({
-                        method: "POST",
-                        url: formUrl,
-                        data: formData,
-                        success: function(response) {
-                            $("#loading-indicator").hide();
-                            $('#leads-form :input').prop('disabled', false);
-                            const status = response.success;
-                            if (status) {
-                                swal("Thành công", "Chúng tôi sẽ sớm liên hệ với bạn", "success");
-
-                                document.getElementById('leads-form').reset();
-                            } else {
-                                swal(
-                                    "Thất bại",
-                                    "Không thể gửi form, hãy thử lại sau",
-                                    "error"
-                                );
-                            }
-                        },
-                        error: function(error) {
-                            $("#loading-indicator").hide();
-                            $('#leads-form :input').prop('disabled', false);
-
-                            swal(
-                                "Thất bại",
-                                "Không thể gửi form, hãy thử lại sau",
-                                "error"
-                            );
-                        },
-                    });
-                };
-            });
-        </script>
+        @vite(['resources/assets/js/leads-form.js'])
     @endsection
 </section>
