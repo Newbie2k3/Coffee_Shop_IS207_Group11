@@ -28,7 +28,7 @@ Route::get('/great-deals', [GuestPageController::class, 'greatDeals'])->name('gr
 Route::get('/menu', [GuestPageController::class, 'menu'])->name('menu');
 Route::get('/about', [GuestPageController::class, 'about'])->name('about');
 Route::get('/product_detail/{id}', [ProductController::class, 'product_detail'])->name('product_detail');
-Route::post('/submit-form',[GuestPageController::class,'submit_form']);
+Route::post('/submit-form',[GuestPageController::class,'submit_form'])->name('guest.form');
 
 //admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified', 'isAdmin']], function () {
