@@ -1,5 +1,4 @@
 <section class="flex">
-<<<<<<< HEAD
     <div>
         <img width="auto"
             src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/bg_2.jpg"
@@ -12,43 +11,11 @@
             <div class="row">
                 <div class="col">
                     <input type="text" id='name' name='name' placeholder="Họ và tên" required>
-=======
-    
-      <div>
-        <img width="auto" src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/bg_2.jpg" alt="">
-      </div>
-      <div class="bg-black form">
-        
-        <form class="my-form" >
-            <p class="fs-3">Yêu cầu tư vấn ngay</p>
-            
-                <div class="row">
-                  <div class="col">
-                    <input type="text"  placeholder="Họ và tên" required>
-                  </div>
-                  <div class="col">
-                    <input type="text"  placeholder="Email" required>
-                  </div>
->>>>>>> feature/Phuc-fix
+
                 </div>
                 <div class="col">
                     <input type="text" id='email' name='email' placeholder="Email" required>
                 </div>
-<<<<<<< HEAD
-=======
-             
-             
-            
-            
-            <div class="mt-2 form-group my-form">
-              <label for="product">Sản phẩm quan tâm:</label>
-              <select class="product" id="product" name="product" required>
-                <option value="">Chọn sản phẩm</option>
-                <option value="product1">Sản phẩm 1</option>
-                <option value="product2">Sản phẩm 2</option>
-                <option value="product3">Sản phẩm 3</option>
-              </select>
->>>>>>> feature/Phuc-fix
             </div>
             <div class="row">
                 <div class="col">

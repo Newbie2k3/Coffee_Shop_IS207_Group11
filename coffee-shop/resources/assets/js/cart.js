@@ -78,7 +78,7 @@ $(document).ready(function () {
         $.ajax({
             method: "PUT",
             url: "/update-item-qty",
-            data: { id, product_qty: productQty },
+            data: { id: id, product_qty: productQty },
             success: function (response) {
                 handleUpdateItemQtySuccess(response, id);
             },

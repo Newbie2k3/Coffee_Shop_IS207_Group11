@@ -155,7 +155,7 @@ class PaymentController extends Controller
 
         Mail::to($data->billing_details->email)->send(new PaymentCompleted($receiptUrl, $attachmentPaths));
 
-        return 'Email đã được gửi thành công!';
+        return response()->json(['success' => true]);
     }
 
     protected function store($data)

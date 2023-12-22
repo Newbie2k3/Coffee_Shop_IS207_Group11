@@ -96,7 +96,7 @@ class CartController extends Controller
         $product_qty = max(1, $request->input('product_qty'));
 
         $cart_item = Cart::find($id);
-        $product = Product::find($id);
+        $product = Product::find($cart_item->product_id);
 
         if (!$product->hasEnoughQuantity($product_qty)) {
             return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không đủ số lượng. Chỉ còn: ' . $product->quantity], 400);

@@ -106,7 +106,7 @@ $(document).ready(function () {
     }
 
     function createTable() {
-        var priceColumnIndex = getTableColumnIndex("myTable", "price-column");
+        const priceColumnIndex = getTableColumnIndex("myTable", "price-column");
 
         if (priceColumnIndex !== -1) {
             $("#myTable").DataTable({
@@ -121,9 +121,8 @@ $(document).ready(function () {
             $.fn.dataTable.ext.type.order["numeric-comma-pre"] = function (
                 data
             ) {
-                return parseFloat(
-                    data.replace(/[^\d.-]/g, "").replace(",", ".")
-                );
+                let numericData = data.replace(/[^\d]/g, "");
+                return parseFloat(numericData);
             };
         } else {
             $("#myTable").DataTable();
@@ -131,7 +130,7 @@ $(document).ready(function () {
     }
 
     function getTableColumnIndex(tableId, columnId) {
-        var columnIndex = -1;
+        let columnIndex = -1;
 
         $("#" + tableId + " th").each(function (index) {
             if ($(this).attr("id") === columnId) {
