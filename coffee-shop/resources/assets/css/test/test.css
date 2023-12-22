@@ -37,13 +37,13 @@
     font-size: 2rem;
     background: linear-gradient(
         to right,
-        #DFB78C,
-        #AB6832,
-        #49281A,
-        #C49B63,
-        #DFB78C,
-        #DFB78C,
-        #DFB78C
+        #dfb78c,
+        #ab6832,
+        #49281a,
+        #c49b63,
+        #dfb78c,
+        #dfb78c,
+        #dfb78c
     );
     background-size: 200% 100%;
     color: transparent;
@@ -56,14 +56,12 @@
 }
 /* login */
 
-.remember-forgot{
-    display:flex;
+.remember-forgot {
+    display: flex;
     justify-content: space-between;
 }
 
-
-
-  .bg-img::before {
+.bg-img::before {
     content: "";
     position: absolute;
     top: 0;
@@ -72,21 +70,20 @@
     height: 100%;
     background-image: url(../../img/backgrounds/login-bg.jpg);
     background-size: cover;
-    background-position:center;
-    z-index:0;
+    background-position: center;
+    z-index: 0;
     filter: blur(5px);
-  }
-  .bg-img::after{
+}
+.bg-img::after {
     content: "";
-    
+
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color:rgba(0,0,0,0.5);
-    z-index:1;
-  }
-  .bg-img > * {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+.bg-img > * {
     position: relative;
-    z-index:2;
-  }
-  
+    z-index: 2;
+}

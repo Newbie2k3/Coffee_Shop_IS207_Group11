@@ -1,12 +1,9 @@
 #filled_cart {
-    display: flex;
-    height: 100%;
-    padding-top: 140px;
-    justify-content: space-between;
+    position: absolute;
+    top: 140px;
 }
 
 #filled_cart table {
-    width: 68%;
     display: flex;
     flex-direction: column;
 }
@@ -54,7 +51,6 @@
 }
 
 #filled_cart .checkout-container {
-    width: 30%;
     height: 420px;
     padding: 16px;
     background-color: rgba(0, 0, 0, 0.85);

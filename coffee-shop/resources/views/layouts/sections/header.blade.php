@@ -108,11 +108,11 @@
     </div>
 
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden bg-white mt-3">
-        <div class="p-4 text-black">
+        <div class="p-4 bg-black">
             @if (Route::has('login'))
                 <div id="user-avatar" data-auth="{{ Auth::check() ? 'true' : 'false' }}"></div>
                 @auth
-                    <h3 class="modal-title text-black mb-3">{{ __(Auth::user()->name) }}
+                    <h3 class="modal-title mb-3">{{ __(Auth::user()->name) }}
                         <br>
                         <span class="modal-subtitle">
                             @admin
@@ -123,44 +123,32 @@
                         </span>
                     </h3>
 
-                    <div class="d-flex gap-4 mb-1">
-                        @admin
-                            <a href="{{ route('dashboard.index') }}">Dashboard</a>
-                        @endadmin
+                    @admin
+                        <a class="d-block py-2" width="100%" href="{{ route('dashboard.index') }}">Dashboard</a>
+                    @endadmin
 
-                        <a href="{{ route('profile.edit') }}">
-                            Profile
-                        </a>
+                    <a class="d-block py-2" width="100%" href="{{ route('profile.edit') }}">
+                        Profile
+                    </a>
 
-                        <a href="{{ route('payment.history') }}">
-                            Personal Invoices
-                        </a>
+                    <a class="d-block py-2" width="100%" href="{{ route('payment.history') }}">
+                        Personal Invoices
+                    </a>
 
-                        <a href="{{ route('cart') }}">
-                            Your Cart
-                        </a>
-                    </div>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <a href="route('logout')"
-                            onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </a>
-                    </form>
+                    <a class="d-block py-2" width="100%" href="{{ route('cart') }}">
+                        Your Cart
+                    </a>
                 @else
                     <h3 class="modal-title">Coffee Shop</h3>
-                    <a href="{{ route('login') }}">Log in</a>
+                    <a class="d-block py-2" width="100%" href="{{ route('login') }}">Log in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
+                        <a class="d-block py-2" width="100%" href="{{ route('register') }}">Register</a>
                     @endif
                 @endauth
             @endif
         </div>
+
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('great-deals')" :active="request()->routeIs('great-deals')">
                 {{ __('Khuyến mãi') }}
@@ -178,5 +166,16 @@
                 {{ __('Về chúng tôi') }}
             </x-responsive-nav-link>
         </div>
+
+        @auth
+            <form method="POST" action="{{ route('logout') }}" class="pt-2 pb-3 space-y-1">
+                @csrf
+                <x-responsive-nav-link :href="route('logout')"
+                    onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-responsive-nav-link>
+            </form>
+        @endauth
     </div>
 </header>
