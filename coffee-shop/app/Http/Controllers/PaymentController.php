@@ -16,6 +16,8 @@ use Stripe\Stripe;
 use Stripe\StripeClient;
 use Stripe\Webhook;
 use Stripe\Exception\SignatureVerificationException;
+use App\Mail\PaymentCompleted;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -37,7 +39,7 @@ class PaymentController extends Controller
             if (!$cartItem->product->hasEnoughQuantity($quantity)) {
                 $insufficientProducts[] = $product_name;
                 continue;
-            }    
+            }
 
             $total = $price * $quantity;
 
@@ -100,6 +102,7 @@ class PaymentController extends Controller
                 break;
             case 'charge.succeeded':
                 $data = $event->data->object;
+                $this->sendMail($data);
                 break;
             case 'checkout.session.completed':
                 $data = $event->data->object;
@@ -140,6 +143,21 @@ class PaymentController extends Controller
         return Excel::download(new PaymentExport, 'payment_history_' . $timestamp . '.xlsx');
     }
 
+    protected function sendMail($data)
+    {
+        $receiptUrl = $data->receipt_url;
+        $attachmentPaths = [
+            "curved_bottom" => public_path('assets/img/mail/curved-bottom-9900000000079e3c.png'),
+            "line" => public_path('assets/img/mail/Line-9900000000079e3c.png'),
+            "logo" => public_path('assets/img/mail/logo1-fa5b373faa156fca.png'),
+            "santaclaus" => public_path('assets/img/mail/santaclaus-9900000145028a3c.png'),
+        ];
+
+        Mail::to($data->billing_details->email)->send(new PaymentCompleted($receiptUrl, $attachmentPaths));
+
+        return 'Email đã được gửi thành công!';
+    }
+
     protected function store($data)
     {
         $user = User::find($data->metadata->user_id);
@@ -173,12 +191,12 @@ class PaymentController extends Controller
     }
 
     protected function reduceProductQuantity($product_id, $quantity)
-{
-    $product = Product::find($product_id);
+    {
+        $product = Product::find($product_id);
 
-    if ($product) {
-        $remaining_quantity = max(0, $product->quantity - $quantity);
-        $product->update(['quantity' => $remaining_quantity]);
+        if ($product) {
+            $remaining_quantity = max(0, $product->quantity - $quantity);
+            $product->update(['quantity' => $remaining_quantity]);
+        }
     }
-}
 }
