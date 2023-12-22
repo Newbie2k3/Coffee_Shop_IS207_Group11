@@ -1,0 +1,65 @@
+.icon-container {
+    max-height: 48px;
+    overflow: hidden;
+}
+
+.sd-modal {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: var(--white);
+    box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: slideDown 0.5s ease-in-out;
+}
+
+.small-modal {
+    width: 200px;
+}
+
+.medium-modal {
+    width: 400px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        max-height: 500px;
+    }
+}
+
+.sd-modal .modal-title {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.2em;
+}
+
+.sd-modal .modal-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    color: #cecece;
+}
+
+.sd-modal a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+    color: #555;
+    transition: 0.5s;
+}
+
+.sd-modal a:hover {
+    color: var(--primary);
+}
