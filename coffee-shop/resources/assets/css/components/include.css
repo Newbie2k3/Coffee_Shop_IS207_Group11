@@ -2,9 +2,13 @@
 @import 'header.css';
 @import 'footer.css';
 
+/* Cart */
+@import 'cart.css';
+
 /* Small elements */
 @import 'button.css';
 @import 'big-banner.css';
 @import 'intro.css';
 @import 'menu-item.css';
+@import 'product-card.css';
 @import 'icon-modal.css';

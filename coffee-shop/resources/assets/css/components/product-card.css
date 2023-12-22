@@ -1,0 +1,47 @@
+.card {
+    width: 284px;
+    height: 420px;
+}
+
+.card .card-img-top {
+    height: 284px;
+    width: 284px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.card .card-info {
+    margin-bottom: 16px;
+    height: 60px;
+}
+
+.card .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.card .card-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: linear-gradient(
+        to right,
+        #ab6832,
+        #49281a,
+        #ab6832,
+        #49281a,
+        #ab6832
+    );
+    background-size: 200% 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    animation: rainbow 5s ease-out infinite;
+}

@@ -29,8 +29,12 @@ class CartController extends Controller
         $user = Auth::user();
         $product = Product::find($product_id);
 
-        if (!$user || !$product) {
+        if (!$user || !$product || $product->status != 1) {
             return response()->json(['status' => 'warning']);
+        }
+
+        if (!$product->hasEnoughQuantity($product_qty)) {
+            return response()->json(['status' => 'not_enough', 'message' => $product->quantity]);
         }
 
         $existing_item = Cart::where('product_id', $product_id)
@@ -38,10 +42,13 @@ class CartController extends Controller
             ->first();
 
         if ($existing_item) {
-            $existing_item->update([
-                'product_qty' => $existing_item->product_qty + $product_qty,
-            ]);
+            $new_quantity = $existing_item->product_qty + $product_qty;
 
+            if (!$product->hasEnoughQuantity($new_quantity)) {
+                return response()->json(['status' => 'not_enough', 'message' => $product->quantity]);
+            }
+
+            $existing_item->update(['product_qty' => $new_quantity]);
         } else {
             Cart::create([
                 'user_id' => $user->id,
@@ -75,7 +82,7 @@ class CartController extends Controller
         $removed_item = Cart::find($id);
 
         if (!$removed_item) {
-            return response()->json(['message' => 'Sản phẩm không tồn tại'], 404);
+            return response()->json(['message' => 'Sản phẩm không còn trong giỏ'], 404);
         }
 
         $removed_item->delete();
@@ -89,14 +96,27 @@ class CartController extends Controller
         $product_qty = max(1, $request->input('product_qty'));
 
         $cart_item = Cart::find($id);
+        $product = Product::find($cart_item->product_id);
+
+        if (!$product) {
+            return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không tồn tại.'], 400);
+        }
+
+        if (!$product->hasEnoughQuantity($product_qty)) {
+            return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không đủ số lượng. Chỉ còn: ' . $product->quantity], 400);
+        }
+        if (!$product->hasEnoughQuantity($product_qty)) {
+            return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không đủ số lượng. Chỉ còn: ' . $product->quantity], 400);
+        }
 
         if (!$cart_item) {
-            return response()->json(['message' => 'Sản phẩm không tồn tại'], 404);
+            return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không tồn tại'], 404);
         }
 
         $cart_item->update(['product_qty' => $product_qty]);
 
         return response()->json([
+            'status' => 'success',
             'item_total' => $this->calculateItemTotal($cart_item->product, $product_qty),
             'cart_total' => $this->calculateCartTotal(),
         ]);

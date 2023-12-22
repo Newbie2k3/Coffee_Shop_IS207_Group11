@@ -20,13 +20,15 @@
     width: 1000px;
     height: 300px;
 }
-.font-tertiary{
+.title-tertiary{
     font-family: var(--font-tertiary);
-    color:#c49b63;
-    
+    color:white;
+    z-index: 1;
 }
-.font-primary{
+.title-primary{
     font-family: var(--font-primary);
     color:white;
-    transform:translateY(-30px);
+    transform:translateY(-24px);
+    z-index: 0;
 }
+

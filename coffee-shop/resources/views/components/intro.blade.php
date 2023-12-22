@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 d-flex" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon"><i class="fa-solid fa-location-crosshairs"></i></div>
+                        <div class="icon"><i class="fa-solid fa-calendar"></i></div>
                         <div class="text">
                             <h3>Mở bán vào Thứ hai - Thứ bảy</h3>
                             <p>6:00am - 9:00pm</p>

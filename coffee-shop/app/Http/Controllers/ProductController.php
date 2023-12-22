@@ -2,25 +2,38 @@
 
 namespace App\Http\Controllers;
 
-
-use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
     public function show(Request $request)
     {
-        $category = DB::table('products')
-            ->join('categories', 'categories.id', '=', 'products.category_id')
-            ->select('products.*', 'categories.name as category_name')
-            ->get();
-        $categories = DB::table('categories')->get();
-        $keyword = $request->input('search');
-        $product = Product::where('name', 'like', '%' . $keyword . '%')->paginate(5);
-        return view('admin.product.product', compact('product', 'category', 'categories', 'keyword'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $products = Product::with('category')->get();
+        $categories = Category::all();
+
+        return view('admin.product.product', compact('products', 'categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $categoryId = $request->input('categoryId');
+
+        $query = Product::with('category')
+            ->where('name', 'like', "%$keyword%");
+
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+
+        $products = $query->get();
+        $categories = Category::all();
+
+        return view('admin.product.product_list', compact('products', 'keyword', 'categoryId'))->render();
     }
 
     public function getProducts($category_id)
@@ -37,24 +50,23 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        print_r($request->all());
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/img/product'), $filename);
-            Product::create([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'category_id' => $request->input('category_id'),
-                'status' => $request->input('status'),
-                'price' => $request->input('price'),
-                'image' => $filename,
-            ]);
-        }
+        $this->validateProductRequest($request);
+
+        $filename = $this->uploadFile($request);
+
+        Product::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'status' => $request->input('status'),
+            'quantity' => $request->input('quantity'),
+            'price' => $request->input('price'),
+            'image' => $filename,
+        ]);
+
         $category_name = Category::find($request->input('category_id'))->name;
 
         return redirect()->route('product')->with('category_name', $category_name);
-        ;
     }
 
     public function edit($id)
@@ -66,31 +78,98 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('assets/img/product'), $filename);
-            $product->update([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'category_id' => $request->input('category_id'),
-                'status' => $request->input('status'),
-                'price' => $request->input('price'),
-                'image' => $filename,
-            ]);
-        }
+        $this->validateProductRequest($request);
+
+        $product = Product::findOrFail($id);
+
+        $filename = $this->uploadFile($request, $product);
+
+        $product->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'status' => $request->input('status'),
+            'quantity' => $request->input('quantity'),
+            'price' => $request->input('price'),
+            'image' => $filename ?: $product->image,
+        ]);
+
         return redirect()->route('product');
     }
 
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return redirect()->route('product');
+        try {
+            $product = Product::findOrFail($id);
+
+            if (!$product) {
+                return response()->json(['message' => 'Sản phẩm không tồn tại.'], 404);
+            }
+
+            $this->deleteFile($product);
+            $product->delete();
+
+            $remainingProducts = Product::count();
+
+            return response()->json(['message' => 'Sản phẩm đã được xóa thành công.', 'remaining' => $remainingProducts], 200);
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+
+            if ($errorCode == 1451) {
+                return response()->json(['message' => 'Không thể xóa vì có dữ liệu liên quan.'], 500);
+            }
+
+            return response()->json(['message' => 'Lỗi xóa sản phẩm: ' . $e->getMessage()], 500);
+        }
     }
     //end admin function
 
+    // Private
+    private function validateProductRequest(Request $request)
+{
+    $rules = [
+        'name' => 'required',
+        'category_id' => 'required|exists:categories,id',
+        'status' => 'required',
+        'quantity' => 'required|numeric|integer|min:0',
+        'price' => 'required|numeric',
+        'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ];
+
+    if ($request->isMethod('post')) {
+        $rules['image'] .= '|required';
+    }
+
+    $request->validate($rules);
+}
+
+    private function uploadFile(Request $request, $existingProduct = null)
+    {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = 'product_' . $request->input('category_id') . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/img/product'), $filename);
+
+            if ($existingProduct) {
+                $this->deleteFile($existingProduct);
+            }
+
+            return $filename;
+        }
+
+        return null;
+    }
+
+    private function deleteFile(Product $product)
+    {
+        $imagePath = public_path('assets/img/product/' . $product->image);
+
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+    }
+
+    // Detail gonna muv into guest
     public function product_detail($id)
     {
         $product = Product::where('id', $id)->first();
