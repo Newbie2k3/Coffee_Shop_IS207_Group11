@@ -10,7 +10,7 @@
 </script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script src="{{ asset('assets/vendor/js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
 
 <!-- My Scripts -->
 @vite(['resources/css/app.css', 'resources/js/app.js'])

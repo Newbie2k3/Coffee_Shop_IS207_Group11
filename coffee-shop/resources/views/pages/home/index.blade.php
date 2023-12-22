@@ -24,13 +24,13 @@
 
     <x-intro />
 
-    <section class="p-5 container">
-        <div class="row">
-            <img class="col-12 col-md-6 pb-5 pb-md-0"
+    <section class="container" style="padding: 120px 0;">
+        <div class="row px-0">
+            <img class="col-12 col-md-6 pb-5 pb-md-0" data-aos="fade-up"
                 src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/about.jpg"
                 alt="">
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <p class="fs-2 title-tertiary">Discover</p>
                 <p class="fs-2 title-primary">OUR STORY</p>
 
@@ -43,9 +43,9 @@
         </div>
     </section>
 
-    <section class="feature bg-color-yellow container">
-        <div class="row">
-            <div class="order col-12 col-md-4 py-4 py-md-0">
+    <section class="feature bg-color-yellow mx-0">
+        <div class="row" style="width:100%;">
+            <div class="order col-12 col-md-4 py-4 py-md-0" data-aos="fade-up">
                 <p class="text-center"><i class=" fa-solid fa-bars fs-1"></i></p>
                 <p class="text-center fs-3">Easy to order</p>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum fugit tempore quam provident
@@ -53,7 +53,7 @@
                     incidunt omnis iusto veritatis recusandae nam quis nostrum nobis soluta earum nisi, inventore nulla
                     asperiores?</p>
             </div>
-            <div class="delivery col-12 col-md-4 py-4 py-md-0">
+            <div class="delivery col-12 col-md-4 py-4 py-md-0" data-aos="fade-up" data-aos-delay="50">
                 <p class="text-center"><i class="fa-solid fa-truck fs-1"></i></p>
                 <p class="text-center fs-3">Fastest delivery</p>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, reiciendis. Nulla odio doloremque
@@ -62,7 +62,7 @@
                     illum
                     repellendus eum non.</p>
             </div>
-            <div class="coffee col-12 col-md-4 py-4 py-md-0">
+            <div class="coffee col-12 col-md-4 py-4 py-md-0" data-aos="fade-up" data-aos-delay="100">
                 <p class="text-center"><i class="fa-solid fa-mug-saucer fs-1"></i></p>
                 <p class="text-center fs-3">Quality coffee</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad natus ex, a reiciendis doloribus eligendi
@@ -73,9 +73,9 @@
         </div>
     </section>
 
-    <section class="menu container">
+    <section class="menu container" style="padding: 120px 0;">
         <div class="row px-5 py-5">
-            <div class="col-12 col-md-7 pb-5 pb-md-0">
+            <div class="col-12 col-md-7 pb-5 pb-md-0" data-aos="fade-up">
                 <p class="fs-2 text-center text-md-end title-tertiary">Discover</p>
                 <p class="fs-2 text-center text-md-end title-primary">OUR MENU</p>
                 <p class="text-center text-md-end">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
@@ -85,7 +85,7 @@
                     facilis
                     doloribus nisi.</p>
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-5" data-aos="fade-up" data-aos-delay="100">
                 <div class="row">
                     <img class="col-6 pb-2 px-1"
                         src="https://neurosciencenews.com/files/2023/06/coffee-brain-caffeine-neuroscincces.jpg"

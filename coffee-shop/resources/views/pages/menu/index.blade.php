@@ -27,14 +27,14 @@
             @foreach ($menu as $key => $category)
                 <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="{{ $key }}">
                     <div class="row mb-5">
-                        <div class="category-info">
+                        <div class="category-info" data-aos="fade-up">
                             <h3 class="col-12 category-title">{{ $category['name'] }}</h3>
                             <p class="category-description">{{ $category['description'] }}</p>
                         </div>
 
                         @if (!empty($category['products']))
-                            @foreach ($category['products'] as $product)
-                                <div class="col-md-3 p-2">
+                            @foreach ($category['products'] as $index => $product)
+                                <div class="col-md-3 p-2" data-aos="fade-up" data-aos-delay="{{ $index * 50 }}">
                                     <x-product-card id="{{ $product['id'] }}"
                                         imgUrl="{{ 'assets/img/product/' . $product['image'] }}"
                                         name="{{ $product['name'] }}" price="{{ $product['price'] }}"
