@@ -31,7 +31,7 @@
                         @foreach ($invoices as $index => $invoice)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $invoice->user->name }}</td>
+                                <td>{{ $invoice->user->name ?? "Đã xóa" }}</td>
                                 <td>{{ $invoice->id }}</td>
                                 <td>@formatNumber($invoice->amount)</td>
                                 <td>{{ $invoice->payment_details->sum('quantity') }}</td>

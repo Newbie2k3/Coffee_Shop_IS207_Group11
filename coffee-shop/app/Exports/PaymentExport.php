@@ -34,8 +34,8 @@ class PaymentExport implements FromCollection, WithHeadings, WithMapping, WithSt
     public function map($payment): array
     {
         return [
-            'Tên Khách Hàng' => $payment->user->name,
-            'Email' => $payment->user->email,
+            'Tên Khách Hàng' => $payment->user->name ?? 'Đã xóa',
+            'Email' => $payment->email,
             'Hình Thức Thanh Toán' => $payment->payment_method,
             'Giá Trị Hóa Đơn' => $payment->amount,
             'Thời Gian' => $payment->created_at,

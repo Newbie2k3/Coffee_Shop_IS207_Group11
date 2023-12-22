@@ -27,7 +27,14 @@ class PaymentController extends Controller
 
         Stripe::setApiKey(config('stripe.sk'));
         $user = auth()->user();
+
+        $cart_items = [];
         $cart_items = Cart::with('product')->where('user_id', $user->id)->get();
+
+        if (empty($cart_items)) {
+            $message = 'Giỏ hàng của bạn đang trống!';
+            return redirect()->route('cart')->with('alert', $message);
+        }
 
         $insufficientProducts = [];
 
@@ -95,10 +102,10 @@ class PaymentController extends Controller
         // Handle the event
         switch ($event->type) {
             case 'payment_intent.created':
-                $data = $event->data->object;
+                // $data = $event->data->object;
                 break;
             case 'payment_intent.succeeded':
-                $data = $event->data->object;
+                // $data = $event->data->object;
                 break;
             case 'charge.succeeded':
                 $data = $event->data->object;
@@ -146,6 +153,8 @@ class PaymentController extends Controller
     protected function sendMail($data)
     {
         $receiptUrl = $data->receipt_url;
+        // =)) loi thi vo facebook
+        if (!$receiptUrl) $receiptUrl = 'https://facabook.com/hungtu4n';
         $attachmentPaths = [
             "curved_bottom" => public_path('assets/img/mail/curved-bottom-9900000000079e3c.png'),
             "line" => public_path('assets/img/mail/Line-9900000000079e3c.png'),
@@ -154,8 +163,6 @@ class PaymentController extends Controller
         ];
 
         Mail::to($data->billing_details->email)->send(new PaymentCompleted($receiptUrl, $attachmentPaths));
-
-        return response()->json(['success' => true]);
     }
 
     protected function store($data)

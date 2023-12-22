@@ -82,7 +82,7 @@ class CartController extends Controller
         $removed_item = Cart::find($id);
 
         if (!$removed_item) {
-            return response()->json(['message' => 'Sản phẩm không tồn tại'], 404);
+            return response()->json(['message' => 'Sản phẩm không còn trong giỏ'], 404);
         }
 
         $removed_item->delete();
@@ -98,6 +98,13 @@ class CartController extends Controller
         $cart_item = Cart::find($id);
         $product = Product::find($cart_item->product_id);
 
+        if (!$product) {
+            return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không tồn tại.'], 400);
+        }
+
+        if (!$product->hasEnoughQuantity($product_qty)) {
+            return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không đủ số lượng. Chỉ còn: ' . $product->quantity], 400);
+        }
         if (!$product->hasEnoughQuantity($product_qty)) {
             return response()->json(['status' => 'warning', 'message' => 'Sản phẩm không đủ số lượng. Chỉ còn: ' . $product->quantity], 400);
         }
