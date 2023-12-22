@@ -2,7 +2,8 @@
     @section('title', $title)
     @section('page-style')
         <!-- Menu -->
-        <link rel="stylesheet" href="{{ asset('assets/css/pages/phucdeptrai_about.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('assets/css/pages/phucdeptrai_about.css') }}"> --}}
+        @vite(['resources/assets/css/pages/about.css'])
     @endsection
 
     <x-big-banner :imgUrl="'assets/img/backgrounds/home-bg.jpg'">

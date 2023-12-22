@@ -15,8 +15,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/assets/css/pages/home.css',
-                'resources/assets/css/pages/product-detail.css',
+                ...getFiles('resources/assets/css/pages', 'css').map((file) => `resources/assets/css/pages/${file}`),
                 ...getFiles('resources/assets/js', 'js').map((file) => `resources/assets/js/${file}`),
             ],
             refresh: true,

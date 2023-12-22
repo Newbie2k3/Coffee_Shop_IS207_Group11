@@ -2,7 +2,11 @@
 
 <!-- AOS init -->
 <script>
-    AOS.init();
+    AOS.init({
+        duration: 800,
+        easing: 'slide',
+        once: 'true'
+    });
 </script>
 
 <!-- My Scripts -->

@@ -24,13 +24,13 @@
 
     <x-intro />
 
-    <section class="p-5 container">
-        <div class="row">
-            <img class="col-12 col-md-6 pb-5 pb-md-0"
+    <section class="container" style="padding: 120px 0;">
+        <div class="row px-0">
+            <img class="col-12 col-md-6 pb-5 pb-md-0" data-aos="fade-up"
                 src="https://raw.githubusercontent.com/letuyen2102/coffee_shop/letuyen-21522778/public/images/about.jpg"
                 alt="">
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <p class="fs-2 title-tertiary">Discover</p>
                 <p class="fs-2 title-primary">OUR STORY</p>
 
@@ -43,23 +43,23 @@ Câu chuyện của chúng tôi không chỉ xoay quanh cà phê mà còn về s
         </div>
     </section>
 
-    <section class="feature bg-color-yellow container">
-        <div class="row">
-            <div class="order col-12 col-md-4 py-4 py-md-0">
+    <section class="feature bg-color-yellow mx-0">
+        <div class="row" style="width:100%;">
+            <div class="order col-12 col-md-4 py-4 py-md-0" data-aos="fade-up">
                 <p class="text-center"><i class=" fa-solid fa-bars fs-1"></i></p>
                 <p class="text-center fs-3">Dễ dàng đặt món</p>
                 <p>Chúng tôi mang đến cho bạn trải nghiệm đặt hàng cực kỳ dễ dàng ngay trên trang chủ. 
                     Chỉ cần vài cú click chuột, bạn có thể lựa chọn các món cà phê yêu thích và thực hiện thanh toán trực tuyến. 
                     Tiết kiệm thời gian, tiện lợi và nhanh chóng!</p>
             </div>
-            <div class="delivery col-12 col-md-4 py-4 py-md-0">
+            <div class="delivery col-12 col-md-4 py-4 py-md-0" data-aos="fade-up" data-aos-delay="50">
                 <p class="text-center"><i class="fa-solid fa-truck fs-1"></i></p>
                 <p class="text-center fs-3">Giao hàng nhanh chóng</p>
                 <p>Đặt hàng ngay và chúng tôi sẽ giao tận nơi cho bạn một cách nhanh chóng. 
                     Với dịch vụ giao hàng nhanh nhất, bạn sẽ nhận được cà phê tươi ngon ngay trong thời gian ngắn nhất. 
                     Tiết kiệm thời gian và tận hưởng cà phê ngon ngọt ngay lập tức!</p>
             </div>
-            <div class="coffee col-12 col-md-4 py-4 py-md-0">
+            <div class="coffee col-12 col-md-4 py-4 py-md-0" data-aos="fade-up" data-aos-delay="100">
                 <p class="text-center"><i class="fa-solid fa-mug-saucer fs-1"></i></p>
                 <p class="text-center fs-3">Cà phê chất lượng</p>
                 <p>Chúng tôi tự hào mang đến cho bạn cà phê chất lượng cao.
@@ -70,14 +70,14 @@ Câu chuyện của chúng tôi không chỉ xoay quanh cà phê mà còn về s
         </div>
     </section>
 
-    <section class="menu container">
+    <section class="menu container" style="padding: 120px 0;">
         <div class="row px-5 py-5">
-            <div class="col-12 col-md-7 pb-5 pb-md-0">
+            <div class="col-12 col-md-7 pb-5 pb-md-0" data-aos="fade-up">
                 <p class="fs-2 text-center text-md-end title-tertiary">Discover</p>
                 <p class="fs-2 text-center text-md-end title-primary">OUR MENU</p>
                 <p class="text-center text-md-end">Duyệt qua các lựa chọn trên menu và tìm hiểu về thành phần, mô tả và giá cả của từng món. Chúng tôi cam kết mang đến cho bạn những trải nghiệm thưởng thức cà phê độc đáo và đáng nhớ.</p>
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-5" data-aos="fade-up" data-aos-delay="100">
                 <div class="row">
                     <img class="col-6 pb-2 px-1"
                         src="https://neurosciencenews.com/files/2023/06/coffee-brain-caffeine-neuroscincces.jpg"
