@@ -34,11 +34,11 @@
                 <p class="fs-2 title-tertiary">Discover</p>
                 <p class="fs-2 title-primary">OUR STORY</p>
 
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit minima obcaecati eligendi ratione
-                    possimus
-                    illo dolorum iste amet dicta, fugiat laudantium soluta debitis! Ad incidunt dignissimos dolorem
-                    placeat
-                    asperiores assumenda.</p>
+                <p>húng tôi đã bắt đầu với một niềm đam mê về cà phê và mong muốn chia sẻ hương vị tuyệt vời này với mọi người.
+
+Từ việc tìm kiếm những hạt cà phê độc đáo đến việc phát triển quy trình rang xay tinh tế, chúng tôi đã luôn tận hưởng việc mang đến cho khách hàng những trải nghiệm cà phê đặc biệt và chất lượng.
+
+Câu chuyện của chúng tôi không chỉ xoay quanh cà phê mà còn về sự đam mê và tận hưởng cuộc sống. Chúng tôi tin rằng mỗi tách cà phê đều mang trong đó một câu chuyện và chúng tôi muốn chia sẻ câu chuyện đó với bạn..</p>
             </div>
         </div>
     </section>
@@ -47,28 +47,25 @@
         <div class="row">
             <div class="order col-12 col-md-4 py-4 py-md-0">
                 <p class="text-center"><i class=" fa-solid fa-bars fs-1"></i></p>
-                <p class="text-center fs-3">Easy to order</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum fugit tempore quam provident
-                    nesciunt a
-                    incidunt omnis iusto veritatis recusandae nam quis nostrum nobis soluta earum nisi, inventore nulla
-                    asperiores?</p>
+                <p class="text-center fs-3">Dễ dàng đặt món</p>
+                <p>Chúng tôi mang đến cho bạn trải nghiệm đặt hàng cực kỳ dễ dàng ngay trên trang chủ. 
+                    Chỉ cần vài cú click chuột, bạn có thể lựa chọn các món cà phê yêu thích và thực hiện thanh toán trực tuyến. 
+                    Tiết kiệm thời gian, tiện lợi và nhanh chóng!</p>
             </div>
             <div class="delivery col-12 col-md-4 py-4 py-md-0">
                 <p class="text-center"><i class="fa-solid fa-truck fs-1"></i></p>
-                <p class="text-center fs-3">Fastest delivery</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, reiciendis. Nulla odio doloremque
-                    omnis
-                    minus nostrum itaque laboriosam et, beatae nam quisquam molestias necessitatibus consectetur quod
-                    illum
-                    repellendus eum non.</p>
+                <p class="text-center fs-3">Giao hàng nhanh chóng</p>
+                <p>Đặt hàng ngay và chúng tôi sẽ giao tận nơi cho bạn một cách nhanh chóng. 
+                    Với dịch vụ giao hàng nhanh nhất, bạn sẽ nhận được cà phê tươi ngon ngay trong thời gian ngắn nhất. 
+                    Tiết kiệm thời gian và tận hưởng cà phê ngon ngọt ngay lập tức!</p>
             </div>
             <div class="coffee col-12 col-md-4 py-4 py-md-0">
                 <p class="text-center"><i class="fa-solid fa-mug-saucer fs-1"></i></p>
-                <p class="text-center fs-3">Quality coffee</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad natus ex, a reiciendis doloribus eligendi
-                    vitae tenetur. Temporibus non laborum ratione sunt labore modi, ipsam explicabo facilis qui,
-                    repudiandae
-                    distinctio!</p>
+                <p class="text-center fs-3">Cà phê chất lượng</p>
+                <p>Chúng tôi tự hào mang đến cho bạn cà phê chất lượng cao.
+                     Từ nguyên liệu tốt nhất cho đến quy trình rang xay cẩn thận, chúng tôi đảm bảo hương vị đích thực và đậm đà.
+                      Hãy thưởng thức cà phê thơm ngon và độc đáo với chất lượng tuyệt vời của chúng tôi.
+                     Tạo ra trải nghiệm thưởng thức cà phê đáng nhớ tại cửa hàng của chúng tôi ngay hôm nay!</p>
             </div>
         </div>
     </section>
@@ -78,12 +75,7 @@
             <div class="col-12 col-md-7 pb-5 pb-md-0">
                 <p class="fs-2 text-center text-md-end title-tertiary">Discover</p>
                 <p class="fs-2 text-center text-md-end title-primary">OUR MENU</p>
-                <p class="text-center text-md-end">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                    tempora numquam
-                    facere
-                    cumque nisi soluta error rem repellat amet vel? Nulla enim adipisci veniam, libero dolorum hic
-                    facilis
-                    doloribus nisi.</p>
+                <p class="text-center text-md-end">Duyệt qua các lựa chọn trên menu và tìm hiểu về thành phần, mô tả và giá cả của từng món. Chúng tôi cam kết mang đến cho bạn những trải nghiệm thưởng thức cà phê độc đáo và đáng nhớ.</p>
             </div>
             <div class="col-12 col-md-5">
                 <div class="row">
