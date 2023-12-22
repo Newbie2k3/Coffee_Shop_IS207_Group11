@@ -4,9 +4,9 @@
             <div class="col-lg-7 col-md-6 mb-5 mb-md-5">
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Về chúng tôi</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum pariatur velit alias tenetur
-                        repellat nisi molestiae officia at, sequi quos! Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit. </p>
+                    <p>Coffee Shop cam kết đem lại cho bạn ly cà phê chất lượng, với hương vị tinh tế
+                        nhất cái đất Sài Thành này. =))
+                    </p>
                     <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                         <li data-aos="fade-up">
                             <a href="#"><span><i class="fa-brands fa-twitter"></i></span></a>
